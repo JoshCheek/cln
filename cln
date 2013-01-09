@@ -1,0 +1,114 @@
+#!/usr/bin/env ruby
+
+$LOAD_PATH.unshift "/Users/joshcheek/code/i_like_mustaches/lib"
+
+require 'i_like_mustaches'
+
+cln = ILikeMustaches.new do |cln|
+  cln.description = 'Command Line Notes'
+
+  # pru
+  cln.quick_note 'grep with regex',                               'pru /whatev/',    'pipable', 'ruby'
+  cln.quick_note 'select with arg that evaluates to a bool',      'pru "size == 2"', 'pipable', 'ruby'
+  cln.quick_note 'map with arg that evaluates to anything else',  'pru size',        'pipable', 'ruby'
+  cln.quick_note 'reduce with -r flag (sets self to full array)', 'pru -r size',     'pipable', 'ruby'
+  cln.quick_note 'map/select/grep and reduce with 2 args',        'pru size join',   'pipable', 'ruby'
+
+  # emacs
+    # FIXES
+      cln.quick_note 'turn on region highlighting',          'M-x transient-mark-mode', 'emacs', 'fixes'
+      cln.quick_note 'change major-mode to Ruby',            'M-x ruby-mode', 'emacs', 'fixes'
+    # MINOR MODES
+      cln.quick_note 'left screen follows right screen',     'M-x follow-mode', 'emacs', 'minor', 'modes'
+    # BUILTINS
+      cln.quick_note 'tutorial',                             'C-h t', 'emacs', 'builtins'
+      cln.quick_note 'document key combo',                   'C-h k <key combo>', 'emacs', 'builtins'
+      cln.quick_note 'document function',                    'C-h f', 'emacs', 'builtins'
+      cln.quick_note 'document variable',                    'C-h v', 'emacs', 'builtins'
+      cln.quick_note 'Apropos (document similar)',           'C-h a', 'emacs', 'builtins'
+      cln.quick_note 'Man pages',                            'M-x man', 'emacs', 'builtins'
+      cln.quick_note 'get rid of help-buffer & window',      'q', 'emacs', 'builtins'
+      cln.quick_note 'get rid of help-buffer ~ window',      'C-x k', 'emacs', 'builtins'
+      cln.quick_note 'start shell',                          'M-x eshell', 'emacs', 'builtins'
+    # MOVEMENT
+      cln.quick_note 'repeat',                               'C-u # command, eg: C-u 8 C-f', 'emacs', 'movement', 'moving', 'navigation'
+      cln.quick_note 'forward 1 sentence',                   'M-a', 'emacs', 'movement', 'moving', 'navigation'
+      cln.quick_note 'back one sentence',                    'M-e', 'emacs', 'movement', 'moving', 'navigation'
+      cln.quick_note 'beginning of line',                    'C-a', 'emacs', 'movement', 'moving', 'navigation'
+      cln.quick_note 'end of line',                          'C-e', 'emacs', 'movement', 'moving', 'navigation'
+      cln.quick_note 'back 1 word',                          'M-b', 'emacs', 'movement', 'moving', 'navigation'
+      cln.quick_note 'forward 1 word',                       'M-f', 'emacs', 'movement', 'moving', 'navigation'
+      cln.quick_note 'back 1 char',                          'C-b', 'emacs', 'movement', 'moving', 'navigation'
+      cln.quick_note 'forward 1 char',                       'C-f', 'emacs', 'movement', 'moving', 'navigation'
+      cln.quick_note 'down 1 line',                          'C-n', 'emacs', 'movement', 'moving', 'navigation'
+      cln.quick_note 'up 1 line',                            'C-p', 'emacs', 'movement', 'moving', 'navigation'
+      cln.quick_note 'down 1 screen',                        'M-v', 'emacs', 'movement', 'moving', 'navigation'
+      cln.quick_note 'up 1 screen',                          'C-v', 'emacs', 'movement', 'moving', 'navigation'
+      cln.quick_note 'beginning of doc',                     'M-<', 'emacs', 'movement', 'moving', 'navigation'
+      cln.quick_note 'end of doc',                           'M->', 'emacs', 'movement', 'moving', 'navigation'
+      cln.quick_note 'realign cursor to middle of screen',   'C-l', 'emacs', 'movement', 'moving', 'navigation'
+    # BUFFERS
+      cln.quick_note 'visit buffer',                         'C-x b', 'emacs', 'buffers'
+      cln.quick_note 'Cancel EVERYTHING!',                   'C-g', 'emacs', 'buffers', 'search'
+      cln.quick_note 'last buffer',                          'C-x b return', 'emacs', 'buffers'
+      cln.quick_note 'send buffer to end of list',           'C-y', 'emacs', 'buffers'
+    # WINDOWS/FRAMES
+      cln.quick_note 'Close current frame',                  'C-x 0', 'emacs', 'windows', 'frames'
+      cln.quick_note 'Use only one frame',                   'C-x 1', 'emacs', 'windows', 'frames'
+      cln.quick_note 'Split frame in half vertically',       'C-x 2', 'emacs', 'windows', 'frames'
+      cln.quick_note 'Split frame in half horizontally',     'C-x 3', 'emacs', 'windows', 'frames'
+      cln.quick_note 'Jump between frames',                  'C-x o', 'emacs', 'windows', 'frames'
+    # SEARCH
+      cln.quick_note 'Start a forward search',               'C-s', 'emacs', 'searching', 'searches'
+      cln.quick_note 'Next item in forward search',          'C-s', 'emacs', 'searching', 'searches'
+      cln.quick_note 'Start a backward search',              'C-r', 'emacs', 'searching', 'searches'
+      cln.quick_note 'Next item in backward search',         'C-r', 'emacs', 'searching', 'searches'
+      cln.quick_note 'Cancel search',                        'C-g', 'emacs', 'searching', 'searches'
+      cln.quick_note 'Move to this search location',         'return', 'emacs', 'searching', 'searches'
+    # FILES
+      cln.quick_note 'open',                                 'C-x C-f', 'emacs', 'files'
+      cln.quick_note 'revert to disk',                       'C-c r', 'emacs', 'files'
+    # EDITING
+      cln.quick_note 'undo',                                 'C-/', 'emacs', 'editing'
+      cln.quick_note 'delete char after cursor',             'C-d', 'emacs', 'editing'
+      cln.quick_note 'kill word before cursor',              'M-<Delback>', 'emacs', 'editing'
+      cln.quick_note 'kill word after the cursor',           'M-d', 'emacs', 'editing'
+      cln.quick_note 'kill from cursor to end of line',      'C-k', 'emacs', 'editing'
+      cln.quick_note 'kill to end of current sentence',      'M-k', 'emacs', 'editing'
+      cln.quick_note 'set mark',                             'C-<space> since that is taken, use C-@', 'emacs', 'editing'
+      cln.quick_note 'kill from mark to cursor',             'C-w', 'emacs', 'editing'
+      cln.quick_note 'yank text back',                       'C-y', 'emacs', 'editing'
+      cln.quick_note 'cycle through kill ring',              'M-y', 'emacs', 'editing'
+
+  # ruby
+  cln.quick_note 'Ripper', <<-RIPPER, 'ruby', 'parsing', 'parsers', 'lexing', 'lexers'
+    require 'ripper'
+
+    class DemoBuilder < Ripper::SexpBuilder
+      instance_methods.each do |meth_name|
+        next unless meth_name =~ /^on_/
+        super_meth = instance_method meth_name
+        define_method meth_name do |*args|
+          super_meth.bind(self).call(*args).tap do |result|
+            puts "\#{meth_name}(\#{args.map(&:inspect).join(', ')})".ljust(30) << " #> \#{result.inspect}"
+          end
+        end
+      end
+    end
+
+    src = %(1 # i am a comment)
+    DemoBuilder.new(src).parse
+    # >> on_int("1")                    #> [:@int, "1", [1, 0]]
+    # >> on_sp(" ")                     #> [:@sp, " ", [1, 1]]
+    # >> on_comment("# i am a comment") #> [:@comment, "# i am a comment", [1, 2]]
+    # >> on_stmts_new()                 #> [:stmts_new]
+    # >> on_stmts_add([:stmts_new], [:@int, "1", [1, 0]]) #> [:stmts_add, [:stmts_new], [:@int, "1", [1, 0]]]
+    # >> on_program([:stmts_add, [:stmts_new], [:@int, "1", [1, 0]]]) #> [:program, [:stmts_add, [:stmts_new], [:@int, "1", [1, 0]]]]
+  RIPPER
+
+  # unix utils
+  cln.quick_note "ln", "ln -s /existing/file /new/symbolic/link", 'soft links'
+end
+
+
+exit ILikeMustaches::Console.new(cln).call
