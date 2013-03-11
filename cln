@@ -7,6 +7,48 @@ require 'i_like_mustaches'
 cln = ILikeMustaches.new do |cln|
   cln.description = 'Command Line Notes'
 
+  # life
+  cln.quick_note 'drivers license info', 'http://www.cyberdriveillinois.com/publications/pdf_publications/dsd_x173.pdf', 'licenses', 'illinois', 'ids', 'identification', 'cards'
+
+  # haskell
+  cln.quick_note "Add a package to dependencies", "put it build-depens in name.cabal, then\n$ cabal-dev install", "haskell"
+  cln.quick_note "Build the package",             "$ cabal-dev install", "haskell"
+
+  # git
+  cln.quick_note 'figure out which branches contain a commit', 'git branch -a --contains SHA'
+
+  # ruby
+  cln.quick_note 'ARGF', '$<', 'globals', 'variables'
+
+  # capybara
+  # cln.quick_note 'The DSL uses this session:', 'Capybara.session', 'capybara', 'testing', 'ruby'
+  cln.quick_note 'Find the current path', 'session.current_path', 'capybara', 'testing', 'ruby', 'url'
+
+  # postgresql
+  cln.quick_note 'postgresql: quit',                            '\q',       'pg', 'meta', 'exit', 'C-c'
+  cln.quick_note 'postgresql: display users',                   '\du',      'pg', 'meta'
+  cln.quick_note 'postgresql: show permissions',                '\z',       'pg', 'meta'
+  cln.quick_note 'postgresql: show table names',                '\z',       'pg', 'meta'
+  cln.quick_note 'postgresql: show table names in a namespace', '\z rbf.*', 'pg', 'meta'
+  cln.quick_note 'postgresql: find the list of pids connected',    'SELECT procpid, application_name from pg_stat_activity;', 'pg', 'meta'
+
+  # less
+  cln.quick_note 'less: go to next buffer', ':n'
+  cln.quick_note 'less: go to previous buffer', ':p'
+
+  # bash
+  cln.quick_note 'check for interactive shell', 'if [[ $- == *i* ]]; then echo yes; fi', 'bash', 'shells', 'logins'
+
+
+  # vim
+  cln.quick_note 'Vim ctags: find reference to class',               ':tag ClassName'
+  cln.quick_note 'vim ctags: shows the list',                        ':tselect or :ts'
+  cln.quick_note 'vim ctags: goes to the next tag in that list',     ':tnext   or :tn'
+  cln.quick_note 'vim ctags: goes to the previous tag in that list', ':tprev   or :tp'
+  cln.quick_note 'vim ctags: goes to the first tag of the list',     ':tfirst  or :tf'
+  cln.quick_note 'vim ctags: goes to the last tag of the list',      ':tlast   or :tl'
+
+
   # pru
   cln.quick_note 'grep with regex',                               'pru /whatev/',    'pipable', 'ruby'
   cln.quick_note 'select with arg that evaluates to a bool',      'pru "size == 2"', 'pipable', 'ruby'
@@ -107,7 +149,7 @@ cln = ILikeMustaches.new do |cln|
   RIPPER
 
   # unix utils
-  cln.quick_note "ln", "ln -s /existing/file /new/symbolic/link", 'soft links'
+  cln.quick_note "ln", "ln -s /existing/file /new/symbolic/link # relative links in /existing/file are not expanded >.<", 'soft links'
 end
 
 
