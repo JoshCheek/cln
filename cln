@@ -10,6 +10,30 @@ cln = ILikeMustaches.new do |cln|
   # life
   cln.quick_note 'drivers license info', 'http://www.cyberdriveillinois.com/publications/pdf_publications/dsd_x173.pdf', 'licenses', 'illinois', 'ids', 'identification', 'cards'
 
+  # grep
+  cln.quick_note "show lines after when grepping",  "grep -A n pattern"
+  cln.quick_note "show lines before when grepping", "grep -B n pattern"
+  cln.quick_note "show lines around when grepping", "grep -B n pattern"
+
+  # readline
+  cln.quick_note "beginning of history",            "M-<",   "readline", "keybindings"
+  cln.quick_note "end of history",                  "M->",   "readline", "keybindings"
+  cln.quick_note "forward search history",          "C-s",   "readline", "keybindings"
+  cln.quick_note "yank last arg (iteratively)",     "M-.",   "readline", "keybindings"
+  cln.quick_note "yank last arg (iteratively)",     "M-.",   "readline", "keybindings"
+  cln.quick_note "delete right",                    "C-d",   "readline", "keybindings"
+  cln.quick_note "transpose words",                 "M-t",   "readline", "keybindings"
+  cln.quick_note "upcase word",                     "M-u",   "readline", "keybindings", "capitalize", "uppercase", "capitalization"
+  cln.quick_note "downcase word",                   "M-l",   "readline", "keybindings", "lowercase", "capitalization"
+  cln.quick_note "delete next word",                "M-d",   "readline", "keybindings"
+  cln.quick_note "show possible completions",       "M-?",   "readline", "keybindings"
+  cln.quick_note "insert all possible completions", "M-*",   "readline", "keybindings"
+  cln.quick_note "start keyboard macro",            "C-x (", "readline", "keybindings", "begin"
+  cln.quick_note "end keyboard macro",              "C-x )", "readline", "keybindings", "stop"
+  cln.quick_note "execute keyboard macro",          "C-x e", "readline", "keybindings", "run"
+  cln.quick_note "incremental undo",                "C-_",   "readline", "keybindings"
+  cln.quick_note "tilde expand",                    "M-&",   "readline", "keybindings", "expansion"
+
   # haskell
   cln.quick_note "Add a package to dependencies", "put it build-depens in name.cabal, then\n$ cabal-dev install", "haskell"
   cln.quick_note "Build the package",             "$ cabal-dev install", "haskell"
@@ -19,6 +43,9 @@ cln = ILikeMustaches.new do |cln|
 
   # ruby
   cln.quick_note 'ARGF', '$<', 'globals', 'variables'
+
+  # homebrew
+  cln.quick_note "homebrew binaries are in", "/usr/local/bin"
 
   # capybara
   # cln.quick_note 'The DSL uses this session:', 'Capybara.session', 'capybara', 'testing', 'ruby'
@@ -37,7 +64,10 @@ cln = ILikeMustaches.new do |cln|
   cln.quick_note 'less: go to previous buffer', ':p'
 
   # bash
-  cln.quick_note 'check for interactive shell', 'if [[ $- == *i* ]]; then echo yes; fi', 'bash', 'shells', 'logins'
+  cln.quick_note 'check for interactive shell',                        'if [[ $- == *i* ]]; then echo yes; fi', 'bash', 'shells', 'logins'
+  cln.quick_note 'replace with the nth argument of the previous line', '!!:n',                                  'bash', 'shells', 'logins'
+  cln.quick_note 'last argument of previous line',                     '!$',                                    'bash', 'shells', 'logins'
+  cln.quick_note 'all arguments of previous line',                     '!*',                                    'bash', 'shells', 'logins'
 
 
   # vim
