@@ -36,13 +36,39 @@ cln = ILikeMustaches.new do |cln|
   cln.quick_note "Build the package",             "$ cabal-dev install", "haskell"
 
   # git
-  cln.quick_note 'figure out which branches contain a commit', 'git branch -a --contains SHA'
-  cln.quick_note '5 lines of context on a diff',               'git diff -U5'
-  cln.quick_note 'alternative diff algorithm',                 'cd martini_at_zoo; git show 0599a52c3ced58480e3b18ec5c366f0b83a69e2c --patience'
-  cln.quick_note 'Show only filenames in diff',                'git diff --name-only'
-  cln.quick_note 'Only look in cwd subtree',                   'git diff --relative'
-  cln.quick_note 'list unmerged files',                        'git ls-files -u'
-  cln.quick_note 'delete stale remote tracking branches',      'git remote prune origin'
+  cln.quick_note 'figure out which branches contain a commit',    'git branch -a --contains SHA'
+  cln.quick_note '5 lines of context on a diff',                  'git diff -U5'
+  cln.quick_note 'alternative diff algorithm',                    'cd martini_at_zoo; git show 0599a52c3ced58480e3b18ec5c366f0b83a69e2c --patience'
+  cln.quick_note 'Show only filenames in diff',                   'git diff --name-only'
+  cln.quick_note 'Only look in cwd subtree',                      'git diff --relative'
+  cln.quick_note 'list unmerged files',                           'git ls-files -u'
+  cln.quick_note 'delete stale remote tracking branches',         'git remote prune origin'
+  cln.quick_note 'contentless commit (e.g. to force sha update)', 'git commit -m "whatever" --allow-empty'
+  cln.quick_note 'show last commit that matches the string',      'git show :/query'
+  cln.quick_note 'show branches merged into current branch',      'git branch --merged'
+  cln.quick_note 'show branches not merged into current branch',  'git branch --no-merged'
+  cln.quick_note "copy other branch's version of a file into wd", 'git checkout BRANCH -- path/to/file'
+  cln.quick_note "show commits in A that aren't in B",            'git log A ^B'
+  cln.quick_note "blame the oiginal commit, not the move commit", <<-GIT
+    git blame -M   # moved within file
+              -C   # moved within commit
+              -CC  # where line was created
+              -CCC # look at all commits
+  GIT
+  cln.quick_note "count how many commits each person made",       'git shortlog -sn'
+
+  # github
+  cln.quick_note 'github will suppress trailing whitespace',        '?w=1 (add to the end of any diff url)'
+  cln.quick_note 'octocat index',                                   'http://octodex.github.com/', 'github'
+  cln.quick_note 'github: get a file finder',                       't'
+  cln.quick_note 'github: swap the branch name for the sha',        'y'
+  cln.quick_note 'github: find all the commands on a given page',   '?'
+  cln.quick_note 'github: scope commit history to specific author', '?author=josh_cheek'
+  cln.quick_note 'github: emoji cheat sheet',                       'http://www.emoji-cheat-sheet.com/'
+  cln.quick_note 'github: compare view',                            <<-EOS
+    github.com/user/repo/compare/{range}
+      where {range} is a branch name, sha, 1.day.ago, yesterday, 2012-12-30
+  EOS
 
   # ruby
     # globals
@@ -71,6 +97,7 @@ cln = ILikeMustaches.new do |cln|
   cln.quick_note 'vim ctags: goes to the last tag of the list',      ':tlast   or :tl'
   cln.quick_note 'to most recent change',                            '`.', 'movement', 'navigation'
   cln.quick_note 'cycle through recent changes',                     'g;', 'movement', 'navigation'
+  cln.quick_note 'Run a command at launch',                          'vim -c NERDTree'
 
   # emacs
     # FIXES
@@ -180,7 +207,8 @@ cln = ILikeMustaches.new do |cln|
 
     # ssh and servers and shit
     cln.quick_note 'Moving public key to ssh server', 'ssh-copy-id # can be installed via homebrew', 'servers', 'remote'
-    cln.quick_note "who is logged in?",  "w", "users", "signed", "names", 'servers', 'remote'
+    cln.quick_note 'who is logged in?',               'w', 'users', 'signed', 'names', 'servers', 'remote'
+    cln.quick_note 'what server am I on?',            'hostname', 'servers', 'remote', 'computers'
 
     # less
     cln.quick_note 'less: go to next buffer', ':n'
@@ -191,6 +219,10 @@ cln = ILikeMustaches.new do |cln|
     cln.quick_note 'replace with the nth argument of the previous line', '!!:n',                                  'bash', 'shells', 'logins'
     cln.quick_note 'last argument of previous line',                     '!$',                                    'bash', 'shells', 'logins'
     cln.quick_note 'all arguments of previous line',                     '!*',                                    'bash', 'shells', 'logins'
+
+    # systemsetup
+    cln.quick_note 'set system time',                   "systemsetup -setusingnetworktime off -setdate '04:20:2012'", 'clocks'
+    cln.quick_note 'revert system time to actual time', "systemsetup -setusingnetworktime on", 'clocks'
 end
 
 
