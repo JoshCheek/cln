@@ -138,8 +138,26 @@ cln = ILikeMustaches.new do |cln|
   cln.quick_note "tilde expand",                    "M-&",   "readline", "keybindings", "expansion"
 
   # haskell
-  cln.quick_note "Add a package to dependencies", "put it build-depens in name.cabal, then\n$ cabal-dev install", "haskell"
-  cln.quick_note "Build the package",             "$ cabal-dev install", "haskell"
+    # binaries
+    cln.quick_note "interpret as script",           "runhaskell", "hs"
+    cln.quick_note "interactive haskell",           "ghci", "glaskow", "haskell", "compiler", "hs"
+    cln.quick_note "compile haskell",               "ghc" , "glaskow", "haskell", "compiler", "hs"
+
+    # language
+    cln.quick_note "hello world",                   %Q'#!/usrb/bin/env runhaskell\nmain = do\n  putStrLn "hello, world!"', "haskell", "hs"
+    cln.quick_note "signature",                     "functionName :: InputType -> OutputType", "haskell", "hs"
+    cln.quick_note "signature",                     "functionName :: (SomeTypeClass a, SomeOtherTypeClass b) => a -> b -> a", "haskell", "hs"
+    cln.quick_note "create a type",                 "data MyTypeName = Constructor1 | Constructor2", "haskell", "hs"
+    cln.quick_note "create a type whose value is a container for an int", "data MyTypeName = Constructor Integer", "haskell", "hs"
+    cln.quick_note "create an agnostic type",       "data List a = Cons a (List a) | Nil", "hs"
+    cln.quick_note "numeric concrete types",        "Integer, Double, Float", "haskell", "hs"
+
+    # ghci
+    cln.quick_note "identify the type",             ':t 1', "haskell", "hs", "ghci"
+
+    # general
+    cln.quick_note "Add a package to dependencies", "put it build-depens in name.cabal, then\n$ cabal-dev install", "haskell", "hs"
+    cln.quick_note "Build the package",             "$ cabal-dev install", "haskell", "hs"
 
   # git
   cln.quick_note 'figure out which branches contain a commit',    'git branch -a --contains SHA'
