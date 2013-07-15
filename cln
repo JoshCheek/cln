@@ -251,6 +251,9 @@ cln = ILikeMustaches.new do |cln|
   # homebrew
   cln.quick_note "homebrew binaries are in", "/usr/local/bin"
 
+  # gpg
+  cln.quick_note "how to use gpg", "http://www.madboa.com/geek/gpg-quickstart/", "pgp", "encryption", "encrypted"
+
   # postgresql
   cln.quick_note 'postgresql: quit',                            '\q',       'pg', 'meta', 'exit', 'C-c'
   cln.quick_note 'postgresql: display users',                   '\du',      'pg', 'meta'
