@@ -160,7 +160,7 @@ cln = ILikeMustaches.new do |cln|
     cln.quick_note "Build the package",             "$ cabal-dev install", "haskell", "hs"
 
   # git
-  cln.quick_note 'figure out which branches contain a commit',    'git branch -a --contains SHA'
+  cln.quick_note 'figure out which branches contain a commit',    'git branch -a --contains SHA', 'includes'
   cln.quick_note '5 lines of context on a diff',                  'git diff -U5'
   cln.quick_note 'alternative diff algorithm',                    'cd martini_at_zoo; git show 0599a52c3ced58480e3b18ec5c366f0b83a69e2c --patience'
   cln.quick_note 'Show only filenames in diff',                   'git diff --name-only'
@@ -181,6 +181,8 @@ cln = ILikeMustaches.new do |cln|
   GIT
   cln.quick_note "count how many commits each person made",       'git shortlog -sn'
   cln.quick_note "git format",                                    'git@github.com:JoshCheek/seeing_is_believing.git'
+  cln.quick_note "log that says the parents",                     'git log --pretty=raw', 'revert', 'merge'
+  cln.quick_note "revert a merge commit",                         'git revert -m 1 HEAD'
 
   # github
   cln.quick_note 'github will suppress trailing whitespace',        '?w=1 (add to the end of any diff url)'
