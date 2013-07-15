@@ -276,6 +276,8 @@ cln = ILikeMustaches.new do |cln|
   cln.quick_note 'vim: copy line nums to current position',               '5,10co .'
   cln.quick_note 'vim: yank line nums',                              '5,10y'
   cln.quick_note 'vim: delete line nums',                            '5,10d'
+  cln.quick_note 'vim: perform an action upto a location',           'g~$', 'invert'
+  cln.quick_note 'vim: set filetype to language',                    ':set ft=ruby', 'syntax'
 
   # emacs
     # FIXES
