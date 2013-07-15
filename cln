@@ -376,13 +376,20 @@ cln = ILikeMustaches.new do |cln|
     # >> on_program([:stmts_add, [:stmts_new], [:@int, "1", [1, 0]]]) #> [:program, [:stmts_add, [:stmts_new], [:@int, "1", [1, 0]]]]
   RIPPER
 
+  # mac
+    # not sure if this actually works
+    cln.quick_note 'shut down processes that are not responding', 'Command + Option + Escape', 'shut-down', 'mac', 'osx'
+
   # unix utils
     # misc
-    cln.quick_note "add a new user",                       "sudo adduser josh"
-    cln.quick_note "switch user",                          "su josh"
-    cln.quick_note "change user and group to be readable", "chmod ug+r filename"
-    cln.quick_note "change owner",                         "chown josh filename"
-    cln.quick_note "change owner and group",               "chown josh:groupname filename"
+    cln.quick_note "add a new user",                         "sudo adduser josh"
+    cln.quick_note "switch user",                            "su josh"
+    cln.quick_note "change user and group to be readable",   "chmod ug+r filename"
+    cln.quick_note "change owner",                           "chown josh filename"
+    cln.quick_note "change owner and group",                 "chown josh:groupname filename"
+    cln.quick_note "locate a man page",                      "man -w ls"
+    cln.quick_note "flush dns (apparently this is extreme)", "dscacheutil -flushcache"
+    cln.quick_note "the file name of the path",              "basename `pwd`", "dirname", "filename", "fname"
 
     # grep
     cln.quick_note "show lines after when grepping",  "grep -A n pattern"
@@ -393,7 +400,8 @@ cln = ILikeMustaches.new do |cln|
     cln.quick_note "ln", "ln -s /existing/file /new/symbolic/link # relative links in /existing/file are not expanded >.<", 'soft links'
 
     # ssh and servers and shit
-    cln.quick_note 'Moving public key to ssh server', 'ssh-copy-id # can be installed via homebrew', 'servers', 'remote'
+    cln.quick_note 'generate an ssh key',             'ssh-keygen -t rsa -C "josh.cheek@gmail.com"'
+    cln.quick_note 'moving public key to ssh server', 'ssh-copy-id # can be installed via homebrew', 'servers', 'remote'
     cln.quick_note 'who is logged in?',               'w', 'users', 'signed', 'names', 'servers', 'remote'
     cln.quick_note 'what server am I on?',            'hostname', 'servers', 'remote', 'computers'
 
