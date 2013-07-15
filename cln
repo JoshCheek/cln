@@ -19,6 +19,22 @@ cln = ILikeMustaches.new do |cln|
     commit to stay focused
     when you fail, move on to other related work that still moves you forward towards your goals.
   GOALS
+  cln.quick_note '20 hours to learn anything', <<-TWENTYHOURS, 'life'
+  https://plus.google.com/104757475552569715504/posts/UTj41SEE77y
+  TED Talk by Josh Kaufman
+  1. Deconstruct the skill          - know what you want to achieve, and break the skill down into smaller pieces that will get you there
+  2. Learn enough to self-correct   - get feedback as you go, so you can fix things you're doing wrong and don't build on false foundations
+  3. Remove practice barriers       - tv, twitter, etc
+  4. Practice for at least 20 hours - ignore your stupidity, achieve this commitment
+  The major barrier to learning something new isn't intellectual, it's emotional.
+  TWENTYHOURS
+  cln.quick_note "Chad Fowler's 4 rules (I think for being happy)", <<-RULES, 'Nordic Ruby 2013'
+    1. Bad things are going to happen
+    2. You get to decide how you feel about them - facts are facts, you choose how you interpret them
+    3. It is possible that you're just going to choose to be happy
+    4. Important things require training and thought - train yourself to remember rule 3
+    Meditation is training for perception
+  RULES
 
 
   # css
