@@ -735,6 +735,8 @@ cln = ILikeMustaches.new do |cln|
     connect timeout behind the proxy to a client in front of the proxy.[citation needed]
   DESCRIPTION
 
+  # website tricks
+  cln.quick_note 'Start a youtube video at 1 minute and 30 seconds', 'www.youtube.com/watch?v=AZPdIY9oAbM#t=1m30s', 'specific', 'time', 'yt'
 end
 
 
