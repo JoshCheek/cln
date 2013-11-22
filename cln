@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-$LOAD_PATH.unshift "/Users/joshcheek/code/i_like_mustaches/lib"
+$LOAD_PATH.unshift ENV['HOME'] + "/code/i_like_mustaches/lib"
 
 require 'i_like_mustaches'
 
