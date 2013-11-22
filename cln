@@ -1,763 +1,955 @@
 #!/usr/bin/env ruby
 
-$LOAD_PATH.unshift ENV['HOME'] + "/code/i_like_mustaches/lib"
+class CommandLineNotes
 
-require 'i_like_mustaches'
+  Color1  = "\e[37m"
+  Color2  = "\e[32m"
+  NoColor = "\e[0m"
 
-cln = ILikeMustaches.new do |cln|
-  cln.description = 'Command Line Notes'
-
-
-
-  # life
-  cln.quick_note 'drivers license info',       'http://www.cyberdriveillinois.com/publications/pdf_publications/dsd_x173.pdf', 'licenses', 'illinois', 'ids', 'identification', 'cards'
-  cln.quick_note 'overcoming procrastination', <<-GOALS
-    set goals
-    schedule your time
-    gather your resources
-    visualize the process
-    commit to stay focused
-    when you fail, move on to other related work that still moves you forward towards your goals.
-  GOALS
-  cln.quick_note '20 hours to learn anything', <<-TWENTYHOURS, 'life'
-  https://plus.google.com/104757475552569715504/posts/UTj41SEE77y
-  TED Talk by Josh Kaufman
-  1. Deconstruct the skill          - know what you want to achieve, and break the skill down into smaller pieces that will get you there
-  2. Learn enough to self-correct   - get feedback as you go, so you can fix things you're doing wrong and don't build on false foundations
-  3. Remove practice barriers       - tv, twitter, etc
-  4. Practice for at least 20 hours - ignore your stupidity, achieve this commitment
-  The major barrier to learning something new isn't intellectual, it's emotional.
-  TWENTYHOURS
-  cln.quick_note "Chad Fowler's 4 rules (I think for being happy)", <<-RULES, 'Nordic Ruby 2013'
-    1. Bad things are going to happen
-    2. You get to decide how you feel about them - facts are facts, you choose how you interpret them
-    3. It is possible that you're just going to choose to be happy
-    4. Important things require training and thought - train yourself to remember rule 3
-    Meditation is training for perception
-  RULES
-  cln.quick_note 'store your keys in the cloud', 'https://www.keyme.net/app'
-  cln.quick_note 'terminal keynote',             'https://github.com/fxn/tkn'
-  cln.quick_note 'accounting equation, credits and debits', 'http://www.youtube.com/watch?v=gaZiAiETW_Y'
-
-  # American vs English
-  cln.quick_note 'cookie',       'biscuit',      'american', 'english'
-  cln.quick_note 'band-aid',     'plaster',      'american', 'english'
-  cln.quick_note 'chips',        'crisps',       'american', 'english'
-  cln.quick_note 'french fries', 'chips',        'american', 'english'
-  cln.quick_note 'soccer',       'football',     'american', 'english'
-  cln.quick_note 'sneakers',     'trainers',     'american', 'english'
-  cln.quick_note 'sweater',      'jumper',       'american', 'english'
-  cln.quick_note 'pants',        'trousers',     'american', 'english'
-  cln.quick_note 'underpants',   'pants',        'american', 'english'
-  cln.quick_note 'cell phone',   'mobile phone', 'american', 'english'
-
-
-  # css
-  # ids are worth 100 points, classes are worth 10, and elements are worth 1
-  # rfc: 'http://tools.ietf.org/html/rfc2318'
-  # cln.quick_note 'position'
-  # fixed -> that place on the window
-  # absolute -> that place on the page
-  # when containing div is absolute, things inside can be positioned absolutely, and will be relative to the containing div
-  # when floating an element, it comes out above the container
-  #   things below can be fixed using clear
-  #   the container can be fixed using a clear fix (which means you don't have to fix the elements below it)
-  cln.quick_note "internal styles", '<head><style type="text/css">h1 { color: #000; }</style></head>', 'css', 'cascading style sheets'
-  cln.quick_note "external styles", '<head><link rel="stylesheet" type="text/css" href="/style.css"></head>', 'css', 'cascading style sheets'
-  cln.quick_note "import other style sheets", '@import', 'css', 'cascading style sheets', 'load', 'require', 'include'
-
-  cln.quick_note "pallettes of coulours", "http://0to255.com", "websites", "urls", "designs"
-  # fish
-  cln.quick_note "fish: accept an autosuggestion",               "C-f",                        "shells"
-  cln.quick_note "fish: set a variable",                         "set varname value",          "shells"
-  cln.quick_note "fish: export a variable",                      "set -x varname value",       "shells"
-  cln.quick_note "fish: erase a variable",                       "set -e varname value",       "shells"
-  cln.quick_note "fish: exit status",                            "$status",                    "shells", "$?"
-  cln.quick_note "fish: length of a list",                       "count $PATH",                "shells", "lists", "size"
-  cln.quick_note "fish: slice a list",                           "echo $PATH[1..2]",           "shells", "lists", "sublists", "indexes"
-  cln.quick_note "fish: command substitutions with parentheses", "set this_dir (ls)",          "shells", "backticks", "``"
-  cln.quick_note "fish: and/or/not",                             "cp f1 f2; and echo success", "shell", "conditionals", "logic", "control flow"
-  cln.quick_note "fish: if/else",                                <<-FISH,                      "shell", "conditionals", "logic", "control flow"
-    if grep fish /etc/shells
-      echo Found fish
-    else if grep bash /etc/shells
-      echo Found bash
-    else
-      echo Got nothing
+  class Binary
+    attr_accessor :notes, :argv
+    def initialize(notes, argv)
+      self.notes, self.argv = notes, argv
     end
-  FISH
-  cln.quick_note "fish: switch",                                 <<-FISH,                      "shell", "conditionals", "logic", "control flow"
-    switch (uname)
-      case Linux
-        echo Hi Tux!
-      case Darwin
-        echo Hi Hexley!
-      case FreeBSD NetBSD DragonFly
-        echo Hi Beastie!
-      case '*'
-        echo Hi, stranger!
-    end
-  FISH
-  cln.quick_note "fish: loops", <<-FISH, "shell", "logic", "control flow"
-    while true
-      echo "Loop forever"
-    end
-    for file in *.txt
-      cp $file $file.bak
-    end
-    for x in (seq 5)
-      touch file_$x.txt
-    end
-  FISH
-  cln.quick_note "fish: define a function",                      <<-FISH,                      "shell", "functions"
-    > function say_hello
-        echo Hello $argv
+
+    def call
+      if argv == ['-h'] || argv == ['--help']
+        @stdout = help_screen
+      else
+        @stdout = map_with_index(notes_to_print) { |note, note_index|
+                    format_note note, note_index
+                  }.join("\n") << NoColor
       end
-    > say_hello
-    Hello
-    > say_hello everybody!
-    Hello everybody!
-  FISH
-  cln.quick_note "fish: arguments",                          "$argv",                      "shell", "$1", "$2", "$3", "$4", "$5", "$6", "$7", "$8", "$9", "variables"
-  cln.quick_note "fish: list all functions",                 "functions # it's a keyword", "shell"
-  cln.quick_note "fish: see the source of a function",       "functions ls",               "shell"
-  cln.quick_note "fish: colours can be names or RGB values", <<-FISH,                      "shell"
-    set_color purple
-    date "+%m/%d/%y"
-    set_color FF0
-    echo (pwd) '>'
-    set_color normal
-  FISH
-  cln.quick_note "fish: config file",                        "~/.config/fish/config.fish",          "shell", ".bashrc", ".bash_profile"
-  cln.quick_note "fish: functions directory",                "~/.config/fish/functions",            "shell", "autoloading"
-  cln.quick_note "fish: completions path",                   "$fish_complete_path",                 "shell", "variables"
-  cln.quick_note "fish: docs",                               "open http://fishshell.com/docs/2.0/", "shell", "documentation", "documents"
+    end
 
-  # readline
-  cln.quick_note "beginning of history",            "M-<",   "readline", "keybindings"
-  cln.quick_note "end of history",                  "M->",   "readline", "keybindings"
-  cln.quick_note "forward search history",          "C-s",   "readline", "keybindings"
-  cln.quick_note "yank last arg (iteratively)",     "M-.",   "readline", "keybindings"
-  cln.quick_note "yank last arg (iteratively)",     "M-.",   "readline", "keybindings"
-  cln.quick_note "delete right",                    "C-d",   "readline", "keybindings"
-  cln.quick_note "transpose words",                 "M-t",   "readline", "keybindings"
-  cln.quick_note "upcase word",                     "M-u",   "readline", "keybindings", "capitalize", "uppercase", "capitalization"
-  cln.quick_note "downcase word",                   "M-l",   "readline", "keybindings", "lowercase", "capitalization"
-  cln.quick_note "delete next word",                "M-d",   "readline", "keybindings"
-  cln.quick_note "show possible completions",       "M-?",   "readline", "keybindings"
-  cln.quick_note "insert all possible completions", "M-*",   "readline", "keybindings", "expand", "expansions"
-  cln.quick_note "start keyboard macro",            "C-x (", "readline", "keybindings", "begin"
-  cln.quick_note "end keyboard macro",              "C-x )", "readline", "keybindings", "stop"
-  cln.quick_note "execute keyboard macro",          "C-x e", "readline", "keybindings", "run"
-  cln.quick_note "incremental undo",                "C-_",   "readline", "keybindings"
-  cln.quick_note "tilde expand",                    "M-&",   "readline", "keybindings", "expansion"
+    def stdout
+      call
+      @stdout
+    end
 
-  # haskell
-    # binaries
-    cln.quick_note "interpret as script",           "runhaskell", "hs"
-    cln.quick_note "interactive haskell",           "ghci", "glaskow", "haskell", "compiler", "hs"
-    cln.quick_note "compile haskell",               "ghc" , "glaskow", "haskell", "compiler", "hs"
+    private
 
-    # language
-    cln.quick_note "hello world",                   %Q'#!/usrb/bin/env runhaskell\nmain = do\n  putStrLn "hello, world!"', "haskell", "hs"
-    cln.quick_note "signature",                     "functionName :: InputType -> OutputType", "haskell", "hs"
-    cln.quick_note "signature",                     "functionName :: (SomeTypeClass a, SomeOtherTypeClass b) => a -> b -> a", "haskell", "hs"
-    cln.quick_note "create a type",                 "data MyTypeName = Constructor1 | Constructor2", "haskell", "hs"
-    cln.quick_note "create a type whose value is a container for an int", "data MyTypeName = Constructor Integer", "haskell", "hs"
-    cln.quick_note "create an agnostic type",       "data List a = Cons a (List a) | Nil", "hs"
-    cln.quick_note "numeric concrete types",        "Integer, Double, Float", "haskell", "hs"
+    def help_screen
+      "Usage: #{$0} [filters]\n"\
+      "\n"\
+      "#{notes.description}"
+    end
 
-    # ghci
-    cln.quick_note "identify the type",             ':t 1', "haskell", "hs", "ghci"
+    def notes_to_print
+      @notes_to_print ||= notes.notes.
+                                select { |values|
+                                 filters.all? { |filter|
+                                   values.any? { |value| value =~ filter }
+                                  }
+                                }
+    end
 
-    # general
-    cln.quick_note "Add a package to dependencies", "put it build-depens in name.cabal, then\n$ cabal-dev install", "haskell", "hs"
-    cln.quick_note "Build the package",             "$ cabal-dev install", "haskell", "hs"
-
-  # git
-  cln.quick_note 'figure out which branches contain a commit',    'git branch -a --contains SHA', 'includes'
-  cln.quick_note '5 lines of context on a diff',                  'git diff -U5'
-  cln.quick_note 'alternative diff algorithm',                    'cd martini_at_zoo; git show 0599a52c3ced58480e3b18ec5c366f0b83a69e2c --patience'
-  cln.quick_note 'Show only filenames in diff',                   'git diff --name-only'
-  cln.quick_note 'Only look in cwd subtree',                      'git diff --relative'
-  cln.quick_note 'list unmerged files',                           'git ls-files -u'
-  cln.quick_note 'delete stale remote tracking branches',         'git remote prune origin'
-  cln.quick_note 'contentless commit (e.g. to force sha update)', 'git commit -m "whatever" --allow-empty'
-  cln.quick_note 'show last commit that matches the string',      'git show :/query'
-  cln.quick_note 'show branches merged into current branch',      'git branch --merged'
-  cln.quick_note 'show branches not merged into current branch',  'git branch --no-merged'
-  cln.quick_note "copy other branch's version of a file into wd", 'git checkout BRANCH -- path/to/file'
-  cln.quick_note "show commits in A that aren't in B",            'git log A ^B'
-  cln.quick_note "blame the oiginal commit, not the move commit", <<-GIT
-    git blame -M   # moved within file
-              -C   # moved within commit
-              -CC  # where line was created
-              -CCC # look at all commits
-  GIT
-  cln.quick_note "count how many commits each person made",       'git shortlog -sn'
-  cln.quick_note "git format",                                    'git@github.com:JoshCheek/seeing_is_believing.git'
-  cln.quick_note "log that says the parents",                     'git log --pretty=raw', 'revert', 'merge'
-  cln.quick_note "revert a merge commit",                         'git revert -m 1 HEAD'
-
-  # github
-  cln.quick_note 'github will suppress trailing whitespace',        '?w=1 (add to the end of any diff url)'
-  cln.quick_note 'octocat index',                                   'http://octodex.github.com/', 'github'
-  cln.quick_note 'github: get a file finder',                       't'
-  cln.quick_note 'github: swap the branch name for the sha',        'y'
-  cln.quick_note 'github: find all the commands on a given page',   '?'
-  cln.quick_note 'github: scope commit history to specific author', '?author=josh_cheek'
-  cln.quick_note 'github: emoji cheat sheet',                       'http://www.emoji-cheat-sheet.com/', 'emoticons', 'smileys'
-  cln.quick_note 'github: compare view',                            <<-EOS
-    github.com/user/repo/compare/{range}
-      where {range} is a branch name, sha, 1.day.ago, yesterday, 2012-12-30
-  EOS
-
-  # ruby
-    cln.quick_note "Ruby's regex lib", 'http://www.geocities.jp/kosako3/oniguruma/', 'regexp', 'regular expressions'
-    cln.quick_note 'Serve current dir', 'ruby -run -e httpd . -p5000', 'ruby', 'server'
-    # globals
-    cln.quick_note 'ARGF', '$<', 'globals', 'variables', 'ruby'
-    # capybara
-    cln.quick_note 'The DSL uses this session:', 'Capybara.session', 'capybara', 'testing', 'ruby'
-    cln.quick_note 'Find the current path', 'session.current_path', 'capybara', 'testing', 'ruby', 'url'
-
-    cln.quick_note "building kisses and hugs ruby", <<-KISSES_AND_HUGS, 'custom'
-      $ export CFLAGS=-Wno-error=shorten-64-to-32
-      $ vim version.h
-      $ vim . && git diff
-          diff --git a/lib/rubygems/version.rb b/lib/rubygems/version.rb
-          index e983751..7468dbe 100644
-          --- a/lib/rubygems/version.rb
-          +++ b/lib/rubygems/version.rb
-          @@ -147,7 +147,7 @@ class Gem::Version
-
-             # FIX: These are only used once, in .correct?. Do they deserve to be
-             # constants?
-          -  VERSION_PATTERN = '[0-9]+(\.[0-9a-zA-Z]+)*' # :nodoc:
-          +  VERSION_PATTERN = '[0-9]+(\.[-0-9a-zA-Z]+)*' # :nodoc:
-             ANCHORED_VERSION_PATTERN = /\A\s*(\#{VERSION_PATTERN})*\s*\z/ # :nodoc:
-
-             ##
-          diff --git a/version.h b/version.h
-          index 5091817..8b2ddd8 100644
-          --- a/version.h
-          +++ b/version.h
-          @@ -1,4 +1,4 @@
-          -#define RUBY_VERSION "2.0.0"
-          +#define RUBY_VERSION "2.0.0.kisses-and-hugs"
-           #define RUBY_RELEASE_DATE "2013-05-20"
-           #define RUBY_PATCHLEVEL 197
-
-          @@ -17,7 +17,7 @@
-           #endif
-
-           #if RUBY_PATCHLEVEL == -1
-          -#define RUBY_PATCHLEVEL_STR "dev"
-          +#define RUBY_PATCHLEVEL_STR "kisses-and-hugs"
-           #else
-           #define RUBY_PATCHLEVEL_STR "p"STRINGIZE(RUBY_PATCHLEVEL)
-           #endif
-      $ ./config.status
-      $ ./configure --prefix="$HOME/.rbenv/versions/kisses-and-hugs" --with-openssl-dir=`brew --prefix openssl` --with-readline-dir=`brew --prefix readline`
-      $ make
-      $ make install
-    KISSES_AND_HUGS
-
-
-  # homebrew
-  cln.quick_note "homebrew binaries are in", "/usr/local/bin"
-
-  # gpg
-  cln.quick_note "how to use gpg", "http://www.madboa.com/geek/gpg-quickstart/", "pgp", "encryption", "encrypted"
-
-  # postgresql
-  cln.quick_note 'postgresql: quit',                            '\q',       'pg', 'meta', 'exit', 'C-c'
-  cln.quick_note 'postgresql: display users',                   '\du',      'pg', 'meta'
-  cln.quick_note 'postgresql: show permissions',                '\z',       'pg', 'meta'
-  cln.quick_note 'postgresql: show table names',                '\z',       'pg', 'meta'
-  cln.quick_note 'postgresql: show table names in a namespace', '\z rbf.*', 'pg', 'meta'
-  cln.quick_note 'postgresql: find the list of pids connected', 'SELECT procpid, application_name from pg_stat_activity;', 'pg', 'meta'
-  cln.quick_note 'postgresql: get a list of all the dbs',       'psql -l',  'pg', 'meta'
-  cln.quick_note 'postgresql: view the query plan',             'explain analyze <query>', 'pg', 'meta'
-  cln.quick_note 'postgresql: start pg in the bg',              'pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start'
-
-  # vim
-  cln.quick_note 'Vim ctags: find reference to class',               ':tag ClassName'
-  cln.quick_note 'vim ctags: shows the list',                        ':tselect or :ts'
-  cln.quick_note 'vim ctags: goes to the next tag in that list',     ':tnext   or :tn'
-  cln.quick_note 'vim ctags: goes to the previous tag in that list', ':tprev   or :tp'
-  cln.quick_note 'vim ctags: goes to the first tag of the list',     ':tfirst  or :tf'
-  cln.quick_note 'vim ctags: goes to the last tag of the list',      ':tlast   or :tl'
-  cln.quick_note 'to most recent change',                            '`.', 'movement', 'navigation'
-  cln.quick_note 'cycle through recent changes',                     'g;', 'movement', 'navigation'
-  cln.quick_note 'Run a command at launch',                          'vim -c NERDTree'
-  cln.quick_note 'vim: copy line nums to current position',               '5,10co .'
-  cln.quick_note 'vim: yank line nums',                              '5,10y'
-  cln.quick_note 'vim: delete line nums',                            '5,10d'
-  cln.quick_note 'vim: perform an action upto a location',           'g~$', 'invert'
-  cln.quick_note 'vim: set filetype to language',                    ':set ft=ruby', 'syntax'
-
-  # emacs
-      cln.quick_note "Kyle's emacs installation notes",      'https://gist.github.com/pd/c202a5cec79595a1199b'
-    # FIXES
-      cln.quick_note 'turn on region highlighting',          'M-x transient-mark-mode', 'emacs', 'fixes'
-      cln.quick_note 'change major-mode to Ruby',            'M-x ruby-mode', 'emacs', 'fixes'
-    # MINOR MODES
-      cln.quick_note 'left screen follows right screen',     'M-x follow-mode', 'emacs', 'minor', 'modes'
-    # BUILTINS
-      cln.quick_note 'tutorial',                             'C-h t', 'emacs', 'builtins'
-      cln.quick_note 'document key combo',                   'C-h k <key combo>', 'emacs', 'builtins'
-      cln.quick_note 'document function',                    'C-h f', 'emacs', 'builtins'
-      cln.quick_note 'document variable',                    'C-h v', 'emacs', 'builtins'
-      cln.quick_note 'Apropos (document similar)',           'C-h a', 'emacs', 'builtins'
-      cln.quick_note 'Man pages',                            'M-x man', 'emacs', 'builtins'
-      cln.quick_note 'get rid of help-buffer & window',      'q', 'emacs', 'builtins'
-      cln.quick_note 'get rid of help-buffer ~ window',      'C-x k', 'emacs', 'builtins'
-      cln.quick_note 'start shell',                          'M-x eshell', 'emacs', 'builtins'
-    # MOVEMENT
-      cln.quick_note 'repeat',                               'C-u # command, eg: C-u 8 C-f', 'emacs', 'movement', 'moving', 'navigation'
-      cln.quick_note 'forward 1 sentence',                   'M-a', 'emacs', 'movement', 'moving', 'navigation'
-      cln.quick_note 'back one sentence',                    'M-e', 'emacs', 'movement', 'moving', 'navigation'
-      cln.quick_note 'beginning of line',                    'C-a', 'emacs', 'movement', 'moving', 'navigation'
-      cln.quick_note 'end of line',                          'C-e', 'emacs', 'movement', 'moving', 'navigation'
-      cln.quick_note 'back 1 word',                          'M-b', 'emacs', 'movement', 'moving', 'navigation'
-      cln.quick_note 'forward 1 word',                       'M-f', 'emacs', 'movement', 'moving', 'navigation'
-      cln.quick_note 'back 1 char',                          'C-b', 'emacs', 'movement', 'moving', 'navigation'
-      cln.quick_note 'forward 1 char',                       'C-f', 'emacs', 'movement', 'moving', 'navigation'
-      cln.quick_note 'down 1 line',                          'C-n', 'emacs', 'movement', 'moving', 'navigation'
-      cln.quick_note 'up 1 line',                            'C-p', 'emacs', 'movement', 'moving', 'navigation'
-      cln.quick_note 'down 1 screen',                        'M-v', 'emacs', 'movement', 'moving', 'navigation'
-      cln.quick_note 'up 1 screen',                          'C-v', 'emacs', 'movement', 'moving', 'navigation'
-      cln.quick_note 'beginning of doc',                     'M-<', 'emacs', 'movement', 'moving', 'navigation'
-      cln.quick_note 'end of doc',                           'M->', 'emacs', 'movement', 'moving', 'navigation'
-      cln.quick_note 'realign cursor to middle of screen',   'C-l', 'emacs', 'movement', 'moving', 'navigation'
-    # BUFFERS
-      cln.quick_note 'list buffers',                         'C-x C-b', 'emacs', 'buffers'
-      cln.quick_note 'visit buffer',                         'C-x b', 'emacs', 'buffers'
-      cln.quick_note 'Cancel EVERYTHING!',                   'C-g', 'emacs', 'buffers', 'search'
-      cln.quick_note 'last buffer',                          'C-x b return', 'emacs', 'buffers'
-      cln.quick_note 'send buffer to end of list',           'C-y', 'emacs', 'buffers'
-    # WINDOWS/FRAMES
-      cln.quick_note 'Close current frame',                  'C-x 0', 'emacs', 'windows', 'frames'
-      cln.quick_note 'Use only one frame',                   'C-x 1', 'emacs', 'windows', 'frames'
-      cln.quick_note 'Split frame in half vertically',       'C-x 2', 'emacs', 'windows', 'frames'
-      cln.quick_note 'Split frame in half horizontally',     'C-x 3', 'emacs', 'windows', 'frames'
-      cln.quick_note 'Jump between frames',                  'C-x o', 'emacs', 'windows', 'frames'
-    # SEARCH
-      cln.quick_note 'Start a forward search',               'C-s', 'emacs', 'searching', 'searches'
-      cln.quick_note 'Next item in forward search',          'C-s', 'emacs', 'searching', 'searches'
-      cln.quick_note 'Start a backward search',              'C-r', 'emacs', 'searching', 'searches'
-      cln.quick_note 'Next item in backward search',         'C-r', 'emacs', 'searching', 'searches'
-      cln.quick_note 'Cancel search',                        'C-g', 'emacs', 'searching', 'searches'
-      cln.quick_note 'Move to this search location',         'return', 'emacs', 'searching', 'searches'
-      cln.quick_note 'Search through function definitions',  'C-x C-i', 'emacs', 'searching', 'searches'
-    # FILES
-      cln.quick_note 'open',                                 'C-x C-f', 'emacs', 'files'
-      cln.quick_note 'revert to disk',                       'C-c r',   'emacs', 'files'
-      cln.quick_note 'save the file',                        'C-x C-s', 'emacs', 'files'
-    # EDITING
-      cln.quick_note 'undo',                                 'C-_', 'emacs', 'editing'
-      cln.quick_note 'delete char after cursor',             'C-d', 'emacs', 'editing'
-      cln.quick_note 'kill word before cursor',              'M-<Delback>', 'emacs', 'editing'
-      cln.quick_note 'kill word after the cursor',           'M-d', 'emacs', 'editing'
-      cln.quick_note 'kill from cursor to end of line',      'C-k', 'emacs', 'editing'
-      cln.quick_note 'kill to end of current sentence',      'M-k', 'emacs', 'editing'
-      cln.quick_note 'set mark',                             'C-<space> since that is taken, use C-@', 'emacs', 'editing'
-      cln.quick_note 'kill from mark to cursor',             'C-w', 'emacs', 'editing'
-      cln.quick_note 'yank text back',                       'C-y', 'emacs', 'editing'
-      cln.quick_note 'cycle through kill ring',              'M-y', 'emacs', 'editing'
-      cln.quick_note 'evaluate lisp',                        'M-S-:', 'emacs', 'editing'
-
-  # code examples
-  cln.quick_note 'Floating point imprecision', 'ruby -e "p 7.01 - 7.00" # => 0.009999999999999787', 'arithmetic', 'math', 'code', 'examples'
-  cln.quick_note 'Ripper', <<-RIPPER, 'ruby', 'parsing', 'parsers', 'lexing', 'lexers', 'code', 'examples'
-    require 'ripper'
-
-    class DemoBuilder < Ripper::SexpBuilder
-      instance_methods.each do |meth_name|
-        next unless meth_name =~ /^on_/
-        super_meth = instance_method meth_name
-        define_method meth_name do |*args|
-          super_meth.bind(self).call(*args).tap do |result|
-            puts "\#{meth_name}(\#{args.map(&:inspect).join(', ')})".ljust(30) << " #> \#{result.inspect}"
-          end
+    def format_note(note, note_index)
+      key         = note[0]
+      value       = note[1]
+      map_with_index(value.each_line) { |value_line, line_index|
+        if line_index.zero?
+          "#{note_index % 2== 0 ? Color1 : Color2}#{key.ljust offset_to_value}  #{value_line.chomp}"
+        else
+          "#{' '*offset_to_value}  #{value_line.chomp}"
         end
-      end
+      }.join("\n")
     end
 
-    src = %(1 # i am a comment)
-    DemoBuilder.new(src).parse
-    # >> on_int("1")                    #> [:@int, "1", [1, 0]]
-    # >> on_sp(" ")                     #> [:@sp, " ", [1, 1]]
-    # >> on_comment("# i am a comment") #> [:@comment, "# i am a comment", [1, 2]]
-    # >> on_stmts_new()                 #> [:stmts_new]
-    # >> on_stmts_add([:stmts_new], [:@int, "1", [1, 0]]) #> [:stmts_add, [:stmts_new], [:@int, "1", [1, 0]]]
-    # >> on_program([:stmts_add, [:stmts_new], [:@int, "1", [1, 0]]]) #> [:program, [:stmts_add, [:stmts_new], [:@int, "1", [1, 0]]]]
-  RIPPER
+    def offset_to_value
+      @offset ||= notes_to_print.map(&:first).max_by(&:size).size
+    end
 
-  # mac
-    cln.quick_note 'shut down processes that are not responding', 'Command + Option + Escape', 'shut-down', 'mac', 'osx' # not sure if this actually works
-    cln.quick_note 'find using spotlight',                        'mdfind -name somename', 'unix', 'mac', 'osx'
+    def filters
+      @filters ||= argv.map { |arg| Regexp.new arg, Regexp::IGNORECASE }
+    end
 
-  # unix utils
-    # misc
-    cln.quick_note "add a new user",                         "sudo adduser josh"
-    cln.quick_note "switch user",                            "su josh"
-    cln.quick_note "change user and group to be readable",   "chmod ug+r filename"
-    cln.quick_note "change owner",                           "chown josh filename"
-    cln.quick_note "change owner and group",                 "chown josh:groupname filename"
-    cln.quick_note "locate a man page",                      "man -w ls"
-    cln.quick_note "flush dns (apparently this is extreme)", "dscacheutil -flushcache"
-    cln.quick_note "the file name of the path",              "basename `pwd`", "dirname", "filename", "fname"
-    cln.quick_note "explains shell invocations",             "http://explainshell.com"
+    # 1.8 doesn't have .with_index
+    def map_with_index(collection, &block)
+      index = -1
+      collection.map do |element|
+        index += 1
+        block.call element, index
+      end
+    end
+  end
 
-    # grep
-    cln.quick_note "show lines after when grepping",  "grep -A n pattern"
-    cln.quick_note "show lines before when grepping", "grep -B n pattern"
-    cln.quick_note "show lines around when grepping", "grep -C n pattern"
+  attr_accessor :description, :notes
 
-    # ln
-    cln.quick_note "ln", "ln -s /existing/file /new/symbolic/link # relative links in /existing/file are not expanded >.<", 'soft links'
+  def initialize
+    @notes = []
+    yield self
+  end
 
-    # ssh and servers and shit
-    cln.quick_note 'generate an ssh key',             'ssh-keygen -t rsa -C "josh.cheek@gmail.com"'
-    cln.quick_note 'moving public key to ssh server', 'ssh-copy-id # can be installed via homebrew', 'servers', 'remote'
-    cln.quick_note 'who is logged in?',               'w', 'users', 'signed', 'names', 'servers', 'remote'
-    cln.quick_note 'what server am I on?',            'hostname', 'servers', 'remote', 'computers'
-
-    # less
-    cln.quick_note 'less: go to next buffer', ':n'
-    cln.quick_note 'less: go to previous buffer', ':p'
-
-    # bash
-    cln.quick_note 'check for interactive shell',                        'if [[ $- == *i* ]]; then echo yes; fi', 'bash', 'shells', 'logins'
-    cln.quick_note 'replace with the nth argument of the previous line', '!!:n',                                  'bash', 'shells', 'logins'
-    cln.quick_note 'last argument of previous line',                     '!$',                                    'bash', 'shells', 'logins'
-    cln.quick_note 'all arguments of previous line',                     '!*',                                    'bash', 'shells', 'logins'
-
-    # systemsetup
-    cln.quick_note 'set system time',                   "systemsetup -setusingnetworktime off -setdate '04:20:2012'", 'clocks'
-    cln.quick_note 'revert system time to actual time', "systemsetup -setusingnetworktime on", 'clocks'
-
-  # HTTP status codes
-    # 100s
-      cln.quick_note '100 Continue', <<-DESCRIPTION, 'http', 'statuses', 'codes', '100s', '1xx'
-        This means that the server has received the request headers, and that the client should proceed to send the request body
-        (in the case of a request for which a body needs to be sent; for example, a POST request). If the request body is large,
-        sending it to a server when a request has already been rejected based upon inappropriate headers is inefficient.
-        To have a server check if the request could be accepted based on the request's headers alone, a client must send Expect:
-        100-continue as a header in its initial request[2] and check if a 100 Continue status code is received in response before continuing
-        (or receive 417 Expectation Failed and not continue).[2]
-      DESCRIPTION
-      cln.quick_note '101 Switching Protocols', <<-DESCRIPTION, 'http', 'statuses', 'codes', '100s', '1xx'
-        This means the requester has asked the server to switch protocols and the server is acknowledging that it will do so.[2]
-      DESCRIPTION
-      cln.quick_note '102 Processing (WebDAV; RFC 2518)', <<-DESCRIPTION, 'http', 'statuses', 'codes', '100s', '1xx'
-        As a WebDAV request may contain many sub-requests involving file operations, it may take a long time to complete the request.
-        This code indicates that the server has received and is processing the request, but no response is available yet.[3]
-        This prevents the client from timing out and assuming the request was lost.
-      DESCRIPTION
-
-    # 200s
-      cln.quick_note '200 OK', <<-DESCRIPTION, 'http', 'statuses', 'codes', '200s', '2xx'
-        Standard response for successful HTTP requests. The actual response will depend on the request method used.
-        In a GET request, the response will contain an entity corresponding to the requested resource.
-        In a POST request the response will contain an entity describing or containing the result of the action.[2]
-      DESCRIPTION
-      cln.quick_note '201 Created', <<-DESCRIPTION, 'http', 'statuses', 'codes', '200s', '2xx'
-        The request has been fulfilled and resulted in a new resource being created.[2]
-      DESCRIPTION
-      cln.quick_note '202 Accepted', <<-DESCRIPTION, 'http', 'statuses', 'codes', '200s', '2xx'
-        The request has been accepted for processing, but the processing has not been completed.
-        The request might or might not eventually be acted upon, as it might be disallowed when processing actually takes place.[2]
-      DESCRIPTION
-      cln.quick_note '203 Non-Authoritative Information (since HTTP/1.1)', <<-DESCRIPTION, 'http', 'statuses', 'codes', '200s', '2xx'
-        The server successfully processed the request, but is returning information that may be from another source.[2]
-      DESCRIPTION
-      cln.quick_note '204 No Content', <<-DESCRIPTION, 'http', 'statuses', 'codes', '200s', '2xx'
-        The server successfully processed the request, but is not returning any content.[2]
-      DESCRIPTION
-      cln.quick_note '205 Reset Content', <<-DESCRIPTION, 'http', 'statuses', 'codes', '200s', '2xx'
-        The server successfully processed the request, but is not returning any content.
-        Unlike a 204 response, this response requires that the requester reset the document view.[2]
-      DESCRIPTION
-      cln.quick_note '206 Partial Content', <<-DESCRIPTION, 'http', 'statuses', 'codes', '200s', '2xx'
-        The server is delivering only part of the resource due to a range header sent by the client.
-        The range header is used by tools like wget to enable resuming of interrupted downloads,
-        or split a download into multiple simultaneous streams.[2]
-      DESCRIPTION
-      cln.quick_note '207 Multi-Status (WebDAV; RFC 4918)', <<-DESCRIPTION, 'http', 'statuses', 'codes', '200s', '2xx'
-        The message body that follows is an XML message and can contain a number of separate response codes,
-        depending on how many sub-requests were made.[4]
-      DESCRIPTION
-      cln.quick_note '208 Already Reported (WebDAV; RFC 5842)', <<-DESCRIPTION, 'http', 'statuses', 'codes', '200s', '2xx'
-        The members of a DAV binding have already been enumerated in a previous reply to this request,
-        and are not being included again.
-      DESCRIPTION
-      cln.quick_note '226 IM Used (RFC 3229)', <<-DESCRIPTION, 'http', 'statuses', 'codes', '200s', '2xx'
-        The server has fulfilled a GET request for the resource, and the response is a representation
-        of the result of one or more instance-manipulations applied to the current instance.[5]
-      DESCRIPTION
-
-    # 300s
-    cln.quick_note '300 Multiple Choices', <<-DESCRIPTION, 'http', 'statuses', 'codes', '300s', '3xx'
-      Indicates multiple options for the resource that the client may follow.
-      It, for instance, could be used to present different format options for video,
-      list files with different extensions, or word sense disambiguation.[2]
-    DESCRIPTION
-    cln.quick_note '301 Moved Permanently', <<-DESCRIPTION, 'http', 'statuses', 'codes', '300s', '3xx'
-      This and all future requests should be directed to the given URI.[2]
-    DESCRIPTION
-    cln.quick_note '302 Found', <<-DESCRIPTION, 'http', 'statuses', 'codes', '300s', '3xx'
-      This is an example of industry practice contradicting the standard.[2]
-      The HTTP/1.0 specification (RFC 1945) required the client to perform a temporary
-      redirect (the original describing phrase was "Moved Temporarily"),[6]
-      but popular browsers implemented 302 with the functionality of a 303 See Other.
-      Therefore, HTTP/1.1 added status codes 303 and 307 to distinguish between the two behaviours.[7]
-      However, some Web applications and frameworks use the 302 status code as if it were the 303.[8]
-    DESCRIPTION
-    cln.quick_note '303 See Other (since HTTP/1.1)', <<-DESCRIPTION, 'http', 'statuses', 'codes', '300s', '3xx'
-      The response to the request can be found under another URI using a GET method.
-      When received in response to a POST (or PUT/DELETE), it should be assumed that
-      the server has received the data and the redirect should be issued with a separate GET message.[2]
-    DESCRIPTION
-    cln.quick_note '304 Not Modified', <<-DESCRIPTION, 'http', 'statuses', 'codes', '300s', '3xx'
-      Indicates that the resource has not been modified since the version specified by the request headers
-      If-Modified-Since or If-Match.[2] This means that there is no need to retransmit the resource,
-      since the client still has a previously-downloaded copy.
-    DESCRIPTION
-    cln.quick_note '305 Use Proxy (since HTTP/1.1)', <<-DESCRIPTION, 'http', 'statuses', 'codes', '300s', '3xx'
-      The requested resource is only available through a proxy, whose address is provided in the response.[2]
-      Many HTTP clients (such as Mozilla[9] and Internet Explorer) do not correctly handle responses with
-      this status code, primarily for security reasons.[citation needed]
-    DESCRIPTION
-    cln.quick_note '306 Switch Proxy', <<-DESCRIPTION, 'http', 'statuses', 'codes', '300s', '3xx'
-      No longer used.[2] Originally meant "Subsequent requests should use the specified proxy."[10]
-    DESCRIPTION
-    cln.quick_note '307 Temporary Redirect (since HTTP/1.1)', <<-DESCRIPTION, 'http', 'statuses', 'codes', '300s', '3xx'
-      In this case, the request should be repeated with another URI; however,
-      future requests should still use the original URI.[2] In contrast to how 302 was historically implemented,
-      the request method is not allowed to be changed when reissuing the original request.
-      For instance, a POST request should be repeated using another POST request.[11]
-    DESCRIPTION
-    cln.quick_note '308 Permanent Redirect (approved as experimental RFC)[12]', <<-DESCRIPTION, 'http', 'statuses', 'codes', '300s', '3xx'
-      The request, and all future requests should be repeated using another URI.
-      307 and 308 (as proposed) parallel the behaviours of 302 and 301, but do not allow the HTTP method to change.
-      So, for example, submitting a form to a permanently redirected resource may continue smoothly.
-    DESCRIPTION
-
-  # 400s
-    cln.quick_note '400 Bad Request', <<-DESCRIPTION, 'http', 'statuses', 'codes', '400s', '4xx'
-      The request cannot be fulfilled due to bad syntax.[2]
-    DESCRIPTION
-    cln.quick_note '401 Unauthorized', <<-DESCRIPTION, 'http', 'statuses', 'codes', '400s', '4xx'
-      Similar to 403 Forbidden, but specifically for use when authentication is required and has failed or has not
-      yet been provided.[2] The response must include a WWW-Authenticate header field containing a challenge applicable
-      to the requested resource. See Basic access authentication and Digest access authentication.
-    DESCRIPTION
-    cln.quick_note '402 Payment Required', <<-DESCRIPTION, 'http', 'statuses', 'codes', '400s', '4xx'
-      Reserved for future use.[2] The original intention was that this code might be used as part of some form of
-      digital cash or micropayment scheme, but that has not happened, and this code is not usually used.
-      As an example of its use, however, Apple's defunct MobileMe service generated a 402 error if the
-      MobileMe account was delinquent.[citation needed] In addition, YouTube uses this status if a particular
-      IP address has made excessive requests, and requires the person to enter a CAPTCHA.
-    DESCRIPTION
-    cln.quick_note '403 Forbidden', <<-DESCRIPTION, 'http', 'statuses', 'codes', '400s', '4xx'
-      The request was a valid request, but the server is refusing to respond to it.[2]
-      Unlike a 401 Unauthorized response, authenticating will make no difference.[2]
-      On servers where authentication is required, this commonly means that the provided credentials were
-      successfully authenticated but that the credentials still do not grant the client permission to
-      access the resource (e.g. a recognized user attempting to access restricted content).
-    DESCRIPTION
-    cln.quick_note '404 Not Found', <<-DESCRIPTION, 'http', 'statuses', 'codes', '400s', '4xx'
-      The requested resource could not be found but may be available again in the future.[2]
-      Subsequent requests by the client are permissible.
-    DESCRIPTION
-    cln.quick_note '405 Method Not Allowed', <<-DESCRIPTION, 'http', 'statuses', 'codes', '400s', '4xx'
-      A request was made of a resource using a request method not supported by that resource;[2]
-      for example, using GET on a form which requires data to be presented via POST, or using PUT on a read-only resource.
-    DESCRIPTION
-    cln.quick_note '406 Not Acceptable', <<-DESCRIPTION, 'http', 'statuses', 'codes', '400s', '4xx'
-      The requested resource is only capable of generating content not acceptable according
-      to the Accept headers sent in the request.[2]
-    DESCRIPTION
-    cln.quick_note '407 Proxy Authentication Required', <<-DESCRIPTION, 'http', 'statuses', 'codes', '400s', '4xx'
-      The client must first authenticate itself with the proxy.[2]
-    DESCRIPTION
-    cln.quick_note '408 Request Timeout', <<-DESCRIPTION, 'http', 'statuses', 'codes', '400s', '4xx'
-      The server timed out waiting for the request.[2] According to W3 HTTP specifications:
-      "The client did not produce a request within the time that the server was prepared to wait.
-      The client MAY repeat the request without modifications at any later time."
-    DESCRIPTION
-    cln.quick_note '409 Conflict', <<-DESCRIPTION, 'http', 'statuses', 'codes', '400s', '4xx'
-      Indicates that the request could not be processed because of conflict in the request,
-      such as an edit conflict.[2]
-    DESCRIPTION
-    cln.quick_note '410 Gone', <<-DESCRIPTION, 'http', 'statuses', 'codes', '400s', '4xx'
-      Indicates that the resource requested is no longer available and will not be available again.[2]
-      This should be used when a resource has been intentionally removed and the resource should be purged.
-      Upon receiving a 410 status code, the client should not request the resource again in the future.
-      Clients such as search engines should remove the resource from their indices.
-      Most use cases do not require clients and search engines to purge the resource, and a "404 Not Found" may be used instead.
-    DESCRIPTION
-    cln.quick_note '411 Length Required', <<-DESCRIPTION, 'http', 'statuses', 'codes', '400s', '4xx'
-      The request did not specify the length of its content, which is required by the requested resource.[2]
-    DESCRIPTION
-    cln.quick_note '412 Precondition Failed', <<-DESCRIPTION, 'http', 'statuses', 'codes', '400s', '4xx'
-      The server does not meet one of the preconditions that the requester put on the request.[2]
-    DESCRIPTION
-    cln.quick_note '413 Request Entity Too Large', <<-DESCRIPTION, 'http', 'statuses', 'codes', '400s', '4xx'
-      The request is larger than the server is willing or able to process.[2]
-    DESCRIPTION
-    cln.quick_note '414 Request-URI Too Long', <<-DESCRIPTION, 'http', 'statuses', 'codes', '400s', '4xx'
-      The URI provided was too long for the server to process.[2]
-    DESCRIPTION
-    cln.quick_note '415 Unsupported Media Type', <<-DESCRIPTION, 'http', 'statuses', 'codes', '400s', '4xx'
-      The request entity has a media type which the server or resource does not support.[2]
-      For example, the client uploads an image as image/svg+xml, but the server requires that images use a different format.
-    DESCRIPTION
-    cln.quick_note '416 Requested Range Not Satisfiable', <<-DESCRIPTION, 'http', 'statuses', 'codes', '400s', '4xx'
-      The client has asked for a portion of the file, but the server cannot supply that portion.[2] For example,
-      if the client asked for a part of the file that lies beyond the end of the file.[2]
-    DESCRIPTION
-    cln.quick_note '417 Expectation Failed', <<-DESCRIPTION, 'http', 'statuses', 'codes', '400s', '4xx'
-      The server cannot meet the requirements of the Expect request-header field.[2]
-    DESCRIPTION
-    cln.quick_note '418 I\'m a teapot (RFC 2324)', <<-DESCRIPTION, 'http', 'statuses', 'codes', '400s', '4xx'
-      This code was defined in 1998 as one of the traditional IETF April Fools' jokes, in RFC 2324,
-      Hyper Text Coffee Pot Control Protocol, and is not expected to be implemented by actual HTTP servers.
-    DESCRIPTION
-    cln.quick_note '420 Enhance Your Calm (Twitter)', <<-DESCRIPTION, 'http', 'statuses', 'codes', '400s', '4xx'
-      Not part of the HTTP standard, but returned by the Twitter Search and Trends API when the client is
-      being rate limited.[13] Other services may wish to implement the 429 Too Many Requests response code instead.
-    DESCRIPTION
-    cln.quick_note '422 Unprocessable Entity (WebDAV; RFC 4918)', <<-DESCRIPTION, 'http', 'statuses', 'codes', '400s', '4xx'
-      The request was well-formed but was unable to be followed due to semantic errors.[4]
-    DESCRIPTION
-    cln.quick_note '423 Locked (WebDAV; RFC 4918)', <<-DESCRIPTION, 'http', 'statuses', 'codes', '400s', '4xx'
-      The resource that is being accessed is locked.[4]
-    DESCRIPTION
-    cln.quick_note '424 Failed Dependency (WebDAV; RFC 4918)', <<-DESCRIPTION, 'http', 'statuses', 'codes', '400s', '4xx'
-      The request failed due to failure of a previous request (e.g. a PROPPATCH).[4]
-    DESCRIPTION
-    cln.quick_note '424 Method Failure (WebDAV)[14]', <<-DESCRIPTION, 'http', 'statuses', 'codes', '400s', '4xx'
-      Indicates the method was not executed on a particular resource within its scope because some part of
-      the method's execution failed causing the entire method to be aborted.
-    DESCRIPTION
-    cln.quick_note '425 Unordered Collection (Internet draft)', <<-DESCRIPTION, 'http', 'statuses', 'codes', '400s', '4xx'
-      Defined in drafts of "WebDAV Advanced Collections Protocol",[15] but not present in
-      "Web Distributed Authoring and Versioning (WebDAV) Ordered Collections Protocol".[16]
-    DESCRIPTION
-    cln.quick_note '426 Upgrade Required (RFC 2817)', <<-DESCRIPTION, 'http', 'statuses', 'codes', '400s', '4xx'
-      The client should switch to a different protocol such as TLS/1.0.[17]
-    DESCRIPTION
-    cln.quick_note '428 Precondition Required (RFC 6585)', <<-DESCRIPTION, 'http', 'statuses', 'codes', '400s', '4xx'
-      The origin server requires the request to be conditional. Intended to prevent "the 'lost update' problem,
-      where a client GETs a resource's state, modifies it, and PUTs it back to the server, when meanwhile a
-      third party has modified the state on the server, leading to a conflict."[18]
-    DESCRIPTION
-    cln.quick_note '429 Too Many Requests (RFC 6585)', <<-DESCRIPTION, 'http', 'statuses', 'codes', '400s', '4xx'
-      The user has sent too many requests in a given amount of time. Intended for use with rate limiting schemes.[18]
-    DESCRIPTION
-    cln.quick_note '431 Request Header Fields Too Large (RFC 6585)', <<-DESCRIPTION, 'http', 'statuses', 'codes', '400s', '4xx'
-      The server is unwilling to process the request because either an individual header field,
-      or all the header fields collectively, are too large.[18]
-    DESCRIPTION
-    cln.quick_note '444 No Response (Nginx)', <<-DESCRIPTION, 'http', 'statuses', 'codes', '400s', '4xx'
-      Used in Nginx logs to indicate that the server has returned no information to the client and
-      closed the connection (useful as a deterrent for malware).
-    DESCRIPTION
-    cln.quick_note '449 Retry With (Microsoft)', <<-DESCRIPTION, 'http', 'statuses', 'codes', '400s', '4xx'
-      A Microsoft extension. The request should be retried after performing the appropriate action.[19]
-      Often search-engines or custom applications will ignore required parameters.
-      Where no default action is appropriate, the Aviongoo website sends a
-      "HTTP/1.1 449 Retry with valid parameters: param1, param2, . . ." response. The applications may choose to learn, or not.
-    DESCRIPTION
-    cln.quick_note '450 Blocked by Windows Parental Controls (Microsoft)', <<-DESCRIPTION, 'http', 'statuses', 'codes', '400s', '4xx'
-      A Microsoft extension. This error is given when Windows Parental Controls
-      are turned on and are blocking access to the given webpage.[20]
-    DESCRIPTION
-    cln.quick_note '451 Unavailable For Legal Reasons (Internet draft)', <<-DESCRIPTION, 'http', 'statuses', 'codes', '400s', '4xx'
-      Defined in the internet draft "A New HTTP Status Code for Legally-restricted Resources".[21]
-      Intended to be used when resource access is denied for legal reasons, e.g. censorship or
-      government-mandated blocked access. A reference to the 1953 dystopian novel Fahrenheit 451, where books are outlawed.[22]
-    DESCRIPTION
-    cln.quick_note '451 Redirect (Microsoft)', <<-DESCRIPTION, 'http', 'statuses', 'codes', '400s', '4xx'
-      Used in Exchange ActiveSync if there either is a more efficient server to use or the server can't access the users' mailbox.[23]
-      The client is supposed to re-run the HTTP Autodiscovery protocol to find a better suited server.[24]
-    DESCRIPTION
-    cln.quick_note '494 Request Header Too Large (Nginx)', <<-DESCRIPTION, 'http', 'statuses', 'codes', '400s', '4xx'
-      Nginx internal code similar to 431 but it was introduced earlier.[25][original research?]
-    DESCRIPTION
-    cln.quick_note '495 Cert Error (Nginx)', <<-DESCRIPTION, 'http', 'statuses', 'codes', '400s', '4xx'
-      Nginx internal code used when SSL client certificate error occurred to distinguish
-      it from 4XX in a log and an error page redirection.
-    DESCRIPTION
-    cln.quick_note '496 No Cert (Nginx)', <<-DESCRIPTION, 'http', 'statuses', 'codes', '400s', '4xx'
-      Nginx internal code used when client didn't provide certificate to distinguish it from
-      4XX in a log and an error page redirection.
-    DESCRIPTION
-    cln.quick_note '497 HTTP to HTTPS (Nginx)', <<-DESCRIPTION, 'http', 'statuses', 'codes', '400s', '4xx'
-      Nginx internal code used for the plain HTTP requests that are sent to HTTPS
-      port to distinguish it from 4XX in a log and an error page redirection.
-    DESCRIPTION
-    cln.quick_note '499 Client Closed Request (Nginx)', <<-DESCRIPTION, 'http', 'statuses', 'codes', '400s', '4xx'
-      Used in Nginx logs to indicate when the connection has been closed by client while the server
-      is still processing its request, making server unable to send a status code back.[26]
-    DESCRIPTION
-
-  # 500s
-  cln.quick_note '500 Internal Server Error', <<-DESCRIPTION, 'http', 'statuses', 'codes', '500s', '5xx'
-    A generic error message, given when no more specific message is suitable.[2]
-  DESCRIPTION
-  cln.quick_note '501 Not Implemented', <<-DESCRIPTION, 'http', 'statuses', 'codes', '500s', '5xx'
-    The server either does not recognize the request method, or it lacks the ability to fulfill the request.[2]
-  DESCRIPTION
-  cln.quick_note '502 Bad Gateway', <<-DESCRIPTION, 'http', 'statuses', 'codes', '500s', '5xx'
-    The server was acting as a gateway or proxy and received an invalid response from the upstream server.[2]
-  DESCRIPTION
-  cln.quick_note '503 Service Unavailable', <<-DESCRIPTION, 'http', 'statuses', 'codes', '500s', '5xx'
-    The server is currently unavailable (because it is overloaded or down for maintenance).[2]
-    Generally, this is a temporary state.
-  DESCRIPTION
-  cln.quick_note '504 Gateway Timeout', <<-DESCRIPTION, 'http', 'statuses', 'codes', '500s', '5xx'
-    The server was acting as a gateway or proxy and did not receive a timely response from the upstream server.[2]
-  DESCRIPTION
-  cln.quick_note '505 HTTP Version Not Supported', <<-DESCRIPTION, 'http', 'statuses', 'codes', '500s', '5xx'
-    The server does not support the HTTP protocol version used in the request.[2]
-  DESCRIPTION
-  cln.quick_note '506 Variant Also Negotiates (RFC 2295)', <<-DESCRIPTION, 'http', 'statuses', 'codes', '500s', '5xx'
-    Transparent content negotiation for the request results in a circular reference.[27]
-  DESCRIPTION
-  cln.quick_note '507 Insufficient Storage (WebDAV; RFC 4918)', <<-DESCRIPTION, 'http', 'statuses', 'codes', '500s', '5xx'
-    The server is unable to store the representation needed to complete the request.[4]
-  DESCRIPTION
-  cln.quick_note '508 Loop Detected (WebDAV; RFC 5842)', <<-DESCRIPTION, 'http', 'statuses', 'codes', '500s', '5xx'
-    The server detected an infinite loop while processing the request (sent in lieu of 208).
-  DESCRIPTION
-  cln.quick_note '509 Bandwidth Limit Exceeded (Apache bw/limited extension)', <<-DESCRIPTION, 'http', 'statuses', 'codes', '500s', '5xx'
-    This status code, while used by many servers, is not specified in any RFCs.
-  DESCRIPTION
-  cln.quick_note '510 Not Extended (RFC 2774)', <<-DESCRIPTION, 'http', 'statuses', 'codes', '500s', '5xx'
-    Further extensions to the request are required for the server to fulfill it.[28]
-  DESCRIPTION
-  cln.quick_note '511 Network Authentication Required (RFC 6585)', <<-DESCRIPTION, 'http', 'statuses', 'codes', '500s', '5xx'
-    The client needs to authenticate to gain network access. Intended for use by intercepting proxies used to control
-    access to the network (e.g. "captive portals" used to require agreement to Terms of Service before granting full
-    Internet access via a Wi-Fi hotspot).[18]
-  DESCRIPTION
-  cln.quick_note '598 Network read timeout error (Unknown)', <<-DESCRIPTION, 'http', 'statuses', 'codes', '500s', '5xx'
-    This status code is not specified in any RFCs, but is used by Microsoft HTTP proxies to signal a network read
-    timeout behind the proxy to a client in front of the proxy.[citation needed]
-  DESCRIPTION
-  cln.quick_note '599 Network connect timeout error (Unknown)', <<-DESCRIPTION, 'http', 'statuses', 'codes', '500s', '5xx'
-    This status code is not specified in any RFCs, but is used by Microsoft HTTP proxies to signal a network
-    connect timeout behind the proxy to a client in front of the proxy.[citation needed]
-  DESCRIPTION
-
-  # website tricks
-  cln.quick_note 'Start a youtube video at 1 minute and 30 seconds', 'www.youtube.com/watch?v=AZPdIY9oAbM#t=1m30s', 'specific', 'time', 'yt'
+  def note(key, value, *tags)
+    leading_whitespace = value[/\A */]
+    value = value.gsub(/^#{leading_whitespace}/, '')
+    notes << [key, value, *tags]
+  end
 end
 
 
-exit ILikeMustaches::Console.new(cln).call
+# define and invoke the specific notes
+if $0 =~ /rspec/
+  describe CommandLineNotes do
+    def bin(notes, argv)
+      CommandLineNotes::Binary.new notes, argv
+    end
+
+    it 'prints the description if you give it -h' do
+      notes = CommandLineNotes.new { |cln| cln.description = 'mah description' }
+      bin(notes, ['-h']).stdout.should include 'mah description'
+      bin(notes, ['--help']).stdout.should include 'mah description'
+    end
+
+    it 'prints all notes by default' do
+      notes = CommandLineNotes.new do |cln|
+        cln.note 'key1', 'value1'
+        cln.note 'key2', 'value2'
+      end
+      bin(notes, []).stdout.should include 'key1'
+      bin(notes, []).stdout.should include 'key2'
+    end
+
+    it 'selects notes whose key matches when given an arg' do
+      notes = CommandLineNotes.new do |cln|
+        cln.note 'key1', 'value1'
+        cln.note 'key2', 'value2'
+      end
+      bin(notes, ['key1']).stdout.should include 'key1'
+    end
+
+    it 'selects notes whose value matches when given an arg' do
+      notes = CommandLineNotes.new do |cln|
+        cln.note 'key1', 'value1'
+        cln.note 'key2', 'value2'
+      end
+      bin(notes, ['value1']).stdout.should include 'key1'
+    end
+
+    it 'selects notes whose tags match when given an arg' do
+      notes = CommandLineNotes.new do |cln|
+        cln.note 'key1', 'value1', 'tag1'
+        cln.note 'key2', 'value2', 'tag2'
+      end
+      bin(notes, ['tag1']).stdout.should include 'key1'
+    end
+
+    it 'treats multiple arguments as successive filters' do
+      notes = CommandLineNotes.new do |cln|
+        cln.note 'key1', 'value1', 'tag1'
+        cln.note 'key2', 'value2', 'tag1', 'tag2'
+      end
+      bin(notes, ['tag1', 'tag2']).stdout.should_not include 'key1'
+      bin(notes, ['tag1', 'tag2']).stdout.should include 'key2'
+    end
+
+    it 'does not print the tags' do
+      notes = CommandLineNotes.new do |cln|
+        cln.note 'key1', 'value1', 'tag1'
+      end
+      bin(notes, []).stdout.should_not include 'tag1'
+    end
+
+    it 'aligns the notes such that values line up' do
+      notes = CommandLineNotes.new do |cln|
+        cln.note 'k',   'value1'
+        cln.note 'key', 'value2'
+      end
+      spacing1, spacing2, *other_spacing = bin(notes, []).stdout.scan(/ +/)
+      other_spacing.should == []
+      spacing1.size.should == spacing2.size + 2
+    end
+
+    def no_ansi(string)
+      string.gsub(/\e\[.*?m/, '')
+    end
+
+    it 'prints notes whose value has multiple lines on multiple lines (aligned)' do
+      notes = CommandLineNotes.new do |cln|
+        cln.note 'k',   'value1'
+        cln.note 'key', <<-VALUE
+          value2.1  # should be at same indentation as value1
+           value2.2 # should be 1 space deeper than value 2.1
+        VALUE
+      end
+      line1, line2, line3, *other_lines = no_ansi(bin(notes, []).stdout).scan(/^.*?v/)
+      other_lines.should == []
+      line1.size.should == line2.size
+      line3.size.should == line2.size + 1
+    end
+
+    it 'prints every other line coloured' do
+      notes = CommandLineNotes.new do |cln|
+        cln.note 'key1', 'value1'
+        cln.note 'key2', 'value2'
+        cln.note 'key3', "value3.1\nalue3.2"
+      end
+      line1, line2, line3, line4, *rest = bin(notes, []).stdout.each_line.to_a
+      rest.should == []
+      line1.should start_with CommandLineNotes::Color1
+      line2.should start_with CommandLineNotes::Color2
+      line3.should start_with CommandLineNotes::Color1
+      line4.should_not start_with CommandLineNotes::Color2 # b/c it's part of note3
+      line4.should end_with CommandLineNotes::NoColor
+    end
+  end
+else
+
+  # THE NOTES!
+  notes = CommandLineNotes.new do |cln|
+    cln.description = 'Command Line Notes'
+
+    # life
+    cln.note 'drivers license info',       'http://www.cyberdriveillinois.com/publications/pdf_publications/dsd_x173.pdf', 'licenses', 'illinois', 'ids', 'identification', 'cards'
+    cln.note 'overcoming procrastination', <<-GOALS
+      set goals
+      schedule your time
+      gather your resources
+      visualize the process
+      commit to stay focused
+      when you fail, move on to other related work that still moves you forward towards your goals.
+    GOALS
+    cln.note '20 hours to learn anything', <<-TWENTYHOURS, 'life'
+    https://plus.google.com/104757475552569715504/posts/UTj41SEE77y
+    TED Talk by Josh Kaufman
+    1. Deconstruct the skill          - know what you want to achieve, and break the skill down into smaller pieces that will get you there
+    2. Learn enough to self-correct   - get feedback as you go, so you can fix things you're doing wrong and don't build on false foundations
+    3. Remove practice barriers       - tv, twitter, etc
+    4. Practice for at least 20 hours - ignore your stupidity, achieve this commitment
+    The major barrier to learning something new isn't intellectual, it's emotional.
+    TWENTYHOURS
+    cln.note "Chad Fowler's 4 rules (I think for being happy)", <<-RULES, 'Nordic Ruby 2013'
+      1. Bad things are going to happen
+      2. You get to decide how you feel about them - facts are facts, you choose how you interpret them
+      3. It is possible that you're just going to choose to be happy
+      4. Important things require training and thought - train yourself to remember rule 3
+      Meditation is training for perception
+    RULES
+    cln.note 'store your keys in the cloud', 'https://www.keyme.net/app'
+    cln.note 'terminal keynote',             'https://github.com/fxn/tkn'
+    cln.note 'accounting equation, credits and debits', 'http://www.youtube.com/watch?v=gaZiAiETW_Y'
+
+    # American vs English
+    cln.note 'cookie',       'biscuit',      'american', 'english'
+    cln.note 'band-aid',     'plaster',      'american', 'english'
+    cln.note 'chips',        'crisps',       'american', 'english'
+    cln.note 'french fries', 'chips',        'american', 'english'
+    cln.note 'soccer',       'football',     'american', 'english'
+    cln.note 'sneakers',     'trainers',     'american', 'english'
+    cln.note 'sweater',      'jumper',       'american', 'english'
+    cln.note 'pants',        'trousers',     'american', 'english'
+    cln.note 'underpants',   'pants',        'american', 'english'
+    cln.note 'cell phone',   'mobile phone', 'american', 'english'
+
+
+    # css
+    # ids are worth 100 points, classes are worth 10, and elements are worth 1
+    # rfc: 'http://tools.ietf.org/html/rfc2318'
+    # cln.note 'position'
+    # fixed -> that place on the window
+    # absolute -> that place on the page
+    # when containing div is absolute, things inside can be positioned absolutely, and will be relative to the containing div
+    # when floating an element, it comes out above the container
+    #   things below can be fixed using clear
+    #   the container can be fixed using a clear fix (which means you don't have to fix the elements below it)
+    cln.note "internal styles", '<head><style type="text/css">h1 { color: #000; }</style></head>', 'css', 'cascading style sheets'
+    cln.note "external styles", '<head><link rel="stylesheet" type="text/css" href="/style.css"></head>', 'css', 'cascading style sheets'
+    cln.note "import other style sheets", '@import', 'css', 'cascading style sheets', 'load', 'require', 'include'
+
+    cln.note "pallettes of coulours", "http://0to255.com", "websites", "urls", "designs"
+    # fish
+    cln.note "fish: accept an autosuggestion",               "C-f",                        "shells"
+    cln.note "fish: set a variable",                         "set varname value",          "shells"
+    cln.note "fish: export a variable",                      "set -x varname value",       "shells"
+    cln.note "fish: erase a variable",                       "set -e varname value",       "shells"
+    cln.note "fish: exit status",                            "$status",                    "shells", "$?"
+    cln.note "fish: length of a list",                       "count $PATH",                "shells", "lists", "size"
+    cln.note "fish: slice a list",                           "echo $PATH[1..2]",           "shells", "lists", "sublists", "indexes"
+    cln.note "fish: command substitutions with parentheses", "set this_dir (ls)",          "shells", "backticks", "``"
+    cln.note "fish: and/or/not",                             "cp f1 f2; and echo success", "shell", "conditionals", "logic", "control flow"
+    cln.note "fish: if/else",                                <<-FISH,                      "shell", "conditionals", "logic", "control flow"
+      if grep fish /etc/shells
+        echo Found fish
+      else if grep bash /etc/shells
+        echo Found bash
+      else
+        echo Got nothing
+      end
+    FISH
+    cln.note "fish: switch",                                 <<-FISH,                      "shell", "conditionals", "logic", "control flow"
+      switch (uname)
+        case Linux
+          echo Hi Tux!
+        case Darwin
+          echo Hi Hexley!
+        case FreeBSD NetBSD DragonFly
+          echo Hi Beastie!
+        case '*'
+          echo Hi, stranger!
+      end
+    FISH
+    cln.note "fish: loops", <<-FISH, "shell", "logic", "control flow"
+      while true
+        echo "Loop forever"
+      end
+      for file in *.txt
+        cp $file $file.bak
+      end
+      for x in (seq 5)
+        touch file_$x.txt
+      end
+    FISH
+    cln.note "fish: define a function",                      <<-FISH,                      "shell", "functions"
+      > function say_hello
+          echo Hello $argv
+        end
+      > say_hello
+      Hello
+      > say_hello everybody!
+      Hello everybody!
+    FISH
+    cln.note "fish: arguments",                          "$argv",                      "shell", "$1", "$2", "$3", "$4", "$5", "$6", "$7", "$8", "$9", "variables"
+    cln.note "fish: list all functions",                 "functions # it's a keyword", "shell"
+    cln.note "fish: see the source of a function",       "functions ls",               "shell"
+    cln.note "fish: colours can be names or RGB values", <<-FISH,                      "shell"
+      set_color purple
+      date "+%m/%d/%y"
+      set_color FF0
+      echo (pwd) '>'
+      set_color normal
+    FISH
+    cln.note "fish: config file",                        "~/.config/fish/config.fish",          "shell", ".bashrc", ".bash_profile"
+    cln.note "fish: functions directory",                "~/.config/fish/functions",            "shell", "autoloading"
+    cln.note "fish: completions path",                   "$fish_complete_path",                 "shell", "variables"
+    cln.note "fish: docs",                               "open http://fishshell.com/docs/2.0/", "shell", "documentation", "documents"
+
+    # readline
+    cln.note "beginning of history",            "M-<",   "readline", "keybindings"
+    cln.note "end of history",                  "M->",   "readline", "keybindings"
+    cln.note "forward search history",          "C-s",   "readline", "keybindings"
+    cln.note "yank last arg (iteratively)",     "M-.",   "readline", "keybindings"
+    cln.note "yank last arg (iteratively)",     "M-.",   "readline", "keybindings"
+    cln.note "delete right",                    "C-d",   "readline", "keybindings"
+    cln.note "transpose words",                 "M-t",   "readline", "keybindings"
+    cln.note "upcase word",                     "M-u",   "readline", "keybindings", "capitalize", "uppercase", "capitalization"
+    cln.note "downcase word",                   "M-l",   "readline", "keybindings", "lowercase", "capitalization"
+    cln.note "delete next word",                "M-d",   "readline", "keybindings"
+    cln.note "show possible completions",       "M-?",   "readline", "keybindings"
+    cln.note "insert all possible completions", "M-*",   "readline", "keybindings", "expand", "expansions"
+    cln.note "start keyboard macro",            "C-x (", "readline", "keybindings", "begin"
+    cln.note "end keyboard macro",              "C-x )", "readline", "keybindings", "stop"
+    cln.note "execute keyboard macro",          "C-x e", "readline", "keybindings", "run"
+    cln.note "incremental undo",                "C-_",   "readline", "keybindings"
+    cln.note "tilde expand",                    "M-&",   "readline", "keybindings", "expansion"
+
+    # haskell
+      # binaries
+      cln.note "interpret as script",           "runhaskell", "hs"
+      cln.note "interactive haskell",           "ghci", "glaskow", "haskell", "compiler", "hs"
+      cln.note "compile haskell",               "ghc" , "glaskow", "haskell", "compiler", "hs"
+
+      # language
+      cln.note "hello world",                   %Q'#!/usrb/bin/env runhaskell\nmain = do\n  putStrLn "hello, world!"', "haskell", "hs"
+      cln.note "signature",                     "functionName :: InputType -> OutputType", "haskell", "hs"
+      cln.note "signature",                     "functionName :: (SomeTypeClass a, SomeOtherTypeClass b) => a -> b -> a", "haskell", "hs"
+      cln.note "create a type",                 "data MyTypeName = Constructor1 | Constructor2", "haskell", "hs"
+      cln.note "create a type whose value is a container for an int", "data MyTypeName = Constructor Integer", "haskell", "hs"
+      cln.note "create an agnostic type",       "data List a = Cons a (List a) | Nil", "hs"
+      cln.note "numeric concrete types",        "Integer, Double, Float", "haskell", "hs"
+
+      # ghci
+      cln.note "identify the type",             ':t 1', "haskell", "hs", "ghci"
+
+      # general
+      cln.note "Add a package to dependencies", "put it build-depens in name.cabal, then\n$ cabal-dev install", "haskell", "hs"
+      cln.note "Build the package",             "$ cabal-dev install", "haskell", "hs"
+
+    # git
+    cln.note 'figure out which branches contain a commit',    'git branch -a --contains SHA', 'includes'
+    cln.note '5 lines of context on a diff',                  'git diff -U5'
+    cln.note 'alternative diff algorithm',                    'cd martini_at_zoo; git show 0599a52c3ced58480e3b18ec5c366f0b83a69e2c --patience'
+    cln.note 'Show only filenames in diff',                   'git diff --name-only'
+    cln.note 'Only look in cwd subtree',                      'git diff --relative'
+    cln.note 'list unmerged files',                           'git ls-files -u'
+    cln.note 'delete stale remote tracking branches',         'git remote prune origin'
+    cln.note 'contentless commit (e.g. to force sha update)', 'git commit -m "whatever" --allow-empty'
+    cln.note 'show last commit that matches the string',      'git show :/query'
+    cln.note 'show branches merged into current branch',      'git branch --merged'
+    cln.note 'show branches not merged into current branch',  'git branch --no-merged'
+    cln.note "copy other branch's version of a file into wd", 'git checkout BRANCH -- path/to/file'
+    cln.note "show commits in A that aren't in B",            'git log A ^B'
+    cln.note "blame the oiginal commit, not the move commit", <<-GIT
+      git blame -M   # moved within file
+                -C   # moved within commit
+                -CC  # where line was created
+                -CCC # look at all commits
+    GIT
+    cln.note "count how many commits each person made",       'git shortlog -sn'
+    cln.note "git format",                                    'git@github.com:JoshCheek/seeing_is_believing.git'
+    cln.note "log that says the parents",                     'git log --pretty=raw', 'revert', 'merge'
+    cln.note "revert a merge commit",                         'git revert -m 1 HEAD'
+
+    # github
+    cln.note 'github will suppress trailing whitespace',        '?w=1 (add to the end of any diff url)'
+    cln.note 'octocat index',                                   'http://octodex.github.com/', 'github'
+    cln.note 'github: get a file finder',                       't'
+    cln.note 'github: swap the branch name for the sha',        'y'
+    cln.note 'github: find all the commands on a given page',   '?'
+    cln.note 'github: scope commit history to specific author', '?author=josh_cheek'
+    cln.note 'github: emoji cheat sheet',                       'http://www.emoji-cheat-sheet.com/', 'emoticons', 'smileys'
+    cln.note 'github: compare view',                            <<-EOS
+      github.com/user/repo/compare/{range}
+        where {range} is a branch name, sha, 1.day.ago, yesterday, 2012-12-30
+    EOS
+
+    # ruby
+      cln.note "Ruby's regex lib", 'http://www.geocities.jp/kosako3/oniguruma/', 'regexp', 'regular expressions'
+      cln.note 'Serve current dir', 'ruby -run -e httpd . -p5000', 'ruby', 'server'
+      # globals
+      cln.note 'ARGF', '$<', 'globals', 'variables', 'ruby'
+      # capybara
+      cln.note 'The DSL uses this session:', 'Capybara.session', 'capybara', 'testing', 'ruby'
+      cln.note 'Find the current path', 'session.current_path', 'capybara', 'testing', 'ruby', 'url'
+
+      cln.note "building kisses and hugs ruby", <<-KISSES_AND_HUGS, 'custom'
+        $ export CFLAGS=-Wno-error=shorten-64-to-32
+        $ vim version.h
+        $ vim . && git diff
+            diff --git a/lib/rubygems/version.rb b/lib/rubygems/version.rb
+            index e983751..7468dbe 100644
+            --- a/lib/rubygems/version.rb
+            +++ b/lib/rubygems/version.rb
+            @@ -147,7 +147,7 @@ class Gem::Version
+
+               # FIX: These are only used once, in .correct?. Do they deserve to be
+               # constants?
+            -  VERSION_PATTERN = '[0-9]+(\.[0-9a-zA-Z]+)*' # :nodoc:
+            +  VERSION_PATTERN = '[0-9]+(\.[-0-9a-zA-Z]+)*' # :nodoc:
+               ANCHORED_VERSION_PATTERN = /\A\s*(\#{VERSION_PATTERN})*\s*\z/ # :nodoc:
+
+               ##
+            diff --git a/version.h b/version.h
+            index 5091817..8b2ddd8 100644
+            --- a/version.h
+            +++ b/version.h
+            @@ -1,4 +1,4 @@
+            -#define RUBY_VERSION "2.0.0"
+            +#define RUBY_VERSION "2.0.0.kisses-and-hugs"
+             #define RUBY_RELEASE_DATE "2013-05-20"
+             #define RUBY_PATCHLEVEL 197
+
+            @@ -17,7 +17,7 @@
+             #endif
+
+             #if RUBY_PATCHLEVEL == -1
+            -#define RUBY_PATCHLEVEL_STR "dev"
+            +#define RUBY_PATCHLEVEL_STR "kisses-and-hugs"
+             #else
+             #define RUBY_PATCHLEVEL_STR "p"STRINGIZE(RUBY_PATCHLEVEL)
+             #endif
+        $ ./config.status
+        $ ./configure --prefix="$HOME/.rbenv/versions/kisses-and-hugs" --with-openssl-dir=`brew --prefix openssl` --with-readline-dir=`brew --prefix readline`
+        $ make
+        $ make install
+      KISSES_AND_HUGS
+
+
+    # homebrew
+    cln.note "homebrew binaries are in", "/usr/local/bin"
+
+    # gpg
+    cln.note "how to use gpg", "http://www.madboa.com/geek/gpg-quickstart/", "pgp", "encryption", "encrypted"
+
+    # postgresql
+    cln.note 'postgresql: quit',                            '\q',       'pg', 'meta', 'exit', 'C-c'
+    cln.note 'postgresql: display users',                   '\du',      'pg', 'meta'
+    cln.note 'postgresql: show permissions',                '\z',       'pg', 'meta'
+    cln.note 'postgresql: show table names',                '\z',       'pg', 'meta'
+    cln.note 'postgresql: show table names in a namespace', '\z rbf.*', 'pg', 'meta'
+    cln.note 'postgresql: find the list of pids connected', 'SELECT procpid, application_name from pg_stat_activity;', 'pg', 'meta'
+    cln.note 'postgresql: get a list of all the dbs',       'psql -l',  'pg', 'meta'
+    cln.note 'postgresql: view the query plan',             'explain analyze <query>', 'pg', 'meta'
+    cln.note 'postgresql: start pg in the bg',              'pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start'
+
+    # vim
+    cln.note 'Vim ctags: find reference to class',               ':tag ClassName'
+    cln.note 'vim ctags: shows the list',                        ':tselect or :ts'
+    cln.note 'vim ctags: goes to the next tag in that list',     ':tnext   or :tn'
+    cln.note 'vim ctags: goes to the previous tag in that list', ':tprev   or :tp'
+    cln.note 'vim ctags: goes to the first tag of the list',     ':tfirst  or :tf'
+    cln.note 'vim ctags: goes to the last tag of the list',      ':tlast   or :tl'
+    cln.note 'to most recent change',                            '`.', 'movement', 'navigation'
+    cln.note 'cycle through recent changes',                     'g;', 'movement', 'navigation'
+    cln.note 'Run a command at launch',                          'vim -c NERDTree'
+    cln.note 'vim: copy line nums to current position',               '5,10co .'
+    cln.note 'vim: yank line nums',                              '5,10y'
+    cln.note 'vim: delete line nums',                            '5,10d'
+    cln.note 'vim: perform an action upto a location',           'g~$', 'invert'
+    cln.note 'vim: set filetype to language',                    ':set ft=ruby', 'syntax'
+
+    # emacs
+        cln.note "Kyle's emacs installation notes",      'https://gist.github.com/pd/c202a5cec79595a1199b'
+      # FIXES
+        cln.note 'turn on region highlighting',          'M-x transient-mark-mode', 'emacs', 'fixes'
+        cln.note 'change major-mode to Ruby',            'M-x ruby-mode', 'emacs', 'fixes'
+      # MINOR MODES
+        cln.note 'left screen follows right screen',     'M-x follow-mode', 'emacs', 'minor', 'modes'
+      # BUILTINS
+        cln.note 'tutorial',                             'C-h t', 'emacs', 'builtins'
+        cln.note 'document key combo',                   'C-h k <key combo>', 'emacs', 'builtins'
+        cln.note 'document function',                    'C-h f', 'emacs', 'builtins'
+        cln.note 'document variable',                    'C-h v', 'emacs', 'builtins'
+        cln.note 'Apropos (document similar)',           'C-h a', 'emacs', 'builtins'
+        cln.note 'Man pages',                            'M-x man', 'emacs', 'builtins'
+        cln.note 'get rid of help-buffer & window',      'q', 'emacs', 'builtins'
+        cln.note 'get rid of help-buffer ~ window',      'C-x k', 'emacs', 'builtins'
+        cln.note 'start shell',                          'M-x eshell', 'emacs', 'builtins'
+      # MOVEMENT
+        cln.note 'repeat',                               'C-u # command, eg: C-u 8 C-f', 'emacs', 'movement', 'moving', 'navigation'
+        cln.note 'forward 1 sentence',                   'M-a', 'emacs', 'movement', 'moving', 'navigation'
+        cln.note 'back one sentence',                    'M-e', 'emacs', 'movement', 'moving', 'navigation'
+        cln.note 'beginning of line',                    'C-a', 'emacs', 'movement', 'moving', 'navigation'
+        cln.note 'end of line',                          'C-e', 'emacs', 'movement', 'moving', 'navigation'
+        cln.note 'back 1 word',                          'M-b', 'emacs', 'movement', 'moving', 'navigation'
+        cln.note 'forward 1 word',                       'M-f', 'emacs', 'movement', 'moving', 'navigation'
+        cln.note 'back 1 char',                          'C-b', 'emacs', 'movement', 'moving', 'navigation'
+        cln.note 'forward 1 char',                       'C-f', 'emacs', 'movement', 'moving', 'navigation'
+        cln.note 'down 1 line',                          'C-n', 'emacs', 'movement', 'moving', 'navigation'
+        cln.note 'up 1 line',                            'C-p', 'emacs', 'movement', 'moving', 'navigation'
+        cln.note 'down 1 screen',                        'M-v', 'emacs', 'movement', 'moving', 'navigation'
+        cln.note 'up 1 screen',                          'C-v', 'emacs', 'movement', 'moving', 'navigation'
+        cln.note 'beginning of doc',                     'M-<', 'emacs', 'movement', 'moving', 'navigation'
+        cln.note 'end of doc',                           'M->', 'emacs', 'movement', 'moving', 'navigation'
+        cln.note 'realign cursor to middle of screen',   'C-l', 'emacs', 'movement', 'moving', 'navigation'
+      # BUFFERS
+        cln.note 'list buffers',                         'C-x C-b', 'emacs', 'buffers'
+        cln.note 'visit buffer',                         'C-x b', 'emacs', 'buffers'
+        cln.note 'Cancel EVERYTHING!',                   'C-g', 'emacs', 'buffers', 'search'
+        cln.note 'last buffer',                          'C-x b return', 'emacs', 'buffers'
+        cln.note 'send buffer to end of list',           'C-y', 'emacs', 'buffers'
+      # WINDOWS/FRAMES
+        cln.note 'Close current frame',                  'C-x 0', 'emacs', 'windows', 'frames'
+        cln.note 'Use only one frame',                   'C-x 1', 'emacs', 'windows', 'frames'
+        cln.note 'Split frame in half vertically',       'C-x 2', 'emacs', 'windows', 'frames'
+        cln.note 'Split frame in half horizontally',     'C-x 3', 'emacs', 'windows', 'frames'
+        cln.note 'Jump between frames',                  'C-x o', 'emacs', 'windows', 'frames'
+      # SEARCH
+        cln.note 'Start a forward search',               'C-s', 'emacs', 'searching', 'searches'
+        cln.note 'Next item in forward search',          'C-s', 'emacs', 'searching', 'searches'
+        cln.note 'Start a backward search',              'C-r', 'emacs', 'searching', 'searches'
+        cln.note 'Next item in backward search',         'C-r', 'emacs', 'searching', 'searches'
+        cln.note 'Cancel search',                        'C-g', 'emacs', 'searching', 'searches'
+        cln.note 'Move to this search location',         'return', 'emacs', 'searching', 'searches'
+        cln.note 'Search through function definitions',  'C-x C-i', 'emacs', 'searching', 'searches'
+      # FILES
+        cln.note 'open',                                 'C-x C-f', 'emacs', 'files'
+        cln.note 'revert to disk',                       'C-c r',   'emacs', 'files'
+        cln.note 'save the file',                        'C-x C-s', 'emacs', 'files'
+      # EDITING
+        cln.note 'undo',                                 'C-_', 'emacs', 'editing'
+        cln.note 'delete char after cursor',             'C-d', 'emacs', 'editing'
+        cln.note 'kill word before cursor',              'M-<Delback>', 'emacs', 'editing'
+        cln.note 'kill word after the cursor',           'M-d', 'emacs', 'editing'
+        cln.note 'kill from cursor to end of line',      'C-k', 'emacs', 'editing'
+        cln.note 'kill to end of current sentence',      'M-k', 'emacs', 'editing'
+        cln.note 'set mark',                             'C-<space> since that is taken, use C-@', 'emacs', 'editing'
+        cln.note 'kill from mark to cursor',             'C-w', 'emacs', 'editing'
+        cln.note 'yank text back',                       'C-y', 'emacs', 'editing'
+        cln.note 'cycle through kill ring',              'M-y', 'emacs', 'editing'
+        cln.note 'evaluate lisp',                        'M-S-:', 'emacs', 'editing'
+
+    # code examples
+    cln.note 'Floating point imprecision', 'ruby -e "p 7.01 - 7.00" # => 0.009999999999999787', 'arithmetic', 'math', 'code', 'examples'
+    cln.note 'Ripper', <<-RIPPER, 'ruby', 'parsing', 'parsers', 'lexing', 'lexers', 'code', 'examples'
+      require 'ripper'
+
+      class DemoBuilder < Ripper::SexpBuilder
+        instance_methods.each do |meth_name|
+          next unless meth_name =~ /^on_/
+          super_meth = instance_method meth_name
+          define_method meth_name do |*args|
+            super_meth.bind(self).call(*args).tap do |result|
+              puts "\#{meth_name}(\#{args.map(&:inspect).join(', ')})".ljust(30) << " #> \#{result.inspect}"
+            end
+          end
+        end
+      end
+
+      src = %(1 # i am a comment)
+      DemoBuilder.new(src).parse
+      # >> on_int("1")                    #> [:@int, "1", [1, 0]]
+      # >> on_sp(" ")                     #> [:@sp, " ", [1, 1]]
+      # >> on_comment("# i am a comment") #> [:@comment, "# i am a comment", [1, 2]]
+      # >> on_stmts_new()                 #> [:stmts_new]
+      # >> on_stmts_add([:stmts_new], [:@int, "1", [1, 0]]) #> [:stmts_add, [:stmts_new], [:@int, "1", [1, 0]]]
+      # >> on_program([:stmts_add, [:stmts_new], [:@int, "1", [1, 0]]]) #> [:program, [:stmts_add, [:stmts_new], [:@int, "1", [1, 0]]]]
+    RIPPER
+
+    # mac
+      cln.note 'shut down processes that are not responding', 'Command + Option + Escape', 'shut-down', 'mac', 'osx' # not sure if this actually works
+      cln.note 'find using spotlight',                        'mdfind -name somename', 'unix', 'mac', 'osx'
+
+    # unix utils
+      # misc
+      cln.note "add a new user",                         "sudo adduser josh"
+      cln.note "switch user",                            "su josh"
+      cln.note "change user and group to be readable",   "chmod ug+r filename"
+      cln.note "change owner",                           "chown josh filename"
+      cln.note "change owner and group",                 "chown josh:groupname filename"
+      cln.note "locate a man page",                      "man -w ls"
+      cln.note "flush dns (apparently this is extreme)", "dscacheutil -flushcache"
+      cln.note "the file name of the path",              "basename `pwd`", "dirname", "filename", "fname"
+      cln.note "explains shell invocations",             "http://explainshell.com"
+
+      # grep
+      cln.note "show lines after when grepping",  "grep -A n pattern"
+      cln.note "show lines before when grepping", "grep -B n pattern"
+      cln.note "show lines around when grepping", "grep -C n pattern"
+
+      # ln
+      cln.note "ln", "ln -s /existing/file /new/symbolic/link # relative links in /existing/file are not expanded >.<", 'soft links'
+
+      # ssh and servers and shit
+      cln.note 'generate an ssh key',             'ssh-keygen -t rsa -C "josh.cheek@gmail.com"'
+      cln.note 'moving public key to ssh server', 'ssh-copy-id # can be installed via homebrew', 'servers', 'remote'
+      cln.note 'who is logged in?',               'w', 'users', 'signed', 'names', 'servers', 'remote'
+      cln.note 'what server am I on?',            'hostname', 'servers', 'remote', 'computers'
+
+      # less
+      cln.note 'less: go to next buffer', ':n'
+      cln.note 'less: go to previous buffer', ':p'
+
+      # bash
+      cln.note 'check for interactive shell',                        'if [[ $- == *i* ]]; then echo yes; fi', 'bash', 'shells', 'logins'
+      cln.note 'replace with the nth argument of the previous line', '!!:n',                                  'bash', 'shells', 'logins'
+      cln.note 'last argument of previous line',                     '!$',                                    'bash', 'shells', 'logins'
+      cln.note 'all arguments of previous line',                     '!*',                                    'bash', 'shells', 'logins'
+
+      # systemsetup
+      cln.note 'set system time',                   "systemsetup -setusingnetworktime off -setdate '04:20:2012'", 'clocks'
+      cln.note 'revert system time to actual time', "systemsetup -setusingnetworktime on", 'clocks'
+
+    # HTTP status codes
+      # 100s
+        cln.note '100 Continue', <<-DESCRIPTION, 'http', 'statuses', 'codes', '100s', '1xx'
+          This means that the server has received the request headers, and that the client should proceed to send the request body
+          (in the case of a request for which a body needs to be sent; for example, a POST request). If the request body is large,
+          sending it to a server when a request has already been rejected based upon inappropriate headers is inefficient.
+          To have a server check if the request could be accepted based on the request's headers alone, a client must send Expect:
+          100-continue as a header in its initial request[2] and check if a 100 Continue status code is received in response before continuing
+          (or receive 417 Expectation Failed and not continue).[2]
+        DESCRIPTION
+        cln.note '101 Switching Protocols', <<-DESCRIPTION, 'http', 'statuses', 'codes', '100s', '1xx'
+          This means the requester has asked the server to switch protocols and the server is acknowledging that it will do so.[2]
+        DESCRIPTION
+        cln.note '102 Processing (WebDAV; RFC 2518)', <<-DESCRIPTION, 'http', 'statuses', 'codes', '100s', '1xx'
+          As a WebDAV request may contain many sub-requests involving file operations, it may take a long time to complete the request.
+          This code indicates that the server has received and is processing the request, but no response is available yet.[3]
+          This prevents the client from timing out and assuming the request was lost.
+        DESCRIPTION
+
+      # 200s
+        cln.note '200 OK', <<-DESCRIPTION, 'http', 'statuses', 'codes', '200s', '2xx'
+          Standard response for successful HTTP requests. The actual response will depend on the request method used.
+          In a GET request, the response will contain an entity corresponding to the requested resource.
+          In a POST request the response will contain an entity describing or containing the result of the action.[2]
+        DESCRIPTION
+        cln.note '201 Created', <<-DESCRIPTION, 'http', 'statuses', 'codes', '200s', '2xx'
+          The request has been fulfilled and resulted in a new resource being created.[2]
+        DESCRIPTION
+        cln.note '202 Accepted', <<-DESCRIPTION, 'http', 'statuses', 'codes', '200s', '2xx'
+          The request has been accepted for processing, but the processing has not been completed.
+          The request might or might not eventually be acted upon, as it might be disallowed when processing actually takes place.[2]
+        DESCRIPTION
+        cln.note '203 Non-Authoritative Information (since HTTP/1.1)', <<-DESCRIPTION, 'http', 'statuses', 'codes', '200s', '2xx'
+          The server successfully processed the request, but is returning information that may be from another source.[2]
+        DESCRIPTION
+        cln.note '204 No Content', <<-DESCRIPTION, 'http', 'statuses', 'codes', '200s', '2xx'
+          The server successfully processed the request, but is not returning any content.[2]
+        DESCRIPTION
+        cln.note '205 Reset Content', <<-DESCRIPTION, 'http', 'statuses', 'codes', '200s', '2xx'
+          The server successfully processed the request, but is not returning any content.
+          Unlike a 204 response, this response requires that the requester reset the document view.[2]
+        DESCRIPTION
+        cln.note '206 Partial Content', <<-DESCRIPTION, 'http', 'statuses', 'codes', '200s', '2xx'
+          The server is delivering only part of the resource due to a range header sent by the client.
+          The range header is used by tools like wget to enable resuming of interrupted downloads,
+          or split a download into multiple simultaneous streams.[2]
+        DESCRIPTION
+        cln.note '207 Multi-Status (WebDAV; RFC 4918)', <<-DESCRIPTION, 'http', 'statuses', 'codes', '200s', '2xx'
+          The message body that follows is an XML message and can contain a number of separate response codes,
+          depending on how many sub-requests were made.[4]
+        DESCRIPTION
+        cln.note '208 Already Reported (WebDAV; RFC 5842)', <<-DESCRIPTION, 'http', 'statuses', 'codes', '200s', '2xx'
+          The members of a DAV binding have already been enumerated in a previous reply to this request,
+          and are not being included again.
+        DESCRIPTION
+        cln.note '226 IM Used (RFC 3229)', <<-DESCRIPTION, 'http', 'statuses', 'codes', '200s', '2xx'
+          The server has fulfilled a GET request for the resource, and the response is a representation
+          of the result of one or more instance-manipulations applied to the current instance.[5]
+        DESCRIPTION
+
+      # 300s
+      cln.note '300 Multiple Choices', <<-DESCRIPTION, 'http', 'statuses', 'codes', '300s', '3xx'
+        Indicates multiple options for the resource that the client may follow.
+        It, for instance, could be used to present different format options for video,
+        list files with different extensions, or word sense disambiguation.[2]
+      DESCRIPTION
+      cln.note '301 Moved Permanently', <<-DESCRIPTION, 'http', 'statuses', 'codes', '300s', '3xx'
+        This and all future requests should be directed to the given URI.[2]
+      DESCRIPTION
+      cln.note '302 Found', <<-DESCRIPTION, 'http', 'statuses', 'codes', '300s', '3xx'
+        This is an example of industry practice contradicting the standard.[2]
+        The HTTP/1.0 specification (RFC 1945) required the client to perform a temporary
+        redirect (the original describing phrase was "Moved Temporarily"),[6]
+        but popular browsers implemented 302 with the functionality of a 303 See Other.
+        Therefore, HTTP/1.1 added status codes 303 and 307 to distinguish between the two behaviours.[7]
+        However, some Web applications and frameworks use the 302 status code as if it were the 303.[8]
+      DESCRIPTION
+      cln.note '303 See Other (since HTTP/1.1)', <<-DESCRIPTION, 'http', 'statuses', 'codes', '300s', '3xx'
+        The response to the request can be found under another URI using a GET method.
+        When received in response to a POST (or PUT/DELETE), it should be assumed that
+        the server has received the data and the redirect should be issued with a separate GET message.[2]
+      DESCRIPTION
+      cln.note '304 Not Modified', <<-DESCRIPTION, 'http', 'statuses', 'codes', '300s', '3xx'
+        Indicates that the resource has not been modified since the version specified by the request headers
+        If-Modified-Since or If-Match.[2] This means that there is no need to retransmit the resource,
+        since the client still has a previously-downloaded copy.
+      DESCRIPTION
+      cln.note '305 Use Proxy (since HTTP/1.1)', <<-DESCRIPTION, 'http', 'statuses', 'codes', '300s', '3xx'
+        The requested resource is only available through a proxy, whose address is provided in the response.[2]
+        Many HTTP clients (such as Mozilla[9] and Internet Explorer) do not correctly handle responses with
+        this status code, primarily for security reasons.[citation needed]
+      DESCRIPTION
+      cln.note '306 Switch Proxy', <<-DESCRIPTION, 'http', 'statuses', 'codes', '300s', '3xx'
+        No longer used.[2] Originally meant "Subsequent requests should use the specified proxy."[10]
+      DESCRIPTION
+      cln.note '307 Temporary Redirect (since HTTP/1.1)', <<-DESCRIPTION, 'http', 'statuses', 'codes', '300s', '3xx'
+        In this case, the request should be repeated with another URI; however,
+        future requests should still use the original URI.[2] In contrast to how 302 was historically implemented,
+        the request method is not allowed to be changed when reissuing the original request.
+        For instance, a POST request should be repeated using another POST request.[11]
+      DESCRIPTION
+      cln.note '308 Permanent Redirect (approved as experimental RFC)[12]', <<-DESCRIPTION, 'http', 'statuses', 'codes', '300s', '3xx'
+        The request, and all future requests should be repeated using another URI.
+        307 and 308 (as proposed) parallel the behaviours of 302 and 301, but do not allow the HTTP method to change.
+        So, for example, submitting a form to a permanently redirected resource may continue smoothly.
+      DESCRIPTION
+
+    # 400s
+      cln.note '400 Bad Request', <<-DESCRIPTION, 'http', 'statuses', 'codes', '400s', '4xx'
+        The request cannot be fulfilled due to bad syntax.[2]
+      DESCRIPTION
+      cln.note '401 Unauthorized', <<-DESCRIPTION, 'http', 'statuses', 'codes', '400s', '4xx'
+        Similar to 403 Forbidden, but specifically for use when authentication is required and has failed or has not
+        yet been provided.[2] The response must include a WWW-Authenticate header field containing a challenge applicable
+        to the requested resource. See Basic access authentication and Digest access authentication.
+      DESCRIPTION
+      cln.note '402 Payment Required', <<-DESCRIPTION, 'http', 'statuses', 'codes', '400s', '4xx'
+        Reserved for future use.[2] The original intention was that this code might be used as part of some form of
+        digital cash or micropayment scheme, but that has not happened, and this code is not usually used.
+        As an example of its use, however, Apple's defunct MobileMe service generated a 402 error if the
+        MobileMe account was delinquent.[citation needed] In addition, YouTube uses this status if a particular
+        IP address has made excessive requests, and requires the person to enter a CAPTCHA.
+      DESCRIPTION
+      cln.note '403 Forbidden', <<-DESCRIPTION, 'http', 'statuses', 'codes', '400s', '4xx'
+        The request was a valid request, but the server is refusing to respond to it.[2]
+        Unlike a 401 Unauthorized response, authenticating will make no difference.[2]
+        On servers where authentication is required, this commonly means that the provided credentials were
+        successfully authenticated but that the credentials still do not grant the client permission to
+        access the resource (e.g. a recognized user attempting to access restricted content).
+      DESCRIPTION
+      cln.note '404 Not Found', <<-DESCRIPTION, 'http', 'statuses', 'codes', '400s', '4xx'
+        The requested resource could not be found but may be available again in the future.[2]
+        Subsequent requests by the client are permissible.
+      DESCRIPTION
+      cln.note '405 Method Not Allowed', <<-DESCRIPTION, 'http', 'statuses', 'codes', '400s', '4xx'
+        A request was made of a resource using a request method not supported by that resource;[2]
+        for example, using GET on a form which requires data to be presented via POST, or using PUT on a read-only resource.
+      DESCRIPTION
+      cln.note '406 Not Acceptable', <<-DESCRIPTION, 'http', 'statuses', 'codes', '400s', '4xx'
+        The requested resource is only capable of generating content not acceptable according
+        to the Accept headers sent in the request.[2]
+      DESCRIPTION
+      cln.note '407 Proxy Authentication Required', <<-DESCRIPTION, 'http', 'statuses', 'codes', '400s', '4xx'
+        The client must first authenticate itself with the proxy.[2]
+      DESCRIPTION
+      cln.note '408 Request Timeout', <<-DESCRIPTION, 'http', 'statuses', 'codes', '400s', '4xx'
+        The server timed out waiting for the request.[2] According to W3 HTTP specifications:
+        "The client did not produce a request within the time that the server was prepared to wait.
+        The client MAY repeat the request without modifications at any later time."
+      DESCRIPTION
+      cln.note '409 Conflict', <<-DESCRIPTION, 'http', 'statuses', 'codes', '400s', '4xx'
+        Indicates that the request could not be processed because of conflict in the request,
+        such as an edit conflict.[2]
+      DESCRIPTION
+      cln.note '410 Gone', <<-DESCRIPTION, 'http', 'statuses', 'codes', '400s', '4xx'
+        Indicates that the resource requested is no longer available and will not be available again.[2]
+        This should be used when a resource has been intentionally removed and the resource should be purged.
+        Upon receiving a 410 status code, the client should not request the resource again in the future.
+        Clients such as search engines should remove the resource from their indices.
+        Most use cases do not require clients and search engines to purge the resource, and a "404 Not Found" may be used instead.
+      DESCRIPTION
+      cln.note '411 Length Required', <<-DESCRIPTION, 'http', 'statuses', 'codes', '400s', '4xx'
+        The request did not specify the length of its content, which is required by the requested resource.[2]
+      DESCRIPTION
+      cln.note '412 Precondition Failed', <<-DESCRIPTION, 'http', 'statuses', 'codes', '400s', '4xx'
+        The server does not meet one of the preconditions that the requester put on the request.[2]
+      DESCRIPTION
+      cln.note '413 Request Entity Too Large', <<-DESCRIPTION, 'http', 'statuses', 'codes', '400s', '4xx'
+        The request is larger than the server is willing or able to process.[2]
+      DESCRIPTION
+      cln.note '414 Request-URI Too Long', <<-DESCRIPTION, 'http', 'statuses', 'codes', '400s', '4xx'
+        The URI provided was too long for the server to process.[2]
+      DESCRIPTION
+      cln.note '415 Unsupported Media Type', <<-DESCRIPTION, 'http', 'statuses', 'codes', '400s', '4xx'
+        The request entity has a media type which the server or resource does not support.[2]
+        For example, the client uploads an image as image/svg+xml, but the server requires that images use a different format.
+      DESCRIPTION
+      cln.note '416 Requested Range Not Satisfiable', <<-DESCRIPTION, 'http', 'statuses', 'codes', '400s', '4xx'
+        The client has asked for a portion of the file, but the server cannot supply that portion.[2] For example,
+        if the client asked for a part of the file that lies beyond the end of the file.[2]
+      DESCRIPTION
+      cln.note '417 Expectation Failed', <<-DESCRIPTION, 'http', 'statuses', 'codes', '400s', '4xx'
+        The server cannot meet the requirements of the Expect request-header field.[2]
+      DESCRIPTION
+      cln.note '418 I\'m a teapot (RFC 2324)', <<-DESCRIPTION, 'http', 'statuses', 'codes', '400s', '4xx'
+        This code was defined in 1998 as one of the traditional IETF April Fools' jokes, in RFC 2324,
+        Hyper Text Coffee Pot Control Protocol, and is not expected to be implemented by actual HTTP servers.
+      DESCRIPTION
+      cln.note '420 Enhance Your Calm (Twitter)', <<-DESCRIPTION, 'http', 'statuses', 'codes', '400s', '4xx'
+        Not part of the HTTP standard, but returned by the Twitter Search and Trends API when the client is
+        being rate limited.[13] Other services may wish to implement the 429 Too Many Requests response code instead.
+      DESCRIPTION
+      cln.note '422 Unprocessable Entity (WebDAV; RFC 4918)', <<-DESCRIPTION, 'http', 'statuses', 'codes', '400s', '4xx'
+        The request was well-formed but was unable to be followed due to semantic errors.[4]
+      DESCRIPTION
+      cln.note '423 Locked (WebDAV; RFC 4918)', <<-DESCRIPTION, 'http', 'statuses', 'codes', '400s', '4xx'
+        The resource that is being accessed is locked.[4]
+      DESCRIPTION
+      cln.note '424 Failed Dependency (WebDAV; RFC 4918)', <<-DESCRIPTION, 'http', 'statuses', 'codes', '400s', '4xx'
+        The request failed due to failure of a previous request (e.g. a PROPPATCH).[4]
+      DESCRIPTION
+      cln.note '424 Method Failure (WebDAV)[14]', <<-DESCRIPTION, 'http', 'statuses', 'codes', '400s', '4xx'
+        Indicates the method was not executed on a particular resource within its scope because some part of
+        the method's execution failed causing the entire method to be aborted.
+      DESCRIPTION
+      cln.note '425 Unordered Collection (Internet draft)', <<-DESCRIPTION, 'http', 'statuses', 'codes', '400s', '4xx'
+        Defined in drafts of "WebDAV Advanced Collections Protocol",[15] but not present in
+        "Web Distributed Authoring and Versioning (WebDAV) Ordered Collections Protocol".[16]
+      DESCRIPTION
+      cln.note '426 Upgrade Required (RFC 2817)', <<-DESCRIPTION, 'http', 'statuses', 'codes', '400s', '4xx'
+        The client should switch to a different protocol such as TLS/1.0.[17]
+      DESCRIPTION
+      cln.note '428 Precondition Required (RFC 6585)', <<-DESCRIPTION, 'http', 'statuses', 'codes', '400s', '4xx'
+        The origin server requires the request to be conditional. Intended to prevent "the 'lost update' problem,
+        where a client GETs a resource's state, modifies it, and PUTs it back to the server, when meanwhile a
+        third party has modified the state on the server, leading to a conflict."[18]
+      DESCRIPTION
+      cln.note '429 Too Many Requests (RFC 6585)', <<-DESCRIPTION, 'http', 'statuses', 'codes', '400s', '4xx'
+        The user has sent too many requests in a given amount of time. Intended for use with rate limiting schemes.[18]
+      DESCRIPTION
+      cln.note '431 Request Header Fields Too Large (RFC 6585)', <<-DESCRIPTION, 'http', 'statuses', 'codes', '400s', '4xx'
+        The server is unwilling to process the request because either an individual header field,
+        or all the header fields collectively, are too large.[18]
+      DESCRIPTION
+      cln.note '444 No Response (Nginx)', <<-DESCRIPTION, 'http', 'statuses', 'codes', '400s', '4xx'
+        Used in Nginx logs to indicate that the server has returned no information to the client and
+        closed the connection (useful as a deterrent for malware).
+      DESCRIPTION
+      cln.note '449 Retry With (Microsoft)', <<-DESCRIPTION, 'http', 'statuses', 'codes', '400s', '4xx'
+        A Microsoft extension. The request should be retried after performing the appropriate action.[19]
+        Often search-engines or custom applications will ignore required parameters.
+        Where no default action is appropriate, the Aviongoo website sends a
+        "HTTP/1.1 449 Retry with valid parameters: param1, param2, . . ." response. The applications may choose to learn, or not.
+      DESCRIPTION
+      cln.note '450 Blocked by Windows Parental Controls (Microsoft)', <<-DESCRIPTION, 'http', 'statuses', 'codes', '400s', '4xx'
+        A Microsoft extension. This error is given when Windows Parental Controls
+        are turned on and are blocking access to the given webpage.[20]
+      DESCRIPTION
+      cln.note '451 Unavailable For Legal Reasons (Internet draft)', <<-DESCRIPTION, 'http', 'statuses', 'codes', '400s', '4xx'
+        Defined in the internet draft "A New HTTP Status Code for Legally-restricted Resources".[21]
+        Intended to be used when resource access is denied for legal reasons, e.g. censorship or
+        government-mandated blocked access. A reference to the 1953 dystopian novel Fahrenheit 451, where books are outlawed.[22]
+      DESCRIPTION
+      cln.note '451 Redirect (Microsoft)', <<-DESCRIPTION, 'http', 'statuses', 'codes', '400s', '4xx'
+        Used in Exchange ActiveSync if there either is a more efficient server to use or the server can't access the users' mailbox.[23]
+        The client is supposed to re-run the HTTP Autodiscovery protocol to find a better suited server.[24]
+      DESCRIPTION
+      cln.note '494 Request Header Too Large (Nginx)', <<-DESCRIPTION, 'http', 'statuses', 'codes', '400s', '4xx'
+        Nginx internal code similar to 431 but it was introduced earlier.[25][original research?]
+      DESCRIPTION
+      cln.note '495 Cert Error (Nginx)', <<-DESCRIPTION, 'http', 'statuses', 'codes', '400s', '4xx'
+        Nginx internal code used when SSL client certificate error occurred to distinguish
+        it from 4XX in a log and an error page redirection.
+      DESCRIPTION
+      cln.note '496 No Cert (Nginx)', <<-DESCRIPTION, 'http', 'statuses', 'codes', '400s', '4xx'
+        Nginx internal code used when client didn't provide certificate to distinguish it from
+        4XX in a log and an error page redirection.
+      DESCRIPTION
+      cln.note '497 HTTP to HTTPS (Nginx)', <<-DESCRIPTION, 'http', 'statuses', 'codes', '400s', '4xx'
+        Nginx internal code used for the plain HTTP requests that are sent to HTTPS
+        port to distinguish it from 4XX in a log and an error page redirection.
+      DESCRIPTION
+      cln.note '499 Client Closed Request (Nginx)', <<-DESCRIPTION, 'http', 'statuses', 'codes', '400s', '4xx'
+        Used in Nginx logs to indicate when the connection has been closed by client while the server
+        is still processing its request, making server unable to send a status code back.[26]
+      DESCRIPTION
+
+    # 500s
+    cln.note '500 Internal Server Error', <<-DESCRIPTION, 'http', 'statuses', 'codes', '500s', '5xx'
+      A generic error message, given when no more specific message is suitable.[2]
+    DESCRIPTION
+    cln.note '501 Not Implemented', <<-DESCRIPTION, 'http', 'statuses', 'codes', '500s', '5xx'
+      The server either does not recognize the request method, or it lacks the ability to fulfill the request.[2]
+    DESCRIPTION
+    cln.note '502 Bad Gateway', <<-DESCRIPTION, 'http', 'statuses', 'codes', '500s', '5xx'
+      The server was acting as a gateway or proxy and received an invalid response from the upstream server.[2]
+    DESCRIPTION
+    cln.note '503 Service Unavailable', <<-DESCRIPTION, 'http', 'statuses', 'codes', '500s', '5xx'
+      The server is currently unavailable (because it is overloaded or down for maintenance).[2]
+      Generally, this is a temporary state.
+    DESCRIPTION
+    cln.note '504 Gateway Timeout', <<-DESCRIPTION, 'http', 'statuses', 'codes', '500s', '5xx'
+      The server was acting as a gateway or proxy and did not receive a timely response from the upstream server.[2]
+    DESCRIPTION
+    cln.note '505 HTTP Version Not Supported', <<-DESCRIPTION, 'http', 'statuses', 'codes', '500s', '5xx'
+      The server does not support the HTTP protocol version used in the request.[2]
+    DESCRIPTION
+    cln.note '506 Variant Also Negotiates (RFC 2295)', <<-DESCRIPTION, 'http', 'statuses', 'codes', '500s', '5xx'
+      Transparent content negotiation for the request results in a circular reference.[27]
+    DESCRIPTION
+    cln.note '507 Insufficient Storage (WebDAV; RFC 4918)', <<-DESCRIPTION, 'http', 'statuses', 'codes', '500s', '5xx'
+      The server is unable to store the representation needed to complete the request.[4]
+    DESCRIPTION
+    cln.note '508 Loop Detected (WebDAV; RFC 5842)', <<-DESCRIPTION, 'http', 'statuses', 'codes', '500s', '5xx'
+      The server detected an infinite loop while processing the request (sent in lieu of 208).
+    DESCRIPTION
+    cln.note '509 Bandwidth Limit Exceeded (Apache bw/limited extension)', <<-DESCRIPTION, 'http', 'statuses', 'codes', '500s', '5xx'
+      This status code, while used by many servers, is not specified in any RFCs.
+    DESCRIPTION
+    cln.note '510 Not Extended (RFC 2774)', <<-DESCRIPTION, 'http', 'statuses', 'codes', '500s', '5xx'
+      Further extensions to the request are required for the server to fulfill it.[28]
+    DESCRIPTION
+    cln.note '511 Network Authentication Required (RFC 6585)', <<-DESCRIPTION, 'http', 'statuses', 'codes', '500s', '5xx'
+      The client needs to authenticate to gain network access. Intended for use by intercepting proxies used to control
+      access to the network (e.g. "captive portals" used to require agreement to Terms of Service before granting full
+      Internet access via a Wi-Fi hotspot).[18]
+    DESCRIPTION
+    cln.note '598 Network read timeout error (Unknown)', <<-DESCRIPTION, 'http', 'statuses', 'codes', '500s', '5xx'
+      This status code is not specified in any RFCs, but is used by Microsoft HTTP proxies to signal a network read
+      timeout behind the proxy to a client in front of the proxy.[citation needed]
+    DESCRIPTION
+    cln.note '599 Network connect timeout error (Unknown)', <<-DESCRIPTION, 'http', 'statuses', 'codes', '500s', '5xx'
+      This status code is not specified in any RFCs, but is used by Microsoft HTTP proxies to signal a network
+      connect timeout behind the proxy to a client in front of the proxy.[citation needed]
+    DESCRIPTION
+
+    # website tricks
+    cln.note 'Start a youtube video at 1 minute and 30 seconds', 'www.youtube.com/watch?v=AZPdIY9oAbM#t=1m30s', 'specific', 'time', 'yt'
+  end
+  puts CommandLineNotes::Binary.new(notes, ARGV).stdout
+end
+
+
