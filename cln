@@ -35,6 +35,21 @@ cln = ILikeMustaches.new do |cln|
     4. Important things require training and thought - train yourself to remember rule 3
     Meditation is training for perception
   RULES
+  cln.quick_note 'store your keys in the cloud', 'https://www.keyme.net/app'
+  cln.quick_note 'terminal keynote',             'https://github.com/fxn/tkn'
+  cln.quick_note 'accounting equation, credits and debits', 'http://www.youtube.com/watch?v=gaZiAiETW_Y'
+
+  # American vs English
+  cln.quick_note 'cookie',       'biscuit',      'american', 'english'
+  cln.quick_note 'band-aid',     'plaster',      'american', 'english'
+  cln.quick_note 'chips',        'crisps',       'american', 'english'
+  cln.quick_note 'french fries', 'chips',        'american', 'english'
+  cln.quick_note 'soccer',       'football',     'american', 'english'
+  cln.quick_note 'sneakers',     'trainers',     'american', 'english'
+  cln.quick_note 'sweater',      'jumper',       'american', 'english'
+  cln.quick_note 'pants',        'trousers',     'american', 'english'
+  cln.quick_note 'underpants',   'pants',        'american', 'english'
+  cln.quick_note 'cell phone',   'mobile phone', 'american', 'english'
 
 
   # css
@@ -199,6 +214,7 @@ cln = ILikeMustaches.new do |cln|
 
   # ruby
     cln.quick_note "Ruby's regex lib", 'http://www.geocities.jp/kosako3/oniguruma/', 'regexp', 'regular expressions'
+    cln.quick_note 'Serve current dir', 'ruby -run -e httpd . -p5000', 'ruby', 'server'
     # globals
     cln.quick_note 'ARGF', '$<', 'globals', 'variables', 'ruby'
     # capybara
@@ -262,6 +278,8 @@ cln = ILikeMustaches.new do |cln|
   cln.quick_note 'postgresql: show table names in a namespace', '\z rbf.*', 'pg', 'meta'
   cln.quick_note 'postgresql: find the list of pids connected', 'SELECT procpid, application_name from pg_stat_activity;', 'pg', 'meta'
   cln.quick_note 'postgresql: get a list of all the dbs',       'psql -l',  'pg', 'meta'
+  cln.quick_note 'postgresql: view the query plan',             'explain analyze <query>', 'pg', 'meta'
+  cln.quick_note 'postgresql: start pg in the bg',              'pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start'
 
   # vim
   cln.quick_note 'Vim ctags: find reference to class',               ':tag ClassName'
@@ -280,6 +298,7 @@ cln = ILikeMustaches.new do |cln|
   cln.quick_note 'vim: set filetype to language',                    ':set ft=ruby', 'syntax'
 
   # emacs
+      cln.quick_note "Kyle's emacs installation notes",      'https://gist.github.com/pd/c202a5cec79595a1199b'
     # FIXES
       cln.quick_note 'turn on region highlighting',          'M-x transient-mark-mode', 'emacs', 'fixes'
       cln.quick_note 'change major-mode to Ruby',            'M-x ruby-mode', 'emacs', 'fixes'
@@ -377,8 +396,8 @@ cln = ILikeMustaches.new do |cln|
   RIPPER
 
   # mac
-    # not sure if this actually works
-    cln.quick_note 'shut down processes that are not responding', 'Command + Option + Escape', 'shut-down', 'mac', 'osx'
+    cln.quick_note 'shut down processes that are not responding', 'Command + Option + Escape', 'shut-down', 'mac', 'osx' # not sure if this actually works
+    cln.quick_note 'find using spotlight',                        'mdfind -name somename', 'unix', 'mac', 'osx'
 
   # unix utils
     # misc
@@ -390,6 +409,7 @@ cln = ILikeMustaches.new do |cln|
     cln.quick_note "locate a man page",                      "man -w ls"
     cln.quick_note "flush dns (apparently this is extreme)", "dscacheutil -flushcache"
     cln.quick_note "the file name of the path",              "basename `pwd`", "dirname", "filename", "fname"
+    cln.quick_note "explains shell invocations",             "http://explainshell.com"
 
     # grep
     cln.quick_note "show lines after when grepping",  "grep -A n pattern"
