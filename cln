@@ -230,6 +230,9 @@ else
     cln.note 'terminal keynote',             'https://github.com/fxn/tkn'
     cln.note 'accounting equation, credits and debits', 'http://www.youtube.com/watch?v=gaZiAiETW_Y'
 
+    # Chicago
+    cln.note 'Make a reservation at the Aviary', 'https://www.theaviary.com/user/login', 'bar', 'speakeasy'
+
     # American vs English
     cln.note 'cookie',       'biscuit',      'american', 'english'
     cln.note 'band-aid',     'plaster',      'american', 'english'
