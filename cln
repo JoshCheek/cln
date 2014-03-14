@@ -475,6 +475,9 @@ else
     cln.note 'postgresql: view the query plan',             'explain analyze <query>', 'pg', 'meta'
     cln.note 'postgresql: start pg in the bg',              'pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start'
 
+    cln.note 'mysql: start', 'mysql.server start'
+    cln.note 'mysql: stop', 'mysql.server stop'
+
     # vim
     cln.note 'Vim ctags: find reference to class',               ':tag ClassName'
     cln.note 'vim ctags: shows the list',                        ':tselect or :ts'
