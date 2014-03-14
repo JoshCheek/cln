@@ -607,6 +607,7 @@ else
       cln.note "flush dns (apparently this is extreme)", "dscacheutil -flushcache"
       cln.note "the file name of the path",              "basename `pwd`", "dirname", "filename", "fname"
       cln.note "explains shell invocations",             "http://explainshell.com"
+      cln.note "transfer remote files with scp",         "scp [options] username1@source_host:directory1/filename1 username2@destination_host:directory2/filename2"
 
       # grep
       cln.note "show lines after when grepping",  "grep -A n pattern"
