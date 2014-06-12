@@ -648,6 +648,9 @@ else
       cln.note 'set system time',                   "systemsetup -setusingnetworktime off -setdate '04:20:2012'", 'clocks'
       cln.note 'revert system time to actual time', "systemsetup -setusingnetworktime on", 'clocks'
 
+      # netcat
+      cln.note 'start a server that records http requests', 'nc -l 8889', 'netcat'
+
     # HTTP status codes
       # 100s
         cln.note '100 Continue', <<-DESCRIPTION, 'http', 'statuses', 'codes', '100s', '1xx'
