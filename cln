@@ -230,6 +230,15 @@ else
     cln.note 'terminal keynote',             'https://github.com/fxn/tkn'
     cln.note 'accounting equation, credits and debits', 'http://www.youtube.com/watch?v=gaZiAiETW_Y'
 
+    # Chrome
+    cln.note 'See passwords in Chrome', 'chrome://settings/passwords', 'wtf'
+
+    # Opera
+    cln.note 'Opera: Things I installed (e.g. 1pass)', 'opera://extensions/', 'plugins'
+    cln.note 'Opera: Official things (e.g. Flash',     'opera://plugins/',    'extensions'
+    cln.note 'Opera: Settings (apple comma)',          'opera://settings/'
+
+
     # Chicago
     cln.note 'Make a reservation at the Aviary', 'https://www.theaviary.com/user/login', 'bar', 'speakeasy'
 
