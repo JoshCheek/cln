@@ -231,12 +231,24 @@ else
     cln.note 'accounting equation, credits and debits', 'http://www.youtube.com/watch?v=gaZiAiETW_Y'
 
     # Chrome
-    cln.note 'See passwords in Chrome', 'chrome://settings/passwords', 'wtf'
+    cln.note 'Chrome see passwords',  'chrome://settings/passwords', 'wtf', 'browser'
+    cln.note 'Chrome internal links', 'chrome://about', 'browser'
 
     # Opera
-    cln.note 'Opera: Things I installed (e.g. 1pass)', 'opera://extensions/', 'plugins'
-    cln.note 'Opera: Official things (e.g. Flash',     'opera://plugins/',    'extensions'
-    cln.note 'Opera: Settings (apple comma)',          'opera://settings/'
+    cln.note 'Opera: Things I installed (e.g. 1pass)', 'opera://extensions/', 'plugins', 'browser'
+    cln.note 'Opera: Official things (e.g. Flash',     'opera://plugins/',    'extensions', 'browser'
+    cln.note 'Opera: Settings (apple comma)',          'opera://settings/', 'browser'
+    cln.note 'Opera: About',                           'opera:about', 'browser'
+    cln.note 'Opera: Downloads',                       'opera:downloads', 'browser'
+    cln.note 'Opera: Themes',                          'opera:themes', 'browser'
+    cln.note 'Opera: History',                         'opera:history', 'browser'
+    cln.note 'Opera: Experiments',                     'opera:flags', 'browser'
+    cln.note 'Opera: Gpu Summary',                     'opera:gpu', 'browser'
+    cln.note 'Opera: Histograms',                      'opera:histograms', 'browser'
+    cln.note 'Opera: Remote Debugging',                'opera:remote-debugging', 'browser'
+
+    # Firefox
+    cln.note 'Firefox something or other',             'about:about', 'browser'
 
 
     # Chicago
