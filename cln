@@ -413,6 +413,7 @@ else
     cln.note "git format",                                    'git@github.com:JoshCheek/seeing_is_believing.git'
     cln.note "log that says the parents",                     'git log --pretty=raw', 'revert', 'merge'
     cln.note "revert a merge commit",                         'git revert -m 1 HEAD'
+    cln.note 'Most recent common ancestor of two branches',   'git merge-base branch1 branch2'
 
     # github
     cln.note 'github will suppress trailing whitespace',        '?w=1 (add to the end of any diff url)'
