@@ -349,6 +349,7 @@ else
     cln.note "fish: docs",                               "open http://fishshell.com/docs/2.0/", "shell", "documentation", "documents"
 
     # readline
+    cln.note "notation",                        "https://www.gnu.org/software/bash/manual/html_node/Introduction-and-Notation.html#Introduction-and-Notation", "readline", "keybindings", "C-k", "M-k"
     cln.note "beginning of history",            "M-<",   "readline", "keybindings"
     cln.note "end of history",                  "M->",   "readline", "keybindings"
     cln.note "forward search history",          "C-s",   "readline", "keybindings"
@@ -433,11 +434,10 @@ else
     # ruby
       cln.note "Ruby's regex lib", 'http://www.geocities.jp/kosako3/oniguruma/', 'regexp', 'regular expressions'
       cln.note 'Serve current dir', 'ruby -run -e httpd . -p5000', 'ruby', 'server'
-      # globals
       cln.note 'ARGF', '$<', 'globals', 'variables', 'ruby'
-      # capybara
       cln.note 'The DSL uses this session:', 'Capybara.session', 'capybara', 'testing', 'ruby'
       cln.note 'Find the current path', 'session.current_path', 'capybara', 'testing', 'ruby', 'url'
+      cln.note 'Ruby configuration variables', 'RbConfig::CONFIG', 'hash'
       cln.note 'Strftime format strings', <<-STRFTIME, 'ruby'
         %a - The abbreviated weekday name (Sun)
         %A - The full weekday name (Sunday)
@@ -459,7 +459,6 @@ else
         %Z - Time zone name
         %% - Literal % character
       STRFTIME
-
 
       cln.note "building kisses and hugs ruby", <<-KISSES_AND_HUGS, 'custom'
         $ export CFLAGS=-Wno-error=shorten-64-to-32
