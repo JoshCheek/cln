@@ -275,6 +275,10 @@ else
     # Firefox
     cln.note 'Firefox something or other',             'about:about', 'browser'
 
+    # Gmail
+    cln.note 'Link to a gmail thread', 'https://mail.google.com/mail/u/0/#all/threadid - important part is the #all in place of the tag it shows (e.g. #inbox)'
+
+
 
     # Chicago
     cln.note 'Make a reservation at the Aviary', 'https://www.theaviary.com/user/login', 'bar', 'speakeasy'
