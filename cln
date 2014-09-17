@@ -450,8 +450,9 @@ else
     cln.note 'Most recent common ancestor of two branches',   'git merge-base branch1 branch2'
 
     # github
-    cln.note 'github will suppress trailing whitespace',        '?w=1 (add to the end of any diff url)'
-    cln.note 'octocat index',                                   'http://octodex.github.com/', 'github'
+    cln.note 'github: Reference commit in another repository',  'JumpstartLab/asquared#123'
+    cln.note 'github: suppress trailing whitespace',            '?w=1 (add to the end of any diff url)'
+    cln.note 'github: octocat index',                           'http://octodex.github.com/', 'github'
     cln.note 'github: get a file finder',                       't'
     cln.note 'github: swap the branch name for the sha',        'y'
     cln.note 'github: find all the commands on a given page',   '?'
