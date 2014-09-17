@@ -685,6 +685,7 @@ else
     # mac
       cln.note 'shut down processes that are not responding', 'Command + Option + Escape', 'shut-down', 'mac', 'osx' # not sure if this actually works
       cln.note 'find using spotlight',                        'mdfind -name somename', 'unix', 'mac', 'osx'
+      cln.note 'animated gif screenshots',                    'http://www.cockos.com/licecap/', 'atom', 'editor', 'mac', 'windows', 'screencapture'
 
     # unix utils
       # misc
