@@ -467,6 +467,7 @@ else
 
     # ruby
       cln.note "Ruby's regex lib", 'http://www.geocities.jp/kosako3/oniguruma/', 'regexp', 'regular expressions'
+      cln.note "Ruby's regex lib", 'https://github.com/k-takata/Onigmo', 'regex', 'regular expressions'
       cln.note 'Serve current dir', 'ruby -run -e httpd . -p5000', 'ruby', 'server'
       cln.note 'ARGF', '$<', 'globals', 'variables', 'ruby'
       cln.note 'The DSL uses this session:', 'Capybara.session', 'capybara', 'testing', 'ruby'
