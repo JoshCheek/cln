@@ -313,6 +313,9 @@ else
 
     cln.note "pallettes of coulours", "http://0to255.com", "websites", "urls", "designs"
     # fish
+    cln.note "fish: Static tab-completion",                  "http://fishshell.com/docs/2.0/index.html#completion-own", "shells"
+    cln.note "fish: Dynamic tab-completion",                 "https://github.com/fish-shell/fish-shell/issues/1217#issuecomment-31441757", "shells"
+    cln.note "fish: cycle through args in prev command",     "M-<up>",                     "shells", "!$", "$1", "$2"
     cln.note "fish: accept an autosuggestion",               "C-f",                        "shells"
     cln.note "fish: set a variable",                         "set varname value",          "shells"
     cln.note "fish: export a variable",                      "set -x varname value",       "shells"
