@@ -781,6 +781,7 @@ else
 
     # website tricks
     cln.note 'Start a youtube video at 1 minute and 30 seconds', 'www.youtube.com/watch?v=AZPdIY9oAbM#t=1m30s', 'specific', 'time', 'yt'
+    cln.note 'Start a vimeo video at 27 minute and 28 seconds',  'https://vimeo.com/79899786#t=27m28s', 'specific', 'time'
   end
   puts CommandLineNotes::Binary.new(notes, ARGV).stdout
 end
