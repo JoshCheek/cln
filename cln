@@ -306,9 +306,10 @@ else
     # when floating an element, it comes out above the container
     #   things below can be fixed using clear
     #   the container can be fixed using a clear fix (which means you don't have to fix the elements below it)
-    cln.note "internal styles", '<head><style type="text/css">h1 { color: #000; }</style></head>', 'css', 'cascading style sheets'
-    cln.note "external styles", '<head><link rel="stylesheet" type="text/css" href="/style.css"></head>', 'css', 'cascading style sheets'
+    cln.note "internal styles",           '<head><style type="text/css">h1 { color: #000; }</style></head>', 'css', 'cascading style sheets'
+    cln.note "external styles",           '<head><link rel="stylesheet" type="text/css" href="/style.css"></head>', 'css', 'cascading style sheets'
     cln.note "import other style sheets", '@import', 'css', 'cascading style sheets', 'load', 'require', 'include'
+    cln.note "xpath cheatsheet",          "sh -c curl\\ http://cheat.errtheblog.com/y/xpath\\ 2\\>/dev/null\\ \\|\\ ruby\\ -ryaml\\ -e\\ \\'puts\\ YAML.load\\(\\$stdin.read\\)\\[\\\"xpath\\\"\\]\\'"
 
     cln.note "pallettes of coulours", "http://0to255.com", "websites", "urls", "designs"
     # fish
