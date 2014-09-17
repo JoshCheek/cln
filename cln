@@ -247,6 +247,31 @@ else
     cln.note 'Opera: Histograms',                      'opera:histograms', 'browser'
     cln.note 'Opera: Remote Debugging',                'opera:remote-debugging', 'browser'
 
+    # Slack
+    cln.note 'Slack: Previous Channel',                          'Option + Up',           'channels', 'dms', 'direct messages'
+    cln.note 'Slack: Next Channel',                              'Option + Down',         'channels', 'dms', 'direct messages'
+    cln.note 'Slack: Previous Channel with Unread',              'Option + Shift + Up',   'channels', 'dms', 'direct messages'
+    cln.note 'Slack: Next Channel with Unread',                  'Option + Shift + Down', 'channels', 'dms', 'direct messages'
+    cln.note 'Slack: Mark as read',                              'Esc',                   'channels', 'dms', 'direct messages'
+    cln.note 'Slack: Mark all as read',                          'Shift + Esc',           'channels', 'dms', 'direct messages'
+    cln.note 'Slack: Quick Switcher',                            'Cmd + t',               'channels', 'dms', 'direct messages'
+    cln.note 'Slack: Autocomplete username',                     '"@..."',                'messaging'
+    cln.note 'Slack: Autocomplete channels',                     '"#..."',                'messaging'
+    cln.note 'Slack: Autocomplete emoji',                        ':...',                  'messaging'
+    cln.note 'Slack: Toggle Flexpane',                           'Command + .'
+    cln.note 'Slack: Paste Snippet',                             'Shift + Command + v'
+    cln.note 'Slack: Help on commands',                          '/commands'
+    cln.note 'Slack: Say "omg hi" to slackbot from any channel', '/msg slackbot omg hi'
+    cln.note 'Slack: Get more specific help',                    '/help'
+    cln.note 'Slack: Set yourself as AFK',                       '/away', 'away from keyboard'
+    cln.note 'Slack: No longer AFK',                             '/active', 'away from keyboard', 'back', 'returned'
+    cln.note 'Slack: Remove yourself from a channel',            'Go to channel, type "/close"'
+    cln.note 'Slack: Send a message to Slack support',           '/feedback [message]'
+    cln.note 'Slack: Hug slack-bot',                             '/me hugs slackbot', 'actions', 'verbs'
+    cln.note 'Slack: Remind me to go to lunch',                  '/remind me in 1 hour to go to lunch'
+    cln.note 'Slack: Search for "SalesEngine" from the bar',     '/s SalesEngine'
+    cln.note 'Slack: Set the currently open channel\'s topic',   '/topic Discuss non-programming things'
+
     # Firefox
     cln.note 'Firefox something or other',             'about:about', 'browser'
 
