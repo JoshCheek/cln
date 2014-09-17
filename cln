@@ -688,7 +688,12 @@ else
       cln.note 'animated gif screenshots',                    'http://www.cockos.com/licecap/', 'atom', 'editor', 'mac', 'windows', 'screencapture'
 
     # unix utils
+
       # misc
+      cln.note "See tables of ascii values",             "man ascii", "unix"
+      cln.note "See tables of BRE and Extended regexes", "man re_format", "unix", 'regular expressions', 'basic', 'extended', 'sed', 'awk'
+      cln.note "File system hierarchy",                  "man hier", "unix", "/usr/", "/var/", "/bin/", "/dev/", "/etc/", "/sbin/", "/tmp/"
+      cln.note "Search the whatis database for tty",     "apropos tty", "unix"
       cln.note "add a new user",                         "sudo adduser josh"
       cln.note "switch user",                            "su josh"
       cln.note "change user and group to be readable",   "chmod ug+r filename"
@@ -699,11 +704,28 @@ else
       cln.note "the file name of the path",              "basename `pwd`", "dirname", "filename", "fname"
       cln.note "explains shell invocations",             "http://explainshell.com"
       cln.note "transfer remote files with scp",         "scp [options] username1@source_host:directory1/filename1 username2@destination_host:directory2/filename2"
+      cln.note "evaluate backspaces (\\b)to fix output", "col -b", 'unix', 'man', 'pages', 'troff', 'nroff'
+      cln.note "meanings of the man page section numbers", <<-MANPAGES, "pages"
+        1 User Commands
+        2 System Calls
+        3 C Library Functions
+        4 Devices and Special Files
+        5 File Formats and Conventions
+        6 Games et. Al.
+        7 Miscellanea
+        8 System Administration tools and Deamons
+      MANPAGES
+
 
       # grep
       cln.note "show lines after when grepping",  "grep -A n pattern"
       cln.note "show lines before when grepping", "grep -B n pattern"
       cln.note "show lines around when grepping", "grep -C n pattern"
+
+      # ack
+      cln.note "Ack: List filetypes",                           "ack --help=type"
+      cln.note "Ack: Search C files for RObject",               "ack --type=cc RObject"
+      cln.note "Ack: See 2 lines of context around each match", "ack -C 2 target"
 
       # ln
       cln.note "ln", "ln -s /existing/file /new/symbolic/link # relative links in /existing/file are not expanded >.<", 'soft links'
