@@ -690,21 +690,22 @@ else
     # unix utils
 
       # misc
-      cln.note "See tables of ascii values",             "man ascii", "unix"
-      cln.note "See tables of BRE and Extended regexes", "man re_format", "unix", 'regular expressions', 'basic', 'extended', 'sed', 'awk'
-      cln.note "File system hierarchy",                  "man hier", "unix", "/usr/", "/var/", "/bin/", "/dev/", "/etc/", "/sbin/", "/tmp/"
-      cln.note "Search the whatis database for tty",     "apropos tty", "unix"
-      cln.note "add a new user",                         "sudo adduser josh"
-      cln.note "switch user",                            "su josh"
-      cln.note "change user and group to be readable",   "chmod ug+r filename"
-      cln.note "change owner",                           "chown josh filename"
-      cln.note "change owner and group",                 "chown josh:groupname filename"
-      cln.note "locate a man page",                      "man -w ls"
-      cln.note "flush dns (apparently this is extreme)", "dscacheutil -flushcache"
-      cln.note "the file name of the path",              "basename `pwd`", "dirname", "filename", "fname"
-      cln.note "explains shell invocations",             "http://explainshell.com"
-      cln.note "transfer remote files with scp",         "scp [options] username1@source_host:directory1/filename1 username2@destination_host:directory2/filename2"
-      cln.note "evaluate backspaces (\\b)to fix output", "col -b", 'unix', 'man', 'pages', 'troff', 'nroff'
+      cln.note "Extract human readable strings from a binary",  "strings path/to/binary", "angeleah"
+      cln.note "See tables of ascii values",                    "man ascii", "unix"
+      cln.note "See tables of BRE and Extended regexes",        "man re_format", "unix", 'regular expressions', 'basic', 'extended', 'sed', 'awk'
+      cln.note "File system hierarchy",                         "man hier", "unix", "/usr/", "/var/", "/bin/", "/dev/", "/etc/", "/sbin/", "/tmp/"
+      cln.note "Search the whatis database for tty",            "apropos tty", "unix"
+      cln.note "add a new user",                                "sudo adduser josh"
+      cln.note "switch user",                                   "su josh"
+      cln.note "change user and group to be readable",          "chmod ug+r filename"
+      cln.note "change owner",                                  "chown josh filename"
+      cln.note "change owner and group",                        "chown josh:groupname filename"
+      cln.note "locate a man page",                             "man -w ls"
+      cln.note "flush dns (apparently this is extreme)",        "dscacheutil -flushcache"
+      cln.note "the file name of the path",                     "basename `pwd`", "dirname", "filename", "fname"
+      cln.note "explains shell invocations",                    "http://explainshell.com"
+      cln.note "transfer remote files with scp",                "scp [options] username1@source_host:directory1/filename1 username2@destination_host:directory2/filename2"
+      cln.note "evaluate backspaces (\\b)to fix output",        "col -b", 'unix', 'man', 'pages', 'troff', 'nroff'
       cln.note "meanings of the man page section numbers", <<-MANPAGES, "pages"
         1 User Commands
         2 System Calls
@@ -715,6 +716,14 @@ else
         7 Miscellanea
         8 System Administration tools and Deamons
       MANPAGES
+      cln.note 'print a plist',                     'plutil -p path-to-plist', 'json', 'mac', 'apple'
+      cln.note 'see list of defaults you can edit', 'defaults domains', 'mac', 'apple'
+      cln.note 'see the defaults for a domain',     'defaults read com.apple.iTunes', 'mac', 'apple'
+      cln.note 'see the global defaults',           'defaults read -g', 'mac', 'apple'
+      cln.note 'write a new default',               <<-WRITE, 'mac', 'apple'
+        defaults write KeyRepeat -int 1
+        defaults write InitialKeyRepeat -int 1
+      WRITE
 
 
       # grep
@@ -741,6 +750,7 @@ else
       cln.note 'less: go to previous buffer', ':p'
 
       # bash
+      cln.note 'PS1 escape sequences',                               'http://tldp.org/HOWTO/Bash-Prompt-HOWTO/bash-prompt-escape-sequences.html', 'bash', 'shells'
       cln.note 'check for interactive shell',                        'if [[ $- == *i* ]]; then echo yes; fi', 'bash', 'shells', 'logins'
       cln.note 'replace with the nth argument of the previous line', '!!:n',                                  'bash', 'shells', 'logins'
       cln.note 'last argument of previous line',                     '!$',                                    'bash', 'shells', 'logins'
