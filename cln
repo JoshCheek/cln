@@ -639,9 +639,9 @@ else
         cln.note 'Move to this search location',         'return', 'emacs', 'searching', 'searches'
         cln.note 'Search through function definitions',  'C-x C-i', 'emacs', 'searching', 'searches'
       # FILES
-        cln.note 'open',                                 'C-x C-f', 'emacs', 'files'
+        cln.note 'open',                                 'C-x C-f', 'emacs', 'files', 'edit'
         cln.note 'revert to disk',                       'C-c r',   'emacs', 'files'
-        cln.note 'save the file',                        'C-x C-s', 'emacs', 'files'
+        cln.note 'save the file',                        'C-x C-s', 'emacs', 'files', 'write'
       # EDITING
         cln.note 'undo',                                 'C-_', 'emacs', 'editing'
         cln.note 'delete char after cursor',             'C-d', 'emacs', 'editing'
@@ -656,7 +656,8 @@ else
         cln.note 'evaluate lisp',                        'M-S-:', 'emacs', 'editing'
 
     # code examples
-    cln.note 'Floating point imprecision', 'ruby -e "p 7.01 - 7.00" # => 0.009999999999999787', 'arithmetic', 'math', 'code', 'examples'
+    cln.note 'Floating point imprecision',   'ruby -e "p 7.01 - 7.00" # => 0.009999999999999787', 'arithmetic', 'math', 'code', 'examples'
+    cln.note 'Floating point imprecision 2', 'ruby -e "p 0.1 + 0.2 == 0.3" # => false', 'arithetic', 'ieee', 'math', 'code', 'examples'
     cln.note 'Ripper', <<-RIPPER, 'ruby', 'parsing', 'parsers', 'lexing', 'lexers', 'code', 'examples'
       require 'ripper'
 
@@ -724,6 +725,9 @@ else
         defaults write KeyRepeat -int 1
         defaults write InitialKeyRepeat -int 1
       WRITE
+      cln.note 'Find the encoding type of a file', 'file filename -I', 'unix'
+      cln.note 'see a file byte by byte',          'od -bc filename', 'unix', 'hexadecimal', 'octal', 'decimal', 'human', 'readable'
+
 
 
       # grep
@@ -755,6 +759,8 @@ else
       cln.note 'replace with the nth argument of the previous line', '!!:n',                                  'bash', 'shells', 'logins'
       cln.note 'last argument of previous line',                     '!$',                                    'bash', 'shells', 'logins'
       cln.note 'all arguments of previous line',                     '!*',                                    'bash', 'shells', 'logins'
+      cln.note 'Run the script from script directory',               'cd "$(dirname "$0")"',                  'bash', 'shells'
+      cln.note 'Find all bash functions',                            'declare -f', 'unix', 'bash'
 
       # systemsetup
       cln.note 'set system time',                   "systemsetup -setusingnetworktime off -setdate '04:20:2012'", 'clocks'
