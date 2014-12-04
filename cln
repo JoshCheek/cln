@@ -91,15 +91,19 @@ end
 
 # define and invoke the specific notes
 if $0 =~ /rspec/
-  describe CommandLineNotes do
+  RSpec.configure do |c|
+    c.disable_monkey_patching!
+  end
+
+  RSpec.describe CommandLineNotes do
     def bin(notes, argv)
       CommandLineNotes::Binary.new notes, argv
     end
 
     it 'prints the description if you give it -h' do
       notes = CommandLineNotes.new { |cln| cln.description = 'mah description' }
-      bin(notes, ['-h']).stdout.should include 'mah description'
-      bin(notes, ['--help']).stdout.should include 'mah description'
+      expect(bin(notes, ['-h']).stdout).to include 'mah description'
+      expect(bin(notes, ['--help']).stdout).to include 'mah description'
     end
 
     it 'prints all notes by default' do
@@ -107,8 +111,8 @@ if $0 =~ /rspec/
         cln.note 'key1', 'value1'
         cln.note 'key2', 'value2'
       end
-      bin(notes, []).stdout.should include 'key1'
-      bin(notes, []).stdout.should include 'key2'
+      expect(bin(notes, []).stdout).to include 'key1'
+      expect(bin(notes, []).stdout).to include 'key2'
     end
 
     it 'selects notes whose key matches when given an arg' do
@@ -116,7 +120,7 @@ if $0 =~ /rspec/
         cln.note 'key1', 'value1'
         cln.note 'key2', 'value2'
       end
-      bin(notes, ['key1']).stdout.should include 'key1'
+      expect(bin(notes, ['key1']).stdout).to include 'key1'
     end
 
     it 'selects notes whose value matches when given an arg' do
@@ -124,7 +128,7 @@ if $0 =~ /rspec/
         cln.note 'key1', 'value1'
         cln.note 'key2', 'value2'
       end
-      bin(notes, ['value1']).stdout.should include 'key1'
+      expect(bin(notes, ['value1']).stdout).to include 'key1'
     end
 
     it 'selects notes whose tags match when given an arg' do
@@ -132,7 +136,7 @@ if $0 =~ /rspec/
         cln.note 'key1', 'value1', 'tag1'
         cln.note 'key2', 'value2', 'tag2'
       end
-      bin(notes, ['tag1']).stdout.should include 'key1'
+      expect(bin(notes, ['tag1']).stdout).to include 'key1'
     end
 
     it 'treats multiple arguments as successive filters' do
@@ -140,15 +144,15 @@ if $0 =~ /rspec/
         cln.note 'key1', 'value1', 'tag1'
         cln.note 'key2', 'value2', 'tag1', 'tag2'
       end
-      bin(notes, ['tag1', 'tag2']).stdout.should_not include 'key1'
-      bin(notes, ['tag1', 'tag2']).stdout.should include 'key2'
+      expect(bin(notes, ['tag1', 'tag2']).stdout).to_not include 'key1'
+      expect(bin(notes, ['tag1', 'tag2']).stdout).to include 'key2'
     end
 
     it 'does not print the tags' do
       notes = CommandLineNotes.new do |cln|
         cln.note 'key1', 'value1', 'tag1'
       end
-      bin(notes, []).stdout.should_not include 'tag1'
+      expect(bin(notes, []).stdout).to_not include 'tag1'
     end
 
     it 'aligns the notes such that values line up' do
@@ -157,8 +161,8 @@ if $0 =~ /rspec/
         cln.note 'key', 'value2'
       end
       spacing1, spacing2, *other_spacing = bin(notes, []).stdout.scan(/ +/)
-      other_spacing.should == []
-      spacing1.size.should == spacing2.size + 2
+      expect(other_spacing).to eq []
+      expect(spacing1.size).to eq spacing2.size + 2
     end
 
     def no_ansi(string)
@@ -174,9 +178,9 @@ if $0 =~ /rspec/
         VALUE
       end
       line1, line2, line3, *other_lines = no_ansi(bin(notes, []).stdout).scan(/^.*?v/)
-      other_lines.should == []
-      line1.size.should == line2.size
-      line3.size.should == line2.size + 1
+      expect(other_lines).to eq []
+      expect(line1.size ).to eq line2.size
+      expect(line3.size ).to eq line2.size.next
     end
 
     it 'prints every other line coloured' do
@@ -186,12 +190,12 @@ if $0 =~ /rspec/
         cln.note 'key3', "value3.1\nalue3.2"
       end
       line1, line2, line3, line4, *rest = bin(notes, []).stdout.each_line.to_a
-      rest.should == []
-      line1.should start_with CommandLineNotes::Color1
-      line2.should start_with CommandLineNotes::Color2
-      line3.should start_with CommandLineNotes::Color1
-      line4.should_not start_with CommandLineNotes::Color2 # b/c it's part of note3
-      line4.should end_with CommandLineNotes::NoColor
+      expect(rest).to eq []
+      expect(line1).to     start_with CommandLineNotes::Color1
+      expect(line2).to     start_with CommandLineNotes::Color2
+      expect(line3).to     start_with CommandLineNotes::Color1
+      expect(line4).to_not start_with CommandLineNotes::Color2 # b/c it's part of note3
+      expect(line4).to     end_with   CommandLineNotes::NoColor
     end
   end
 else
