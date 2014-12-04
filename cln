@@ -230,6 +230,9 @@ else
     cln.note 'terminal keynote',             'https://github.com/fxn/tkn'
     cln.note 'accounting equation, credits and debits', 'http://www.youtube.com/watch?v=gaZiAiETW_Y'
 
+    # Browsers
+    cln.note 'Measure how fast browser javascript is', 'https://www.webkit.org/perf/sunspider-1.0.2/sunspider-1.0.2', 'measuring', 'js'
+
     # Chrome
     cln.note 'Chrome see passwords',  'chrome://settings/passwords', 'wtf', 'browser'
     cln.note 'Chrome internal links', 'chrome://about', 'browser'
@@ -401,6 +404,10 @@ else
     cln.note "incremental undo",                "C-_",   "readline", "keybindings"
     cln.note "tilde expand",                    "M-&",   "readline", "keybindings", "expansion"
 
+    # apis
+    cln.note 'play with apis', 'https://apigee.com/console', 'spotify', 'instagram'
+
+
     # haskell
       # binaries
       cln.note "interpret as script",           "runhaskell", "hs"
@@ -466,6 +473,8 @@ else
     EOS
 
     # ruby
+    Command + f1 to turn mirroring on and off (mac)
+      cln.note "Display all rake tasks (even those w/o descriptions)", "rake -T -A", "ruby"
       cln.note "Ruby's regex lib", 'http://www.geocities.jp/kosako3/oniguruma/', 'regexp', 'regular expressions'
       cln.note "Ruby's regex lib", 'https://github.com/k-takata/Onigmo', 'regex', 'regular expressions'
       cln.note 'Serve current dir', 'ruby -run -e httpd . -p5000', 'ruby', 'server'
@@ -537,6 +546,9 @@ else
         $ make install
       KISSES_AND_HUGS
 
+
+    # Assembly
+    cln.note 'Descriptions of the registers', 'http://www.swansontec.com/sregisters.html', 'assembly', 'intel', 'asm', 'att', 'at&t', 'hardware'
 
     # homebrew
     cln.note "homebrew binaries are in", "/usr/local/bin"
@@ -684,29 +696,33 @@ else
     RIPPER
 
     # mac
+      cln.note "Turn mirroring on and off (mac)",             'Command + f1', 'mac', 'osx', 'screen', 'sharing', 'displays'
       cln.note 'shut down processes that are not responding', 'Command + Option + Escape', 'shut-down', 'mac', 'osx' # not sure if this actually works
       cln.note 'find using spotlight',                        'mdfind -name somename', 'unix', 'mac', 'osx'
       cln.note 'animated gif screenshots',                    'http://www.cockos.com/licecap/', 'atom', 'editor', 'mac', 'windows', 'screencapture'
+      cln.note 'location of file from spotlight',             'mouse over file, hold command and option', 'mac', 'osx'
+      cln.note 'open a file\'s information from spotlight',   'command+i', 'mac', 'osx'
 
     # unix utils
 
       # misc
-      cln.note "Extract human readable strings from a binary",  "strings path/to/binary", "angeleah"
-      cln.note "See tables of ascii values",                    "man ascii", "unix"
-      cln.note "See tables of BRE and Extended regexes",        "man re_format", "unix", 'regular expressions', 'basic', 'extended', 'sed', 'awk'
-      cln.note "File system hierarchy",                         "man hier", "unix", "/usr/", "/var/", "/bin/", "/dev/", "/etc/", "/sbin/", "/tmp/"
-      cln.note "Search the whatis database for tty",            "apropos tty", "unix"
-      cln.note "add a new user",                                "sudo adduser josh"
-      cln.note "switch user",                                   "su josh"
-      cln.note "change user and group to be readable",          "chmod ug+r filename"
-      cln.note "change owner",                                  "chown josh filename"
-      cln.note "change owner and group",                        "chown josh:groupname filename"
-      cln.note "locate a man page",                             "man -w ls"
-      cln.note "flush dns (apparently this is extreme)",        "dscacheutil -flushcache"
-      cln.note "the file name of the path",                     "basename `pwd`", "dirname", "filename", "fname"
-      cln.note "explains shell invocations",                    "http://explainshell.com"
-      cln.note "transfer remote files with scp",                "scp [options] username1@source_host:directory1/filename1 username2@destination_host:directory2/filename2"
-      cln.note "evaluate backspaces (\\b)to fix output",        "col -b", 'unix', 'man', 'pages', 'troff', 'nroff'
+      cln.note "How to place xargs argument anywhere in command", "xargs -I {} echo Directory: {}", "unix"
+      cln.note "Extract human readable strings from a binary",    "strings path/to/binary", "angeleah"
+      cln.note "See tables of ascii values",                      "man ascii", "unix"
+      cln.note "See tables of BRE and Extended regexes",          "man re_format", "unix", 'regular expressions', 'basic', 'extended', 'sed', 'awk'
+      cln.note "File system hierarchy",                           "man hier", "unix", "/usr/", "/var/", "/bin/", "/dev/", "/etc/", "/sbin/", "/tmp/"
+      cln.note "Search the whatis database for tty",              "apropos tty", "unix"
+      cln.note "add a new user",                                  "sudo adduser josh"
+      cln.note "switch user",                                     "su josh"
+      cln.note "change user and group to be readable",            "chmod ug+r filename"
+      cln.note "change owner",                                    "chown josh filename"
+      cln.note "change owner and group",                          "chown josh:groupname filename"
+      cln.note "locate a man page",                               "man -w ls"
+      cln.note "flush dns (apparently this is extreme)",          "dscacheutil -flushcache"
+      cln.note "the file name of the path",                       "basename `pwd`", "dirname", "filename", "fname"
+      cln.note "explains shell invocations",                      "http://explainshell.com"
+      cln.note "transfer remote files with scp",                  "scp [options] username1@source_host:directory1/filename1 username2@destination_host:directory2/filename2"
+      cln.note "evaluate backspaces (\\b)to fix output",          "col -b", 'unix', 'man', 'pages', 'troff', 'nroff'
       cln.note "meanings of the man page section numbers", <<-MANPAGES, "pages"
         1 User Commands
         2 System Calls
