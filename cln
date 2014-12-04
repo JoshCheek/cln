@@ -473,7 +473,6 @@ else
     EOS
 
     # ruby
-    Command + f1 to turn mirroring on and off (mac)
       cln.note "Display all rake tasks (even those w/o descriptions)", "rake -T -A", "ruby"
       cln.note "Ruby's regex lib", 'http://www.geocities.jp/kosako3/oniguruma/', 'regexp', 'regular expressions'
       cln.note "Ruby's regex lib", 'https://github.com/k-takata/Onigmo', 'regex', 'regular expressions'
