@@ -233,6 +233,9 @@ else
     cln.note 'store your keys in the cloud', 'https://www.keyme.net/app'
     cln.note 'terminal keynote',             'https://github.com/fxn/tkn'
     cln.note 'accounting equation, credits and debits', 'http://www.youtube.com/watch?v=gaZiAiETW_Y'
+    cln.note 'RSA videos', 'https://www.youtube.com/user/theRSAorg/playlists'
+    cln.note '256 color mode in the terminal', 'def prgb(msg,r:0,g:0,b:0) puts "\e[38;5;#{r*36+g*6+b+16}m#{msg}\e[39m" end', 'shell'
+    cln.note 'Box characters', '┘ ┐ ┌ └ ┼ ─ ├ ┤ ┴ ┬ │ This could be useful, too: ruby -e \'p (9472..9532).map { |n| n.chr(Encoding::UTF_8) }\'', 'terminal', 'table'
 
     # Browsers
     cln.note 'Measure how fast browser javascript is', 'https://www.webkit.org/perf/sunspider-1.0.2/sunspider-1.0.2', 'measuring', 'js'
@@ -433,14 +436,18 @@ else
       # general
       cln.note "Add a package to dependencies", "put it build-depens in name.cabal, then\n$ cabal-dev install", "haskell", "hs"
       cln.note "Build the package",             "$ cabal-dev install", "haskell", "hs"
+      cln.note "Latency numbers every programmer should know", "https://gist.github.com/hellerbarde/2843375#file-latency_humanized-markdown", "ms", "ns", "milliseconds", "nanoseconds", "microseconds"
 
     # git
+    cln.note 'set the remote tracking branch to origin/master',       'git branch --set-upstream-to origin/master', 'branches'
+    cln.note 'search git log for commits where diff matches pattern', 'git log -Gversion_requirements -p lib/rubygems/dependency.rb', 'grep'
     cln.note 'figure out which branches contain a commit',    'git branch -a --contains SHA', 'includes'
     cln.note '5 lines of context on a diff',                  'git diff -U5'
     cln.note 'alternative diff algorithm',                    'cd martini_at_zoo; git show 0599a52c3ced58480e3b18ec5c366f0b83a69e2c --patience'
     cln.note 'Show only filenames in diff',                   'git diff --name-only'
     cln.note 'Only look in cwd subtree',                      'git diff --relative'
     cln.note 'list unmerged files',                           'git ls-files -u'
+    cln.note 'list uncommitted files',                        'git ls-files -o'
     cln.note 'delete stale remote tracking branches',         'git remote prune origin'
     cln.note 'contentless commit (e.g. to force sha update)', 'git commit -m "whatever" --allow-empty'
     cln.note 'show last commit that matches the string',      'git show :/query'
@@ -475,6 +482,9 @@ else
       github.com/user/repo/compare/{range}
         where {range} is a branch name, sha, 1.day.ago, yesterday, 2012-12-30
     EOS
+
+    # Java
+      cln.note "Execute a jar", "java -jar HelloWorld.jar"
 
     # ruby
       cln.note "Display all rake tasks (even those w/o descriptions)", "rake -T -A", "ruby"
@@ -548,7 +558,7 @@ else
         $ make
         $ make install
       KISSES_AND_HUGS
-
+    cln.note 'Get the size of the console', "require 'io/console'; height, width = $stdout.winsize", 'terminal', 'ansi', 'escape', 'sequences'
 
     # Assembly
     cln.note 'Descriptions of the registers', 'http://www.swansontec.com/sregisters.html', 'assembly', 'intel', 'asm', 'att', 'at&t', 'hardware'
@@ -572,6 +582,9 @@ else
 
     cln.note 'mysql: start', 'mysql.server start'
     cln.note 'mysql: stop', 'mysql.server stop'
+
+    # sql
+    cln.note 'Visual explanation of SQL joins', 'http://blog.codinghorror.com/a-visual-explanation-of-sql-joins/'
 
     # vim
     cln.note 'Vim ctags: find reference to class',                     ':tag ClassName'
@@ -709,6 +722,8 @@ else
     # unix utils
 
       # misc
+      cln.note "The Filesystem Hierarchy Standard",               "http://www.pathname.com/fhs/pub/fhs-2.3.html", "unix", "fhs", "postmodern", "/usr/tmp/etc/"
+      cln.note "List of directories that can be in /opt",         "http://www.lanana.org/lsbreg/providers/providers.txt", "unix", "file system", "/opt/"
       cln.note "How to place xargs argument anywhere in command", "xargs -I {} echo Directory: {}", "unix"
       cln.note "Extract human readable strings from a binary",    "strings path/to/binary", "angeleah"
       cln.note "See tables of ascii values",                      "man ascii", "unix"
@@ -746,8 +761,11 @@ else
       WRITE
       cln.note 'Find the encoding type of a file', 'file filename -I', 'unix'
       cln.note 'see a file byte by byte',          'od -bc filename', 'unix', 'hexadecimal', 'octal', 'decimal', 'human', 'readable'
-
-
+      cln.note 'Directory stack', <<-STACK
+        pushd newdir # cd to newdir
+        popd         # return to previous location `cd -`
+        dirs         # see list of locations'
+      STACK
 
       # grep
       cln.note "show lines after when grepping",  "grep -A n pattern"
@@ -758,6 +776,10 @@ else
       cln.note "Ack: List filetypes",                           "ack --help=type"
       cln.note "Ack: Search C files for RObject",               "ack --type=cc RObject"
       cln.note "Ack: See 2 lines of context around each match", "ack -C 2 target"
+
+      # ag
+      cln.note "gg: Search for parse for filenamse matching .hx$, starting in parent dir", "ag arse .. -G '\\.hx$'"
+      cln.note "ag: Search with case sensitivity",                                         "ag -s query"
 
       # ln
       cln.note "ln", "ln -s /existing/file /new/symbolic/link # relative links in /existing/file are not expanded >.<", 'soft links'
@@ -772,7 +794,13 @@ else
       cln.note 'less: go to next buffer', ':n'
       cln.note 'less: go to previous buffer', ':p'
 
+      # tar
+      cln.note 'tar: list what will be extracted before extracting', 'tar -tf zip-2.0.2.gem', 'archive'
+
       # bash
+      cln.note 'see bash shell options',                             'shopt'
+      cln.note 'starts a bash shell with extglob option set',        'bash -O extglob', 'shopt', 'options'
+      cln.note 'list of bash shell options and their meanings',      'http://wiki.bash-hackers.org/internals/shell_options', 'shopt'
       cln.note 'PS1 escape sequences',                               'http://tldp.org/HOWTO/Bash-Prompt-HOWTO/bash-prompt-escape-sequences.html', 'bash', 'shells'
       cln.note 'check for interactive shell',                        'if [[ $- == *i* ]]; then echo yes; fi', 'bash', 'shells', 'logins'
       cln.note 'replace with the nth argument of the previous line', '!!:n',                                  'bash', 'shells', 'logins'
@@ -780,6 +808,17 @@ else
       cln.note 'all arguments of previous line',                     '!*',                                    'bash', 'shells', 'logins'
       cln.note 'Run the script from script directory',               'cd "$(dirname "$0")"',                  'bash', 'shells'
       cln.note 'Find all bash functions',                            'declare -f', 'unix', 'bash'
+      cln.note 'Bash case statement',                                <<-EOF, 'bash', 'shells', 'switch'
+        # case statements use bash pattern matching
+        var=c;
+        case "$var" in
+          a|b) echo a;;
+          c)   echo c;;
+          *)   echo "unrecognized!" >&2
+               exit 1
+               ;;
+        esac
+      EOF
 
       # systemsetup
       cln.note 'set system time',                   "systemsetup -setusingnetworktime off -setdate '04:20:2012'", 'clocks'
@@ -794,11 +833,12 @@ else
 
     # HTTP status codes, from http://murmurings.herokuapp.com/blog/2014/09/06/hypertext-transfer-protocol/
       cln.note 'HTTP status code categories', <<-CODES, '100s', '200s', '300s', '400s', '500s'
-        1xx: Informational   request received but is continuing process
-        2xx: Success         successfully received, understood, and accepted by the server
-        3xx: Redirection     further action must be taken in order to complete the request
-        4xx: Client Error    request contains bad syntax or cannot be fulfilled
-        5xx: Server Error    server failed to fulfill valid request
+        https://pbs.twimg.com/media/B50dCAKIEAAP0NQ.jpg:large
+        1xx: Informational   "Hold on"       | request received but is continuing process
+        2xx: Success         "Here you go"   | successfulle received, understood, and accepted by the server
+        3xx: Redirection     "Go away"       | further action must be taken in order to complete the request
+        4xx: Client Error    "You fucked up" | request contains bad syntax or cannot be fulfilled
+        5xx: Server Error    "I fucked up"   | server failed to fulfill valid request
       CODES
 
       cln.note 'Common HTTP status codes', <<-CODES
@@ -817,6 +857,9 @@ else
     # website tricks
     cln.note 'Start a youtube video at 1 minute and 30 seconds', 'www.youtube.com/watch?v=AZPdIY9oAbM#t=1m30s', 'specific', 'time', 'yt'
     cln.note 'Start a vimeo video at 27 minute and 28 seconds',  'https://vimeo.com/79899786#t=27m28s', 'specific', 'time'
+
+    # hardware
+    cln.note 'Buy circuits off Amazon', 'http://www.amazon.com/b/ref=dp_brw_link?ie=UTF8&node=306843011', 'hardware', 'component', 'IC', 'transistors', 'capacitors', 'integrated circuits'
   end
   puts CommandLineNotes::Binary.new(notes, ARGV).stdout
 end
