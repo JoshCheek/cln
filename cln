@@ -1,5 +1,9 @@
 #!/usr/bin/env ruby
 
+# Would be nice to add:
+#   don't print color if piping into another process
+#   real groups
+
 class CommandLineNotes
 
   Color1  = "\e[37m"
@@ -322,7 +326,9 @@ else
     cln.note "xpath cheatsheet",          "sh -c curl\\ http://cheat.errtheblog.com/y/xpath\\ 2\\>/dev/null\\ \\|\\ ruby\\ -ryaml\\ -e\\ \\'puts\\ YAML.load\\(\\$stdin.read\\)\\[\\\"xpath\\\"\\]\\'"
 
     cln.note "pallettes of coulours", "http://0to255.com", "websites", "urls", "designs"
+
     # fish
+    cln.note "fish: Command abbreviation",                   "set -U fish_user_abbreviations 'gco=git checkout'", 'shells', 'shorthand', 'expansion'
     cln.note "fish: Static tab-completion",                  "http://fishshell.com/docs/2.0/index.html#completion-own", "shells"
     cln.note "fish: Dynamic tab-completion",                 "https://github.com/fish-shell/fish-shell/issues/1217#issuecomment-31441757", "shells"
     cln.note "fish: cycle through args in prev command",     "M-<up>",                     "shells", "!$", "$1", "$2"
@@ -434,9 +440,11 @@ else
       cln.note "identify the type",             ':t 1', "haskell", "hs", "ghci"
 
       # general
-      cln.note "Add a package to dependencies", "put it build-depens in name.cabal, then\n$ cabal-dev install", "haskell", "hs"
-      cln.note "Build the package",             "$ cabal-dev install", "haskell", "hs"
-      cln.note "Latency numbers every programmer should know", "https://gist.github.com/hellerbarde/2843375#file-latency_humanized-markdown", "ms", "ns", "milliseconds", "nanoseconds", "microseconds"
+      cln.note "Add a package to dependencies",                "put it build-depens in name.cabal, then\n$ cabal-dev install", "haskell", "hs"
+      cln.note "Build the package",                            "$ cabal-dev install", "haskell", "hs"
+      cln.note "Latency numbers every programmer should know", "https://gist.github.com/hellerbarde/2843375#file-latency_humanized-markdown", "ms", "ns", "milliseconds", "nanoseconds", "microseconds", "durations", "time", "developer"
+      cln.note 'accounting equation, credits and debits',      "http://www.youtube.com/watch?v=gaZiAiETW_Y"
+      cln.note 'terminal keynote',                             "https://github.com/fxn/tkn"
 
     # git
     cln.note 'set the remote tracking branch to origin/master',       'git branch --set-upstream-to origin/master', 'branches'
@@ -446,8 +454,8 @@ else
     cln.note 'alternative diff algorithm',                    'cd martini_at_zoo; git show 0599a52c3ced58480e3b18ec5c366f0b83a69e2c --patience'
     cln.note 'Show only filenames in diff',                   'git diff --name-only'
     cln.note 'Only look in cwd subtree',                      'git diff --relative'
-    cln.note 'list unmerged files',                           'git ls-files -u'
-    cln.note 'list uncommitted files',                        'git ls-files -o'
+    cln.note 'list unmerged files',                           'git ls-files -u', 'dirs'
+    cln.note 'list uncommitted files',                        'git ls-files -o', 'working', 'dirs'
     cln.note 'delete stale remote tracking branches',         'git remote prune origin'
     cln.note 'contentless commit (e.g. to force sha update)', 'git commit -m "whatever" --allow-empty'
     cln.note 'show last commit that matches the string',      'git show :/query'
@@ -468,17 +476,20 @@ else
     cln.note 'Most recent common ancestor of two branches',   'git merge-base branch1 branch2'
 
     # github
-    cln.note 'github: Reference commit in another repository',  'JumpstartLab/asquared#123'
-    cln.note 'github: suppress trailing whitespace',            '?w=1 (add to the end of any diff url)'
-    cln.note 'github: octocat index',                           'http://octodex.github.com/', 'github'
-    cln.note 'github: get a file finder',                       't'
-    cln.note 'github: swap the branch name for the sha',        'y'
-    cln.note 'github: find all the commands on a given page',   '?'
-    cln.note 'github: scope commit history to specific author', '?author=josh_cheek'
-    cln.note 'github: emoji cheat sheet',                       'http://www.emoji-cheat-sheet.com/', 'emoticons', 'smileys'
-    cln.note 'github: how to use issues',                       'https://guides.github.com/features/issues/index.html', 'github', 'milestones'
-    cln.note 'github: advanced search',                         'https://github.com/search/advanced?q=sidebar&ref=reposearch&state=open&type=Issues'
-    cln.note 'github: compare view',                            <<-EOS
+    cln.note 'github: Languages supported by github flavored markdown', 'https://github.com/github/linguist/blob/master/lib/linguist/languages.yml', 'gfm'
+    cln.note 'github: See all your pull requests',              'https://github.com/search?utf8=✓&q=is%3Apr+author%3AJoshCheek', 'query', 'search', 'gh'
+    cln.note 'github: Search an archive of their info w/ sql',  'http://ghtorrent.org/dblite/', 'gh'
+    cln.note 'github: Reference commit in another repository',  'JumpstartLab/asquared#123', 'gh'
+    cln.note 'github: suppress trailing whitespace',            '?w=1 (add to the end of any diff url)', 'gh'
+    cln.note 'github: octocat index',                           'http://octodex.github.com/', 'github', 'gh'
+    cln.note 'github: get a file finder',                       't', 'gh'
+    cln.note 'github: swap the branch name for the sha',        'y', 'gh'
+    cln.note 'github: find all the commands on a given page',   '?', 'gh'
+    cln.note 'github: scope commit history to specific author', '?author=josh_cheek', 'gh'
+    cln.note 'github: emoji cheat sheet',                       'http://www.emoji-cheat-sheet.com/', 'emoticons', 'smileys', 'gh'
+    cln.note 'github: how to use issues',                       'https://guides.github.com/features/issues/index.html', 'github', 'milestones', 'gh'
+    cln.note 'github: advanced search',                         'https://github.com/search/advanced?q=sidebar&ref=reposearch&state=open&type=Issues', 'gh'
+    cln.note 'github: compare view',                            <<-EOS, 'gh'
       github.com/user/repo/compare/{range}
         where {range} is a branch name, sha, 1.day.ago, yesterday, 2012-12-30
     EOS
@@ -486,7 +497,22 @@ else
     # Java
       cln.note "Execute a jar", "java -jar HelloWorld.jar"
 
+    # C programming (cc)
+      cln.note "Figure out what some arcane type signature means in the C language", "http://cdecl.org/", "cc", "programming"
+
     # ruby
+      cln.note "How to compile MRI", <<-CODE, 'ruby', 'source', 'build'
+        cd /Users/josh/ref/ruby/ruby \\
+          && ./configure \\
+               --prefix="/Users/josh/ref/ruby/ruby/dev" \\
+               --with-opt-dir="$(brew --prefix openssl):$(brew --prefix readline):$(brew --prefix libyaml):$(brew --prefix gdbm)" \\
+          && make \\
+          && make install
+      CODE
+      cln.note "Places rubygems will look for gems", "GEM_PATH", "rvm", "rbenv", "chruby", "rubygems"
+      cln.note "Where gems get installed to", "GEM_HOME", "rvm", "rbenv", "chruby", "rubygems"
+      cln.note "MRI sexp", "Ripper.sexp('1+1')", "ruby", "s-expressions", "parse", "parsing"
+      cln.note "MRI iseq", "RubyVM::InstructionSequence.compile('1+1').disasm", "ruby", "instructions", "parsing", "parse", "compile", "compiling", "bytecode"
       cln.note "Display all rake tasks (even those w/o descriptions)", "rake -T -A", "ruby"
       cln.note "Ruby's regex lib", 'http://www.geocities.jp/kosako3/oniguruma/', 'regexp', 'regular expressions'
       cln.note "Ruby's regex lib", 'https://github.com/k-takata/Onigmo', 'regex', 'regular expressions'
@@ -565,6 +591,8 @@ else
 
     # homebrew
     cln.note "homebrew binaries are in", "/usr/local/bin"
+    cln.note "homebew has a man page!!!", "man brew"
+    cln.note "fix homebrew when permissions get fucked, e.g. '/usr/local/include is not writable'", "https://gist.github.com/rpavlik/768518"
 
     # gpg
     cln.note "how to use gpg", "http://www.madboa.com/geek/gpg-quickstart/", "pgp", "encryption", "encrypted"
