@@ -754,6 +754,7 @@ else
     RIPPER
 
     # mac
+    cln.note 'A hidden mac paint program in preview',         'http://scripting.com/2014/11/27/aHiddenMacPaintProgram.html', 'apple'
       cln.note "Turn mirroring on and off (mac)",             'Command + f1', 'mac', 'osx', 'screen', 'sharing', 'displays'
       cln.note 'shut down processes that are not responding', 'Command + Option + Escape', 'shut-down', 'mac', 'osx' # not sure if this actually works
       cln.note 'find using spotlight',                        'mdfind -name somename', 'unix', 'mac', 'osx'
