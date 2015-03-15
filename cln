@@ -501,6 +501,17 @@ else
       cln.note "Figure out what some arcane type signature means in the C language", "http://cdecl.org/", "cc", "programming"
 
     # ruby
+      cln.note 'Running without rubygems', <<-CODE
+        # http://myronmars.to/n/dev-blog/2012/03/faster-test-boot-times-with-bundler-standalone
+        $ bundle install --standalone --binstubs bundle/bin
+        $ ruby --disable-gems -S bundle/bin/rspec
+      CODE
+      cln.note 'Rendering markdown', <<-CODE, 'ruby', 'redcarpet', 'md'
+        require 'redcarpet'
+        renderer = Redcarpet::Render::HTML.new
+        markdown = Redcarpet::Markdown.new(renderer)
+        puts markdown.render('# omg')
+      CODE
       cln.note "How to compile MRI", <<-CODE, 'ruby', 'source', 'build'
         cd /Users/josh/ref/ruby/ruby \\
           && ./configure \\
