@@ -873,6 +873,83 @@ else
       # curl
       cln.note 'Post a form with curl -- typically they use key/value pairs', 'curl https://example.com -d some_key=some_value', 'website'
 
+      # Unix signals
+
+      cln.note 'SIGHUP', <<-NOTE, 'unix', 'signals', 'linux', 'interrupts'
+        Linux sends a process this signal when it becomes disconnected from a terminal.
+        Many Linux programs use SIGHUP for an unrelated purpose:
+        to indicate to a running program that it should reread its configuration files.
+      NOTE
+
+      cln.note 'SIGINT', <<-NOTE, 'unix', 'signals', 'linux', 'interrupts'
+        Linux sends a process this signal when the user tries to end it by pressing Ctrl+C.
+      NOTE
+
+      cln.note 'SIGILL', <<-NOTE, 'unix', 'signals', 'linux', 'interrupts'
+        A process gets this signal when it attempts to execute an illegal instruction.
+        This could indicate that the program’s stack is corrupted.
+      NOTE
+
+      cln.note 'SIGABRT', <<-NOTE, 'unix', 'signals', 'linux', 'interrupts'
+        The abort function causes the process to receive this signal.
+      NOTE
+
+      cln.note 'SIGFPE', <<-NOTE, 'unix', 'signals', 'linux', 'interrupts'
+        The process has executed an invalid floating-point math instruction.
+        Depending on how the CPU is configured,
+        an invalid floating-point operation may return a special non-number value
+        such as inf (infinity) or NaN (not a number) instead of raising SIGFPE.
+      NOTE
+
+      cln.note 'SIGKILL', <<-NOTE, 'unix', 'signals', 'linux', 'interrupts'
+        This signal ends a process immediately and cannot be handled.
+      NOTE
+
+      cln.note 'SIGUSR1', <<-NOTE, 'unix', 'signals', 'linux', 'interrupts'
+        This signal is reserved for application use.
+      NOTE
+
+      cln.note 'SIGUSR2', <<-NOTE, 'unix', 'signals', 'linux', 'interrupts'
+        This signal is reserved for application use.
+      NOTE
+
+      cln.note 'SIGSEGV', <<-NOTE, 'unix', 'signals', 'linux', 'interrupts'
+        The program attempted an invalid memory access.
+        The access may be to an address that is invalid in the process’s virtual memory space,
+        or the access may be forbidden by the target memory’s permissions.
+        Dereferencing a “wild pointer” can cause a SIGSEGV.
+      NOTE
+
+      cln.note 'SIGPIPE', <<-NOTE, 'unix', 'signals', 'linux', 'interrupts'
+        The program has attempted to access a broken data stream,
+        such as a socket connection that has been closed by the other party.
+      NOTE
+
+      cln.note 'SIGALRM', <<-NOTE, 'unix', 'signals', 'linux', 'interrupts'
+        The alarm system call schedules the delivery of this signal at a later time.
+        See Section 8.13, “setitimer: Setting Interval Timers,” in Chapter 8,
+        “Linux System Calls,” for information about setitimer, a generalized version of alarm.
+      NOTE
+
+      cln.note 'SIGTERM', <<-NOTE, 'unix', 'signals', 'linux', 'interrupts'
+        This signal requests that a process terminate.
+        This is the default signal sent by the kill command.
+      NOTE
+
+      cln.note 'SIGCHLD', <<-NOTE, 'unix', 'signals', 'linux', 'interrupts'
+        Linux sends a process this signal when a child process exits.
+        See Section 3.4.4, “Cleaning Up Children Asynchronously,” in Chapter 3, “Processes.”
+      NOTE
+
+      cln.note 'SIGXCPU', <<-NOTE, 'unix', 'signals', 'linux', 'interrupts'
+        Linux sends a process this signal when it exceeds the limit of CPU time that it can consume.
+        See Section 8.5, “getrlimit and setrlimit: Resource Limits,” in Chapter 8 for information on CPU time limits.
+      NOTE
+
+      cln.note 'SIGVTALRM', <<-NOTE, 'unix', 'signals', 'linux', 'interrupts'
+        The setitimer schedules the delivery of this signal at a future time.
+        See Section 8.13, “setitimer: Setting Interval Timers.”
+      NOTE
 
     # HTTP status codes, from http://murmurings.herokuapp.com/blog/2014/09/06/hypertext-transfer-protocol/
       cln.note 'HTTP status code categories', <<-CODES, '100s', '200s', '300s', '400s', '500s'
