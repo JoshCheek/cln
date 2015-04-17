@@ -501,6 +501,37 @@ else
       cln.note "Figure out what some arcane type signature means in the C language", "http://cdecl.org/", "cc", "programming"
 
     # ruby
+      cln.note 'syntax highlighting', <<-CODE, 'ruby'
+        require 'coderay'
+        CodeRay.encode code, :ruby, :terminal
+
+        require 'rouge'
+        formatter = Rouge::Formatters::Terminal256.new theme: 'colorful'
+        lexer     = Rouge::Lexers::Ruby.new
+        tokens    = lexer.lex raw_code
+        formatter.format(tokens)
+      CODE
+      cln.note 'Parsing with Treetop', <<-CODE, 'ruby'
+        require 'treetop'  # => true
+
+        Treetop.load_from_string <<GRAMMAR  # => AParser
+        grammar A
+          rule optional_e
+            the_e:e?
+          end
+          rule e
+            'e'
+          end
+        end
+        GRAMMAR
+
+        ast = AParser.new.parse 'e'  # => SyntaxNode+OptionalE0 offset=0, "e" (the_e):\n  SyntaxNode offset=0, "e"
+        ast.the_e.empty?             # => false
+        ast.text_value               # => "e"
+        ast.elements                 # => [SyntaxNode offset=0, "e"]
+        ast.terminal?                # => false
+        ast.nonterminal?             # => true
+      CODE
       cln.note 'Running without rubygems', <<-CODE
         # http://myronmars.to/n/dev-blog/2012/03/faster-test-boot-times-with-bundler-standalone
         $ bundle install --standalone --binstubs bundle/bin
