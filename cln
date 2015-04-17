@@ -525,7 +525,7 @@ else
         end
         GRAMMAR
 
-        ast = AParser.new.parse 'e'  # => SyntaxNode+OptionalE0 offset=0, "e" (the_e):\n  SyntaxNode offset=0, "e"
+        ast = AParser.new.parse 'e'  # => SyntaxNode+OptionalE0 offset=0, "e" (the_e):\\n  SyntaxNode offset=0, "e"
         ast.the_e.empty?             # => false
         ast.text_value               # => "e"
         ast.elements                 # => [SyntaxNode offset=0, "e"]
