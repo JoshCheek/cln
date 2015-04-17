@@ -638,6 +638,15 @@ else
 
     # gpg
     cln.note "how to use gpg", "http://www.madboa.com/geek/gpg-quickstart/", "pgp", "encryption", "encrypted"
+    cln.note "Some notes on ssl", <<-INSTRUCTIONS, 'rbx'
+      Last time I installed rubinius (via homebrew), it said:
+
+      A CA file has been bootstrapped using certificates from the system keychain.
+      To add additional certificates, place .pem files in
+        /usr/local/etc/openssl/certs
+      and run
+        /usr/local/opt/openssl/bin/c_rehash
+    INSTRUCTIONS
 
     # postgresql
     cln.note 'postgresql: quit',                            '\q',       'pg', 'meta', 'exit', 'C-c'
