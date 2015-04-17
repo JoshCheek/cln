@@ -513,7 +513,6 @@ else
       CODE
       cln.note 'Parsing with Treetop', <<-CODE, 'ruby'
         require 'treetop'  # => true
-
         Treetop.load_from_string <<GRAMMAR  # => AParser
         grammar A
           rule optional_e
@@ -524,7 +523,6 @@ else
           end
         end
         GRAMMAR
-
         ast = AParser.new.parse 'e'  # => SyntaxNode+OptionalE0 offset=0, "e" (the_e):\\n  SyntaxNode offset=0, "e"
         ast.the_e.empty?             # => false
         ast.text_value               # => "e"
