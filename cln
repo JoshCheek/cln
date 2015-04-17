@@ -850,6 +850,16 @@ else
         dirs         # see list of locations'
       STACK
 
+      # tmux (http://lukaszwrobel.pl/blog/tmux-tutorial-split-terminal-windows-easily)
+      cln.note 'Tmux: split pane horizontally',       'Ctrl+b "'
+      cln.note 'Tmux: split pane vertically',         'Ctrl+b %'
+      cln.note 'Tmux: switch pane',                   'Ctrl+b arrow key'
+      cln.note 'Tmux: (c)reate a new window',         'Ctrl+b c'
+      cln.note 'Tmux: move to the (n)ext window',     'Ctrl+b n'
+      cln.note 'Tmux: move to the (p)revious window', 'Ctrl+b p'
+      cln.note 'Tmux: resize pane',                   'Hold Ctrl+b, don\'t release it and hold one of the arrow keys'
+
+
       # grep
       cln.note "show lines after when grepping",  "grep -A n pattern"
       cln.note "show lines before when grepping", "grep -B n pattern"
