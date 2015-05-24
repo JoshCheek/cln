@@ -640,7 +640,8 @@ else
     # homebrew
     cln.note "homebrew binaries are in", "/usr/local/bin"
     cln.note "homebew has a man page!!!", "man brew"
-    cln.note "fix homebrew when permissions get fucked, e.g. '/usr/local/include is not writable'", "https://gist.github.com/rpavlik/768518"
+    cln.note "fix homebrew when permissions get fucked, e.g. '/usr/local/include is not writable'", "https://gist.github.com/rpavlik/768518", 'brew'
+    cln.note 'Download strategies', '/usr/local/Library/Taps/caskroom/homebrew-cask/lib/hbc/download_strategy.rb', 'brew'
 
     # gpg
     cln.note "how to use gpg", "http://www.madboa.com/geek/gpg-quickstart/", "pgp", "encryption", "encrypted"
