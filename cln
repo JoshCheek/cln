@@ -819,6 +819,15 @@ else
     # unix utils
 
       # misc
+      cln.note 'List out the capabilities of the current terminal', 'infocmp', 'unix'
+      cln.note "Not exactly sure, almost looks like a description of the output from infocmp, but haven't figured it out yet", 'man terminfo', 'unix'
+      cln.note "Who has internet connections open on port 3000",  "lsof -i :3000", 'unix'
+      cln.note "List of well known port numbers",                 "cat /etc/services", 'unix'
+      cln.note "List of well known port numbers",                 "http://www.iana.org/assignments/port-numbers", 'unix'
+      cln.note "pids for port 3000",                              "lsof -i :3000 | awk '$2 ~ /[[:digit:]]/ { print $2 }' | sort -u", 'unix'
+      cln.note "process info for the program on port 3000",       "lsof -i :3000 | awk '$2 ~ /[[:digit:]]/ { print $2 }' | sort -u | xargs ps -p", 'unix'
+      cln.note "Look up DNS record of 'any' type for google.com", "dig www.google.com any", "unix", "whois"
+      cln.note "Look up WHOIS information about a web address",   "whois 64.233.179.105", "DNS", "unix"
       cln.note "The Filesystem Hierarchy Standard",               "http://www.pathname.com/fhs/pub/fhs-2.3.html", "unix", "fhs", "postmodern", "/usr/tmp/etc/"
       cln.note "List of directories that can be in /opt",         "http://www.lanana.org/lsbreg/providers/providers.txt", "unix", "file system", "/opt/"
       cln.note "How to place xargs argument anywhere in command", "xargs -I {} echo Directory: {}", "unix"
