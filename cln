@@ -446,6 +446,9 @@ else
       cln.note 'accounting equation, credits and debits',      "http://www.youtube.com/watch?v=gaZiAiETW_Y"
       cln.note 'terminal keynote',                             "https://github.com/fxn/tkn"
 
+    # svn
+    cln.note 'svn equivalent to git clone', 'svn checkout http://subversion.imagemagick.org/subversion/ImageMagick/trunk'
+
     # git
     cln.note 'set the remote tracking branch to origin/master',       'git branch --set-upstream-to origin/master', 'branches'
     cln.note 'search git log for commits where diff matches pattern', 'git log -Gversion_requirements -p lib/rubygems/dependency.rb', 'grep'
