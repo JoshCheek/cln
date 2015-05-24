@@ -479,6 +479,7 @@ else
     cln.note 'Most recent common ancestor of two branches',   'git merge-base branch1 branch2'
 
     # github
+    cln.note 'github: Get all gists with gisty gem',            'gisty sync', 'ruby', 'gh'
     cln.note 'github: Languages supported by github flavored markdown', 'https://github.com/github/linguist/blob/master/lib/linguist/languages.yml', 'gfm'
     cln.note 'github: See all your pull requests',              'https://github.com/search?utf8=✓&q=is%3Apr+author%3AJoshCheek', 'query', 'search', 'gh'
     cln.note 'github: Search an archive of their info w/ sql',  'http://ghtorrent.org/dblite/', 'gh'
