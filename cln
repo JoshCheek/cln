@@ -676,6 +676,13 @@ else
     cln.note 'Visual explanation of SQL joins', 'http://blog.codinghorror.com/a-visual-explanation-of-sql-joins/'
 
     # vim
+    cln.note 'vim: mark a line with letter "a"',                                           "ma",     'marks', 'marking'
+    cln.note 'vim: jump to line marked with "a"',                                          "'a",     'marks', 'marking'
+    cln.note 'vim: jump to line/col marked with "a"',                                      "`a",     'marks', 'marking'
+    cln.note 'vim: list marks',                                                            ":marks", 'marks', 'marking'
+    cln.note 'vim: jump to position where we last exited the current buffer',              '`"',     'marks', 'marking'
+    cln.note 'vim: jump to position in last file edited (when exited vim)',                '`0',     'marks', 'marking'
+    cln.note 'vim: jump to line we jumped from (like C-o, but toggles between locations)', "''",     'marks', 'marking'
     cln.note 'Vim ctags: find reference to class',                     ':tag ClassName'
     cln.note 'vim ctags: shows the list',                              ':tselect or :ts'
     cln.note 'vim ctags: goes to the next tag in that list',           ':tnext   or :tn'
