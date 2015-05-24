@@ -504,7 +504,11 @@ else
     # C programming (cc)
       cln.note "Figure out what some arcane type signature means in the C language", "http://cdecl.org/", "cc", "programming"
 
+    # gems
+      cln.note 'ruby-opencv', 'image based machine learning', 'ruby', 'gems'
+
     # ruby
+      cln.note 'pretty printing json', "JSON.pretty_generate([*'a'..'z'].map.with_index(1).to_h", 'ruby'
       cln.note 'syntax highlighting', <<-CODE, 'ruby'
         require 'coderay'
         CodeRay.encode code, :ruby, :terminal
