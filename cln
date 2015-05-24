@@ -1053,6 +1053,9 @@ else
 
     # hardware
     cln.note 'Buy circuits off Amazon', 'http://www.amazon.com/b/ref=dp_brw_link?ie=UTF8&node=306843011', 'hardware', 'component', 'IC', 'transistors', 'capacitors', 'integrated circuits'
+
+    # yawn
+    cln.note 'Wat traumatised eyes you have', 'ಠ_ಠ', 'emoji', 'emoticon', 'searls'
   end
   puts CommandLineNotes::Binary.new(notes, ARGV).stdout
 end
