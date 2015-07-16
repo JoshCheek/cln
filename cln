@@ -680,7 +680,9 @@ else
     cln.note 'postgresql: find the list of pids connected', 'SELECT procpid, application_name from pg_stat_activity;', 'pg', 'meta'
     cln.note 'postgresql: get a list of all the dbs',       'psql -l',  'pg', 'meta'
     cln.note 'postgresql: view the query plan',             'explain analyze <query>', 'pg', 'meta'
-    cln.note 'postgresql: start pg in the bg',              'pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start'
+    cln.note 'postgresql: start pg in the bg',              "pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start\n" \
+                                                            "pg_ctl -D /usr/local/var/postgres-9.4.2/ -l /usr/local/var/postgres-9.4.2/server.log status"
+    cln.note 'postgresql: create a new data dir after updating', 'initdb -D /usr/local/var/postgres-9.4.2'
 
     cln.note 'mysql: start', 'mysql.server start'
     cln.note 'mysql: stop', 'mysql.server stop'
