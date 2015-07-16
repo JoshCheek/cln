@@ -328,6 +328,13 @@ else
     cln.note "pallettes of coulours", "http://0to255.com", "websites", "urls", "designs"
 
     # fish
+    cln.note 'fish: send stdout through a named pipe',       "ruby -ne 'print $_.upcase' (ls | psub)", "shells"
+    cln.note 'fish: produce / consume an event',             <<-FISH, "shells"
+    function event_test --on-event test_event
+      echo event test: $argv
+    end
+    emit test_event something
+    FISH
     cln.note "fish: Command abbreviation",                   "set -U fish_user_abbreviations 'gco=git checkout'", 'shells', 'shorthand', 'expansion'
     cln.note "fish: Static tab-completion",                  "http://fishshell.com/docs/2.0/index.html#completion-own", "shells"
     cln.note "fish: Dynamic tab-completion",                 "https://github.com/fish-shell/fish-shell/issues/1217#issuecomment-31441757", "shells"
