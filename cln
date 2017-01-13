@@ -218,6 +218,7 @@ else
       commit to stay focused
       when you fail, move on to other related work that still moves you forward towards your goals.
     GOALS
+    cln.note 'cost of living calculator', 'http://www.bankrate.com/calculators/savings/moving-cost-of-living-calculator.aspx'
     cln.note '20 hours to learn anything', <<-TWENTYHOURS, 'life'
     https://plus.google.com/104757475552569715504/posts/UTj41SEE77y
     TED Talk by Josh Kaufman
@@ -232,7 +233,7 @@ else
       2. You get to decide how you feel about them - facts are facts, you choose how you interpret them
       3. It is possible that you're just going to choose to be happy
       4. Important things require training and thought - train yourself to remember rule 3
-      Meditation is training for perception
+      Mnditation is training for perception
     RULES
     cln.note 'store your keys in the cloud', 'https://www.keyme.net/app'
     cln.note 'terminal keynote',             'https://github.com/fxn/tkn'
@@ -240,6 +241,12 @@ else
     cln.note 'RSA videos', 'https://www.youtube.com/user/theRSAorg/playlists'
     cln.note '256 color mode in the terminal', 'def prgb(msg,r:0,g:0,b:0) puts "\e[38;5;#{r*36+g*6+b+16}m#{msg}\e[39m" end', 'shell'
     cln.note 'Box characters', '┘ ┐ ┌ └ ┼ ─ ├ ┤ ┴ ┬ │ This could be useful, too: ruby -e \'p (9472..9532).map { |n| n.chr(Encoding::UTF_8) }\'', 'terminal', 'table'
+    cln.note 'Curated list of awesome lists', 'https://github.com/sindresorhus/awesome', 'programming', 'languages', 'resources'
+    cln.note 'Anatomical terms of location', 'https://en.wikipedia.org/wiki/Anatomical_terms_of_location', 'latin', 'science', 'top', 'bottom', 'front', 'back'
+    cln.note 'How Dropbox hacks your mac', 'sudo strings /Library/DropboxHelperTools/Dropbox_u501/dbaccessperm | grep INSERT'
+
+    # Tutorials
+    cln.note 'Pretty good explanations / tutorials (tons of topics including arcane ones like awk, fortran, sed, lisp, etc)', 'http://www.tutorialspoint.com'
 
     # Browsers
     cln.note 'Measure how fast browser javascript is', 'https://www.webkit.org/perf/sunspider-1.0.2/sunspider-1.0.2', 'measuring', 'js'
@@ -326,8 +333,14 @@ else
     cln.note "xpath cheatsheet",          "sh -c curl\\ http://cheat.errtheblog.com/y/xpath\\ 2\\>/dev/null\\ \\|\\ ruby\\ -ryaml\\ -e\\ \\'puts\\ YAML.load\\(\\$stdin.read\\)\\[\\\"xpath\\\"\\]\\'"
 
     cln.note "pallettes of coulours", "http://0to255.com", "websites", "urls", "designs"
+    cln.note "Flexbox playground",    "http://codepen.io/enxaneta/pen/adLPwv"
+
+    # tools
+    cln.note 'ragel source code', 'git://git.complang.org/ragel.git', 'parsing', 'parsers', 'scanners', 'lexers', 'yacc', 'bison'
 
     # fish
+    cln.note 'fish: group commands together (both echos print to the same stdout)', 'begin; echo a; echo b; end | tr ab AB'
+    cln.note 'fish: Start a shell without any customizations', "sh -c 'env HOME=$(mktemp -d) fish'", 'shells'
     cln.note 'fish: send stdout through a named pipe',       "ruby -ne 'print $_.upcase' (ls | psub)", "shells"
     cln.note 'fish: produce / consume an event',             <<-FISH, "shells"
     function event_test --on-event test_event
@@ -425,8 +438,11 @@ else
     cln.note "tilde expand",                    "M-&",   "readline", "keybindings", "expansion"
 
     # apis
-    cln.note 'play with apis', 'https://apigee.com/console', 'spotify', 'instagram'
+    cln.note 'play with apis', 'https://apigee.com/console', 'spotify', 'instagram', 'apis'
+    cln.note 'Google Maps',    'http://code.tutsplus.com/courses/custom-interactive-maps-with-the-google-maps-api', 'apis'
 
+    # C
+    cln.note 'C-programming: replace functions by setting LD_PRELOAD', 'https://github.com/whitequark/unrandom', 'lang', 'c-lang'
 
     # haskell
       # binaries
@@ -451,16 +467,31 @@ else
       cln.note "Build the package",                            "$ cabal-dev install", "haskell", "hs"
       cln.note "Latency numbers every programmer should know", "https://gist.github.com/hellerbarde/2843375#file-latency_humanized-markdown", "ms", "ns", "milliseconds", "nanoseconds", "microseconds", "durations", "time", "developer"
       cln.note 'accounting equation, credits and debits',      "http://www.youtube.com/watch?v=gaZiAiETW_Y"
-      cln.note 'terminal keynote',                             "https://github.com/fxn/tkn"
 
     # svn
     cln.note 'svn equivalent to git clone', 'svn checkout http://subversion.imagemagick.org/subversion/ImageMagick/trunk'
 
     # git
+    cln.note 'Push / pull git code from an EC2 Server', <<-GIT
+    File: ~/.ssh/config
+    ```
+    Host joshcheek.com
+      User ec2-user
+      HostName 52.35.33.206
+      IdentityFile ~/.ssh/joshcheekcom.pem
+    ```
+
+    Then:
+
+    ```
+    $ git remote add production ssh://joshcheek.com/~/app
+    ```
+    GIT
     cln.note 'Reuse recorded resolution of conflicted merges', <<-GIT, 'git'
     [rerere]
       enabled = true
     GIT
+    cln.note 'Multiple git authors, eg when pairing',                 'https://github.com/therubymug/hitch'
     cln.note 'View logs for a file across renames',                   'git log --follow path/to/file'
     cln.note 'Stash unstaged changes',                                'git stash --keep-index'
     cln.note 'set the remote tracking branch to origin/master',       'git branch --set-upstream-to origin/master', 'branches'
@@ -474,7 +505,9 @@ else
     cln.note 'list uncommitted files',                        'git ls-files -o', 'working', 'dirs'
     cln.note 'delete stale remote tracking branches',         'git remote prune origin'
     cln.note 'contentless commit (e.g. to force sha update)', 'git commit -m "whatever" --allow-empty'
+    cln.note 'revision and revision ranges format',           'man gitrevisions'
     cln.note 'show last commit that matches the string',      'git show :/query'
+    cln.note 'show lib/mrspec.rb as of 3 commits ago',        'git show \'HEAD~3:lib/mrspec.rb\''
     cln.note 'show branches merged into current branch',      'git branch --merged'
     cln.note 'show branches not merged into current branch',  'git branch --no-merged'
     cln.note "copy other branch's version of a file into wd", 'git checkout BRANCH -- path/to/file'
@@ -492,8 +525,11 @@ else
     cln.note 'Most recent common ancestor of two branches',   'git merge-base branch1 branch2'
 
     # github
+    cln.note 'github: See your public keys',                    'https://api.github.com/users/JoshCheek/keys', 'ssh'
+    cln.note 'github: A person\'s public activity',             'https://api.github.com/users/JoshCheek/events/public', 'events'
+    cln.note 'github: You can render tex if you write it in orgmode', 'https://github.com/Michieljoris/readme.org-cheatsheet/blob/master/readme.org', 'gh', 'latex', 'markdown'
     cln.note 'github: Get all gists with gisty gem',            'gisty sync', 'ruby', 'gh'
-    cln.note 'github: Languages supported by github flavored markdown', 'https://github.com/github/linguist/blob/master/lib/linguist/languages.yml', 'gfm'
+    cln.note 'github: Languages supported by github flavored markdown', 'https://github.com/github/linguist/blob/master/lib/linguist/languages.yml', 'gfm', 'list'
     cln.note 'github: See all your pull requests',              'https://github.com/search?utf8=✓&q=is%3Apr+author%3AJoshCheek', 'query', 'search', 'gh'
     cln.note 'github: Search an archive of their info w/ sql',  'http://ghtorrent.org/dblite/', 'gh'
     cln.note 'github: Reference commit in another repository',  'JumpstartLab/asquared#123', 'gh'
@@ -512,7 +548,14 @@ else
     EOS
 
     # Java
-      cln.note "Execute a jar", "java -jar HelloWorld.jar"
+      cln.note "Compile HelloWorld.java into HelloWorld.class",                  "javac HelloWorld.java", "java", "jar"
+      cln.note "Compile HelloWorld.java into HelloWorld.class in 'buid' dir",    "javac -d build HelloWorld.java", "java", "jar"
+      cln.note "Run HelloWorld.class in current dir",                            "java HelloWorld.class", "java", "jar"
+      cln.note "Create Fullpath.jar from .class files in current directory",     "jar cf Fullpath.jar *.class", "java", "jar"
+      cln.note "View the contents of Fullpath.jar",                              "jar tf Fullpath.jar", "java", "jar"
+      cln.note "Execute Fullpath.jar with args of 'abcd' and 'efgh'",            "java -jar Fullpath.jar abcd efgh", "java", "jar"
+      cln.note "Extract the contents of Fullpath.jar into current directory",    "jar xf Fullpath.jar", "java", "jar"
+      cln.note "Extract the contents of META-INF/MANIFEST.MF from Fullpath.jar", "jar xf Fullpath.jar META-INF/MANIFEST.MF", "java", "jar"
 
     # C programming (cc)
       cln.note "Figure out what some arcane type signature means in the C language", "http://cdecl.org/", "cc", "programming"
@@ -521,6 +564,15 @@ else
       cln.note 'ruby-opencv', 'image based machine learning', 'ruby', 'gems'
 
     # ruby
+
+      cln.note 'Lexing Ruby code', 'https://gist.github.com/JoshCheek/1982b45311995f061706617357140a3a', 'parser', 'ripper', 'ruby_parser'
+      cln.note 'Printing an a with a diaeresis after it with unicode in Ruby', 'puts "a\u0308"'
+      cln.note 'Date from a JavaScript Date constructor', "Date.parse('31 Dec 1969') + (msSince1Jan1970 / 60 / 60 / 1000 / 24).days"
+      cln.note 'Find location in source code of where an object was created', 'ObjectSpace.allocation_sourcefile(x), and ObjectSpace.allocation_sourceline(x)', 'ruby'
+      cln.note 'ActiveRecord can define a query for a view if you', 'define the instance method read_only? to return true', 'rails'
+      cln.note 'Ruby searches against multiple fields', 'Textacular, thoughtbot/scenic', 'rails', 'activerecord'
+      cln.note 'Tell ActiveRecord to use sql database dumps instead of config.schema', 'config.database_format.structure = :structure'
+      cln.note 'Chruby execute a specific ruby (ie rubinius)', 'chruby-exec rbx -- ruby -v'
       cln.note 'Homebrew dir for Rubinius', '/usr/local/Library/Taps/rubinius/homebrew-apps', 'ruby'
       cln.note 'pretty printing json', "JSON.pretty_generate([*'a'..'z'].map.with_index(1).to_h", 'ruby'
       cln.note 'syntax highlighting', <<-CODE, 'ruby'
@@ -605,6 +657,15 @@ else
         %% - Literal % character
       STRFTIME
 
+      cln.note "Reading each key of input", <<-EACH_KEY, 'escape', 'keys'
+        require "io/console"
+        $stdin.raw do
+          10.times do |i|
+            printf "%-2d %p\\r\\n", i+1, $stdin.readpartial(256)
+          end
+        end
+      EACH_KEY
+
       cln.note "building kisses and hugs ruby", <<-KISSES_AND_HUGS, 'custom'
         $ export CFLAGS=-Wno-error=shorten-64-to-32
         $ vim version.h
@@ -652,10 +713,27 @@ else
     cln.note 'Descriptions of the registers', 'http://www.swansontec.com/sregisters.html', 'assembly', 'intel', 'asm', 'att', 'at&t', 'hardware'
 
     # homebrew
-    cln.note "homebrew binaries are in", "/usr/local/bin"
-    cln.note "homebew has a man page!!!", "man brew"
-    cln.note "fix homebrew when permissions get fucked, e.g. '/usr/local/include is not writable'", "https://gist.github.com/rpavlik/768518", 'brew'
-    cln.note 'Download strategies', '/usr/local/Library/Taps/caskroom/homebrew-cask/lib/hbc/download_strategy.rb', 'brew'
+    cln.note "homebrew binaries are in", "/usr/local/bin", 'linux', 'package managers'
+    cln.note "homebew has a man page!!!", "man brew", 'linux', 'package managers'
+    cln.note "fix homebrew when permissions get fucked, e.g. '/usr/local/include is not writable'", "https://gist.github.com/rpavlik/768518", 'brew', 'linux', 'package managers'
+    cln.note 'Download strategies', '/usr/local/Library/Taps/caskroom/homebrew-cask/lib/hbc/download_strategy.rb', 'brew', 'linux', 'package managers'
+
+    # yum
+    cln.note "Yum: turn on extra repos", '$ vim /etc/yum.repos.d/epel.repo', 'linux', 'linux', 'package managers'
+    cln.note "Yum: install a package (-y to answer 'yes' to questions)", '$ yum install -y ruby23 ruby23-devel', 'linux', 'package managers'
+
+    # ansible
+    cln.note "Run a playbook", "$ ansible-playbook -i 'localhost,' -c local playbook.yml"
+
+    # EC2
+    cln.note "EC2: SSH into an EC2 server at port 52.39.29.64, as user ec2-user, with a pem (credentials)", "$ ssh -i ~/.ssh/josh-test.pem  ec2-user@52.39.29.63", "aws"
+    cln.note "EC2: forward port 80 to 3000", <<-EXPLANATION "aws"
+       Go to https://us-west-2.console.aws.amazon.com/ec2/v2/home?region=us-west-2#SecurityGroups:sort=groupId
+       and add an additional rule to allow TCP port 80 through
+
+       Then, change iptables (taken from https://forums.aws.amazon.com/thread.jspa?threadID=82413)
+       $ sudo iptables -t nat -I PREROUTING -p tcp --dport 80 -j REDIRECT --to-ports 3000
+    EXPLANATION
 
     # gpg
     cln.note "how to use gpg", "http://www.madboa.com/geek/gpg-quickstart/", "pgp", "encryption", "encrypted"
@@ -674,12 +752,14 @@ else
     cln.note 'postgresql: display users',                   '\du',      'pg', 'meta'
     cln.note 'postgresql: show permissions',                '\z',       'pg', 'meta'
     cln.note 'postgresql: show table names',                '\z',       'pg', 'meta'
+    cln.note 'postgresql: list roles',                      '\du',      'pg', 'meta'
     cln.note 'postgresql: show table names in a namespace', '\z rbf.*', 'pg', 'meta'
     cln.note 'postgresql: help (list all commands)',        '\?',       'pg', 'meta'
     cln.note 'postgresql: list schemas',                    '\dn',      'pg', 'meta'
     cln.note 'postgresql: list tables in search_path',      '\dt',      'pg', 'meta'
     cln.note 'postgresql: find the list of pids connected', 'SELECT procpid, application_name from pg_stat_activity;', 'pg', 'meta'
-    cln.note 'postgresql: get a list of all the dbs',       'psql -l',  'pg', 'meta'
+    cln.note 'postgresql: get a list of all the dbs',       '\l',       'pg', 'meta'
+    cln.note 'postgresql: run a command form the command line', "psql -c '\du'", 'pg', 'meta'
     cln.note 'postgresql: view the query plan',             'explain analyze <query>', 'pg', 'meta'
     cln.note 'postgresql: start pg in the bg',              "pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start\n" \
                                                             "pg_ctl -D /usr/local/var/postgres-9.4.2/ -l /usr/local/var/postgres-9.4.2/server.log status"
@@ -723,9 +803,36 @@ else
     cln.note 'vim: visually highlight ever expanding html tags',       'vatatatatatatat', 'text', 'objects'
     cln.note 'vim: mark the current line "a"',                         ':ka'
     cln.note 'vim: jump to mark a',                                    '`a'
+    cln.note 'vim: run without loading ~/.vimrc',                      'vim -u NONE myfile.rb'
+    cln.note 'vim: lookup the word/selection in the keywordprg',       'K'
+    cln.note 'vim: lookup the value of a configuration option we set', 'set keywordprg?'
+    cln.note 'vim: in help-mode, lookup the word under the cursor',    'C-]'
+    cln.note 'vim: in help-mode, return to where we jumped from',      'C-O'
+    cln.note 'vim: Ruby find next method def',                         ']m'
+    cln.note 'vim: Ruby find prev method def',                         '[m'
+    cln.note 'vim: Ruby find next end',                                ']M'
+    cln.note 'vim: Ruby find next end',                                '[M'
+    cln.note 'vim: text object: inner method',                         'im'
+    cln.note 'vim: text object: inner class',                          'iM'
+    cln.note 'vim: text object: around method',                        'am'
+    cln.note 'vim: text object: around class',                         'aM'
+    cln.note 'vim: fold inner method',                                 'zfim'
+    cln.note 'vim: fold inner class',                                  'zfiM'
+    cln.note 'vim: open current fold',                                 'zo'
+    cln.note 'vim: text object: around ruby (chain these to keep selecting more)', 'ar'
+    cln.note 'vim: go to file (eg on a require or include. For Ruby, prob need to add lib to the path)', 'gf'
+    cln.note 'vim: go to the definition of the word under the cursor (I think this doesn\'t use ctags)', '[<Tab>'
+    cln.note 'vim: open an unnamed buffer split above the current one',            ':new'
+    cln.note 'vim: open an unnamed buffer split left of the current one',          ':vnew'
+    cln.note 'run "ls -l" and insert the output',                                  '!!ls -l'
+    cln.note 'vim: using repeat.vim to make repeatable mappings', <<-VIM
+      :nmap <Plug>TransposeCharacters xp:call repeat#set("\<Plug>TransposeCharacters")<CR>
+      nmap cp <Plug>TransposeCharacters
+    VIM
 
     # emacs
         cln.note "Kyle's emacs installation notes",      'https://gist.github.com/pd/c202a5cec79595a1199b'
+        cln.note "Start the emacs server",               "emacsclient -c -n --alternate-editor=''"
       # FIXES
         cln.note 'turn on region highlighting',          'M-x transient-mark-mode', 'emacs', 'fixes'
         cln.note 'change major-mode to Ruby',            'M-x ruby-mode', 'emacs', 'fixes'
@@ -823,12 +930,20 @@ else
       # >> on_program([:stmts_add, [:stmts_new], [:@int, "1", [1, 0]]]) #> [:program, [:stmts_add, [:stmts_new], [:@int, "1", [1, 0]]]]
     RIPPER
 
+    # c
+    cln.note 'C stdio functions', 'man stdio', 'c-programming'
+
     # mac
+      cln.note 'Take a screenshot without the stupid halo',   'Cmd-Shift-4 Space, hover over window, hold Option while clicking', 'mac', 'osx', 'screencapture'
+      cln.note 'Read accessibility settings',                 'security authorization read system.preferences.accessibility'
+      cln.note 'Make a .app',                                 'Using the "Applescript Editor", make the program `do shell script "...your code here..."` and save it as an application', 'executable', 'files'
+      cln.note 'Mac font locations',                          '/Library/Fonts and /System/Library/Fonts'
       cln.note 'A hidden mac paint program in preview',       'http://scripting.com/2014/11/27/aHiddenMacPaintProgram.html', 'apple'
       cln.note "Turn mirroring on and off (mac)",             'Command + f1', 'mac', 'osx', 'screen', 'sharing', 'displays'
       cln.note 'shut down processes that are not responding', 'Command + Option + Escape', 'shut-down', 'mac', 'osx' # not sure if this actually works
       cln.note 'find using spotlight',                        'mdfind -name somename', 'unix', 'mac', 'osx'
       cln.note 'animated gif screenshots',                    'http://www.cockos.com/licecap/', 'atom', 'editor', 'mac', 'windows', 'screencapture'
+      cln.note 'Sublime binary',                              'https://github.com/paulirish/dotfiles/blob/b694f0efbe2cdebe1cc28cde5294ea9b3aaf9586/setup-a-new-machine.sh#L178', 'symlink', 'editors'
       cln.note 'location of file from spotlight',             'mouse over file, hold command and option', 'mac', 'osx'
       cln.note 'open a file\'s information from spotlight',   'command+i', 'mac', 'osx'
       cln.note 'Build your own pow',                          <<-CODE
@@ -840,18 +955,55 @@ else
       CODE
 
     # unix utils
+      # images
+      cln.note 'Generate the image from primitive shapes',        'primitive -i $base.jpg -o $outfile -m $triangle -s $scale -n $num_shapes -a $alpha'
+      cln.note 'resize an image',                                 'convert  -resize 900x1200  infile.jpg outfile.jpg'
 
       # misc
+      cln.note 'Expose port 9292 to the internet',               'ngrok http 9292'
+      cln.note 'Environment variables rules and a list',         'http://pubs.opengroup.org/onlinepubs/009695399/basedefs/xbd_chap08.html', 'definitions', 'unix'
+      cln.note 'List of syscalls',                               'locate syscall.h # /usr/include/sys/syscall.h', 'unix'
+      cln.note 'System control information',                     'sysctl -a', 'unix'
+      cln.note 'Processor name',                                 'sysctl machdep.cpu.brand_string', 'unix'
+      cln.note 'Display pids and parent pids without a header',  'ps -o pid= -o ppid= | head', 'processes', 'list'
+      cln.note 'modify, verify and repair local disks', 'diskutil list'
+      cln.note 'convert and copy a file', 'dd'
+      cln.note 'Use dtrace to get a list of system calls',        'sudo dtrace -ln \'syscall:::entry\'', 'unix'
+
+      cln.note 'Awesome list of unix utilities "UNIX TOOLBOX"',   'http://cb.vu/unixtoolbox.xhtml'
+      cln.note 'xterm font aliases',                              '/usr/X11R6/lib/X11/fonts/misc/fonts.alias', 'unix'
+      cln.note 'list fonts known by xterm',                       'xlsfonts', 'unix'
+      cln.note 'Record and upload terminal sessions',             'http://showterm.io/', 'unix', 'shell', 'script'
+      cln.note 'system-level exploration (strace + tcpdump + htop + iftop + lsof)', 'http://www.sysdig.org/wiki/sysdig-examples/', 'unix'
+      cln.note 'Show every time a file is opened under /etc.',                      'sudo sysdig evt.type=open and fd.name contains /etc', 'unix'
+      cln.note 'List all open files',                                'lsof', 'unix'
+      cln.note 'Tool for displaying information about object files', 'otool', 'unix'
+      cln.note 'Make script of terminal session',                 'script', 'unix'
+      cln.note 'play back a script with timing information',      'scriptreplay', 'unix'
+      cln.note 'Who is logged in, and what are they doing?',      'w', 'unix'
+      cln.note 'Send message to another user',                    'write josh', 'unix'
+      cln.note 'Print binaries',                                  'hexdump', 'unix'
+      cln.note 'Reformat input to align columns',                 'column -t', 'unix'
+      cln.note 'Remove characters 1 through 3 from input',        'colrm 1 3', 'unix', 'cut'
+      cln.note 'See your system architecture',                    'arch', 'unix'
+      cln.note 'print the route packets take to network host',    'traceroute xmas.futile.net', 'unix'
       cln.note 'Reset your terminal',                             'reset', 'refresh', 'reload', 'unix'
       cln.note 'List out the capabilities of the current terminal', 'infocmp', 'unix'
       cln.note "Not exactly sure, almost looks like a description of the output from infocmp, but haven't figured it out yet", 'man terminfo', 'unix'
+      cln.note 'Ports you\'re listening on',                      "netstat -an -p udp -p tcp | sed -n '1p;/LISTEN/p'", 'unix'
+      cln.note 'list of known protocols (supported by netstat)',  'cat /etc/protocols', 'unix', 'internet'
+      cln.note 'list files open by process 1234',                 'lsof -p 1234', 'unix'
+      cln.note 'list process with the file /a/b/c open',          'lsof /a/b/c', 'unix'
+      cln.note 'list internet connections',                       'lsof -i', 'unix'
       cln.note "Who has internet connections open on port 3000",  "lsof -i :3000", 'unix'
       cln.note "List of well known port numbers",                 "cat /etc/services", 'unix'
       cln.note "List of well known port numbers",                 "http://www.iana.org/assignments/port-numbers", 'unix'
       cln.note "pids for port 3000",                              "lsof -i :3000 | awk '$2 ~ /[[:digit:]]/ { print $2 }' | sort -u", 'unix'
       cln.note "process info for the program on port 3000",       "lsof -i :3000 | awk '$2 ~ /[[:digit:]]/ { print $2 }' | sort -u | xargs ps -p", 'unix'
-      cln.note "Look up DNS record of 'any' type for google.com", "dig www.google.com any", "unix", "whois"
-      cln.note "Look up WHOIS information about a web address",   "whois 64.233.179.105", "DNS", "unix"
+      cln.note "Look up DNS record of 'any' type for google.com", "dig www.google.com any", "unix", "whois", "networking"
+      cln.note "Look up WHOIS information about a web address",   "whois 64.233.179.105", "DNS", "unix", "networking"
+      cln.note "Look up WHOIS information about all domains matching 'joshcheek'", "whois dom joshcheek", "networking"
+      cln.note "Perform DNS lookup for google.com's mail records listing intermediate queries", "nslookup -type=MX -debug google.com", "networking"
       cln.note "The Filesystem Hierarchy Standard",               "http://www.pathname.com/fhs/pub/fhs-2.3.html", "unix", "fhs", "postmodern", "/usr/tmp/etc/"
       cln.note "List of directories that can be in /opt",         "http://www.lanana.org/lsbreg/providers/providers.txt", "unix", "file system", "/opt/"
       cln.note "How to place xargs argument anywhere in command", "xargs -I {} echo Directory: {}", "unix"
@@ -896,6 +1048,11 @@ else
         popd         # return to previous location `cd -`
         dirs         # see list of locations'
       STACK
+
+      # awk
+      cln.note 'Awk: Set a variable',    %[awk -v name=Jerry 'BEGIN{printf "Name = %s\n", name}'], 'unix'
+      cln.note 'Awk: See all variables', "awk --dump-variables ''; cat awkvars.out ", 'unix'
+      cln.note 'Awk: tutorial',          'http://www.tutorialspoint.com/awk/awk_built_in_variables.htm', 'unix'
 
       # tmux (http://lukaszwrobel.pl/blog/tmux-tutorial-split-terminal-windows-easily)
       cln.note 'Tmux: split pane horizontally',       'Ctrl+b "'
@@ -1049,7 +1206,15 @@ else
         See Section 8.13, “setitimer: Setting Interval Timers.”
       NOTE
 
+      cln.note 'SIGINFO', <<-NOTE, 'unix', 'signals', 'linux', 'interrupts'
+        C-t sends INFO signal
+      NOTE
+
+    # ngrep
+      cln.note 'List all tcp info to google.com', 'sudo ngrep -W byline -q  -i "HTTP" tcp and host google.com'
+
     # HTTP status codes, from http://murmurings.herokuapp.com/blog/2014/09/06/hypertext-transfer-protocol/
+      cln.note 'List of HTTP status codes', 'https://httpstatuses.com/', 'yumin'
       cln.note 'HTTP status code categories', <<-CODES, '100s', '200s', '300s', '400s', '500s'
         https://pbs.twimg.com/media/B50dCAKIEAAP0NQ.jpg:large
         1xx: Informational   "Hold on"       | request received but is continuing process
@@ -1079,8 +1244,11 @@ else
     # hardware
     cln.note 'Buy circuits off Amazon', 'http://www.amazon.com/b/ref=dp_brw_link?ie=UTF8&node=306843011', 'hardware', 'component', 'IC', 'transistors', 'capacitors', 'integrated circuits'
 
-    # yawn
+    # emoji / unicode
+    cln.note 'Zero width Joiner',             '\u{200d}', 'emoticon', 'emoji'
     cln.note 'Wat traumatised eyes you have', 'ಠ_ಠ', 'emoji', 'emoticon', 'searls'
+    cln.note 'Shrugging emoji',               '¯\_(ツ)_/¯', 'emoticon'
+    cln.note 'Happy emoji',                   'c(ˊᗜˋ*c)', 'emoticon'
     cln.note 'Emoji', <<-EMOJI, 'emoticon'
       😀 😁 😂 😃 😄 😅 😆 😇 😈 👿 😉 😊 ☺️ 😋 😌 😍 😎 😏 😐 😑 😒 😓 😔 😕 😖 😗 😘 😙 😚
       😛 😜 😝 😞 😟 😠 😡 😢 😣 😤 😥 😦 😧 😨 😩 😪 😫 😬 😭 😮 😯 😰 😱 😲 😳 😴 😵 😶 😷
@@ -1109,8 +1277,77 @@ else
       💅 👂 👃 👋 👍 👎 ☝ 👆 👇 👈 👉 👌 ✌ 👊 ✊ ✋ 💪 👐 🙌 👏 🙏
       👋 👍 👎 ☝️ 👆 👇 👈 👉 👌 ✌️ 👊 ✊ ✋ 💪 👐 🙌 👏 🙏 👀 👄 💋 👅
     EMOJI
+
+    # Turing
+    cln.note 'The real cost of Turing', 'https://github.com/turingschool/outcomes/blob/master/2015_outcomes_report.markdown', 'jeff tweeted this'
+
+    # Clojure
+    cln.note 'Clojure cheatsheet', 'http://clojure.org/api/cheatsheet'
+
+    # Elm
+    cln.note 'Elm version of hoogle', 'http://klaftertief.github.io/package.elm-lang.org/', 'elm-lang', 'elmlang'
+
+    # Networking
+    cln.note 'Internal IP Addresses', <<-NOTE
+      http://whatis.techtarget.com/definition/RFC-1918
+      RFC 1918 was used to create the standards by which networking equipment assigns IP addresses in a private network.
+      A private network can use a single public IP address.
+      The RFC reserves the following ranges of IP addresses that cannot be routed on the Internet:
+
+      10.0.0.0 - 10.255.255.255 (10/8 prefix)
+      172.16.0.0 - 172.31.255.255 (172.16/12 prefix)
+      192.168.0.0 - 192.168.255.255 (192.168/16 prefix)
+      IP addresses within these ranges can be assigned within a private network;
+      each address will be unique on that network but not outside of it.
+      Private IP addresses can't be communicated with directly by external computers
+      because they are not globally unique and, as such, not addressable on the public Internet.
+    NOTE
+
+    # youtube
+    cln.note 'Download a video from youtube using http://rg3.github.io/youtube-dl/', "'youtube-dl https://www.youtube.com/watch?v=aEjcK5JFEFE'"
+
+    # iterm2
+    cln.note 'Print an image in iTerm2', 'ruby -r base64 -e \'name="#{ENV[%(HOME)]}/Desktop/frog-brown-kidsafe.png";data=File.read name;puts "\e]1337;File=name=#{name};size=#{data.bytesize};inline=1:#{Base64.encode64 data}\a\n"\''
+
+    # science
+    cln.note 'Locate books and papers', 'http://golibgen.io/index.php', 'katie', 'research', 'sciences', 'biology', 'download', 'textbooks'
+    cln.note 'Genetic ontology', 'http://www.ebi.ac.uk/QuickGO/GTerm?id=GO:0000988#term=ancchart', 'biology'
+    cln.note 'Genetic ontology', 'http://gowiki.tamu.edu/wiki/index.php/Category:GO:0000988_!_transcription_factor_activity,_protein_binding', 'biology'
+
+    # Java
+    cln.note 'List all java settings and version', '$ java -XshowSettings:all -version'
+
+    # terminal / ansi
+    cln.note 'unscii, font for terminal art', 'http://pelulamu.net/unscii/', 'ascii'
+
+    ####################
+    cln.note 'create a donger like that shruggy guy on slack ੧ʕ͡◕‿ರʔง', 'http://dongerlist.com/create-donger', 'ascii', 'art', 'text'
   end
   puts CommandLineNotes::Binary.new(notes, ARGV).stdout
 end
 
 
+# #!/usr/bin/env bash
+# set -eu
+# set -o pipefail
+
+# # compile ruby
+# dir="$(pwd)/test_ruby_path"
+# # optdir="--with-opt-dir=$(brew --prefix openssl)"
+# # optdir="$optdir:$(brew --prefix readline)"
+# # optdir="$optdir:$(brew --prefix libyaml)"
+# # optdir="$optdir:$(brew --prefix gdbm)"
+# # "$optdir"
+# # ./configure --prefix="$dir" --disable-option-checking --disable-pie --disable-dtrace --disable-install-doc --disable-install-static-library --without-gmp --without-valgrind
+# # make
+# # make install
+
+# # run the test
+# mkdir -p tmp
+# cd tmp
+
+# echo 'Dir.chdir File.dirname(__FILE__)'                               >  test.rb
+# echo 'File.write "my_bin", "#!/usr/bin/env bash\necho WORKS"'         >> test.rb
+# echo 'File.chmod 0755, "my_bin"'                                      >> test.rb
+# echo 'Process.wait spawn({"PATH" => ".:#{ENV["PATH"]}"}, "my_bin 1")' >> test.rb
+# "${dir}/bin/ruby" test.rb
