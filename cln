@@ -209,7 +209,8 @@ else
     cln.description = 'Command Line Notes'
 
     # life
-    cln.note 'drivers license info',       'http://www.cyberdriveillinois.com/publications/pdf_publications/dsd_x173.pdf', 'licenses', 'illinois', 'ids', 'identification', 'cards'
+    cln.note 'drivers license info',                  'http://www.cyberdriveillinois.com/publications/pdf_publications/dsd_x173.pdf', 'licenses', 'illinois', 'ids', 'identification', 'cards'
+    cln.note 'Airplane seat pitch for Spirit\'s 319', 'https://www.seatguru.com/airlines/Spirit_Airlines/Spirit_Airlines_Airbus_A319_B.php'
     cln.note 'overcoming procrastination', <<-GOALS
       set goals
       schedule your time
