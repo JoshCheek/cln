@@ -419,24 +419,24 @@ else
     cln.note "fish: docs",                               "open http://fishshell.com/docs/2.0/", "shell", "documentation", "documents"
 
     # readline
-    cln.note "notation",                        "https://www.gnu.org/software/bash/manual/html_node/Introduction-and-Notation.html#Introduction-and-Notation", "readline", "keybindings", "C-k", "M-k"
-    cln.note "beginning of history",            "M-<",   "readline", "keybindings"
-    cln.note "end of history",                  "M->",   "readline", "keybindings"
-    cln.note "forward search history",          "C-s",   "readline", "keybindings"
-    cln.note "yank last arg (iteratively)",     "M-.",   "readline", "keybindings"
-    cln.note "yank last arg (iteratively)",     "M-.",   "readline", "keybindings"
-    cln.note "delete right",                    "C-d",   "readline", "keybindings"
-    cln.note "transpose words",                 "M-t",   "readline", "keybindings"
-    cln.note "upcase word",                     "M-u",   "readline", "keybindings", "capitalize", "uppercase", "capitalization"
-    cln.note "downcase word",                   "M-l",   "readline", "keybindings", "lowercase", "capitalization"
-    cln.note "delete next word",                "M-d",   "readline", "keybindings"
-    cln.note "show possible completions",       "M-?",   "readline", "keybindings"
-    cln.note "insert all possible completions", "M-*",   "readline", "keybindings", "expand", "expansions"
-    cln.note "start keyboard macro",            "C-x (", "readline", "keybindings", "begin"
-    cln.note "end keyboard macro",              "C-x )", "readline", "keybindings", "stop"
-    cln.note "execute keyboard macro",          "C-x e", "readline", "keybindings", "run"
-    cln.note "incremental undo",                "C-_",   "readline", "keybindings"
-    cln.note "tilde expand",                    "M-&",   "readline", "keybindings", "expansion"
+    cln.note "readline: notation",                        "https://www.gnu.org/software/bash/manual/html_node/Introduction-and-Notation.html#Introduction-and-Notation", "readline", "keybindings", "C-k", "M-k"
+    cln.note "readline: beginning of history",            "M-<",   "readline", "keybindings"
+    cln.note "readline: end of history",                  "M->",   "readline", "keybindings"
+    cln.note "readline: forward search history",          "C-s",   "readline", "keybindings"
+    cln.note "readline: yank last arg (iteratively)",     "M-.",   "readline", "keybindings"
+    cln.note "readline: yank last arg (iteratively)",     "M-.",   "readline", "keybindings"
+    cln.note "readline: delete right",                    "C-d",   "readline", "keybindings"
+    cln.note "readline: transpose words",                 "M-t",   "readline", "keybindings"
+    cln.note "readline: upcase word",                     "M-u",   "readline", "keybindings", "capitalize", "uppercase", "capitalization"
+    cln.note "readline: downcase word",                   "M-l",   "readline", "keybindings", "lowercase", "capitalization"
+    cln.note "readline: delete next word",                "M-d",   "readline", "keybindings"
+    cln.note "readline: show possible completions",       "M-?",   "readline", "keybindings"
+    cln.note "readline: insert all possible completions", "M-*",   "readline", "keybindings", "expand", "expansions"
+    cln.note "readline: start keyboard macro",            "C-x (", "readline", "keybindings", "begin"
+    cln.note "readline: end keyboard macro",              "C-x )", "readline", "keybindings", "stop"
+    cln.note "readline: execute keyboard macro",          "C-x e", "readline", "keybindings", "run"
+    cln.note "readline: incremental undo",                "C-_",   "readline", "keybindings"
+    cln.note "readline: tilde expand",                    "M-&",   "readline", "keybindings", "expansion"
 
     # apis
     cln.note 'play with apis', 'https://apigee.com/console', 'spotify', 'instagram', 'apis'
@@ -749,6 +749,10 @@ else
     INSTRUCTIONS
 
     # postgresql
+    cln.note 'postgresql: use env vars to connect to postgresql', 'env PGUSER=postgres PGPASSWORD=root psql -d gt-web-dev -h 0.0.0.0'
+    cln.note 'postgresql: display all variables',           'psql -c "SHOW all;"', 'pg', 'meta'
+    cln.note 'postgresql: find data directory',             'psql -c "SHOW data_directory"', 'pg', 'meta'
+    cln.note 'postgresql: set a variable',                  'psql -c "SET varname = value;"', 'pg', 'meta'
     cln.note 'postgresql: quit',                            '\q',       'pg', 'meta', 'exit', 'C-c'
     cln.note 'postgresql: display users',                   '\du',      'pg', 'meta'
     cln.note 'postgresql: show permissions',                '\z',       'pg', 'meta'
@@ -967,10 +971,11 @@ else
       cln.note 'System control information',                     'sysctl -a', 'unix'
       cln.note 'Processor name',                                 'sysctl machdep.cpu.brand_string', 'unix'
       cln.note 'Display pids and parent pids without a header',  'ps -o pid= -o ppid= | head', 'processes', 'list'
-      cln.note 'modify, verify and repair local disks', 'diskutil list'
-      cln.note 'convert and copy a file', 'dd'
-      cln.note 'Use dtrace to get a list of system calls',        'sudo dtrace -ln \'syscall:::entry\'', 'unix'
+      cln.note 'modify, verify and repair local disks',          'diskutil list'
+      cln.note 'Convert and copy a file',                        'dd'
+      cln.note 'Use dtrace to get a list of system calls',       'sudo dtrace -ln \'syscall:::entry\'', 'unix'
 
+      cln.note 'Convert epoch time to human readable format',     'date -r 1518974029', 'unix'
       cln.note 'Awesome list of unix utilities "UNIX TOOLBOX"',   'http://cb.vu/unixtoolbox.xhtml'
       cln.note 'xterm font aliases',                              '/usr/X11R6/lib/X11/fonts/misc/fonts.alias', 'unix'
       cln.note 'list fonts known by xterm',                       'xlsfonts', 'unix'
@@ -988,8 +993,9 @@ else
       cln.note 'Remove characters 1 through 3 from input',        'colrm 1 3', 'unix', 'cut'
       cln.note 'See your system architecture',                    'arch', 'unix'
       cln.note 'print the route packets take to network host',    'traceroute xmas.futile.net', 'unix'
-      cln.note 'Reset your terminal',                             'reset', 'refresh', 'reload', 'unix'
-      cln.note 'List out the capabilities of the current terminal', 'infocmp', 'unix'
+      cln.note 'Reset your terminal',                             'reset', 'refresh', 'reload', 'unix', 'terminal', 'console', 'ansi escape codes'
+      cln.note 'List out the capabilities of the current terminal', 'infocmp', 'unix', 'terminal', 'console', 'ansi escape codes'
+      cln.note 'Save and then restore the screen',                'tput smcup; echo press return; read tmp; tput rmcup; echo $tmp', 'terminal', 'console', 'ansi escape codes'
       cln.note "Not exactly sure, almost looks like a description of the output from infocmp, but haven't figured it out yet", 'man terminfo', 'unix'
       cln.note 'Ports you\'re listening on',                      "netstat -an -p udp -p tcp | sed -n '1p;/LISTEN/p'", 'unix'
       cln.note 'list of known protocols (supported by netstat)',  'cat /etc/protocols', 'unix', 'internet'
@@ -1097,6 +1103,7 @@ else
       cln.note 'tar: zip, compress, verbose into the file, from directory', 'tar -zcvf dirn.tar.gz dir/', 'archive'
 
       # bash
+      cln.note 'Open the current input line in your editor',         'C-x C-e', 'text', 'shells', 'logins'
       cln.note 'see bash shell options',                             'shopt'
       cln.note 'starts a bash shell with extglob option set',        'bash -O extglob', 'shopt', 'options'
       cln.note 'list of bash shell options and their meanings',      'http://wiki.bash-hackers.org/internals/shell_options', 'shopt'
