@@ -5,90 +5,87 @@
 #   real groups
 
 class CommandLineNotes
-
-  Color1  = "\e[37m"
-  Color2  = "\e[32m"
-  NoColor = "\e[0m"
-
-  class Binary
-    attr_accessor :notes, :argv
-    def initialize(notes, argv)
-      self.notes, self.argv = notes, argv
+  Note = Struct.new :key, :value, :tags, keyword_init: true do
+    def initialize(*)
+      super
+      self.value = outdent self.value
     end
 
-    def call
-      if argv == ['-h'] || argv == ['--help']
-        @stdout = help_screen
-      else
-        @stdout = map_with_index(notes_to_print) { |note, note_index|
-                    format_note note, note_index
-                  }.join("\n") << NoColor
-      end
-    end
-
-    def stdout
-      call
-      @stdout
+    def match?(filter)
+      key =~ filter || value =~ filter || tags.any? { |tag| tag =~ filter }
     end
 
     private
 
-    def help_screen
-      "Usage: #{$0} [filters]\n"\
-      "\n"\
-      "#{notes.description}"
-    end
-
-    def notes_to_print
-      @notes_to_print ||= notes.notes.
-                                select { |values|
-                                 filters.all? { |filter|
-                                   values.any? { |value| value =~ filter }
-                                  }
-                                }
-    end
-
-    def format_note(note, note_index)
-      key         = note[0]
-      value       = note[1]
-      map_with_index(value.each_line) { |value_line, line_index|
-        if line_index.zero?
-          "#{note_index % 2== 0 ? Color1 : Color2}#{key.ljust offset_to_value}  #{value_line.chomp}"
-        else
-          "#{' '*offset_to_value}  #{value_line.chomp}"
-        end
-      }.join("\n")
-    end
-
-    def offset_to_value
-      @offset ||= notes_to_print.map(&:first).max_by(&:size).size
-    end
-
-    def filters
-      @filters ||= argv.map { |arg| Regexp.new arg, Regexp::IGNORECASE }
-    end
-
-    # 1.8 doesn't have .with_index
-    def map_with_index(collection, &block)
-      index = -1
-      collection.map do |element|
-        index += 1
-        block.call element, index
-      end
+    def outdent(lines)
+      whitespace = lines.scan(/^ +/).min_by(&:size)
+      lines.gsub(/^#{whitespace}/, "")
     end
   end
 
-  attr_accessor :description, :notes
+  attr_accessor :description
+  attr_reader :notes
 
-  def initialize
-    @notes = []
-    yield self
+  def initialize(&block)
+    self.notes = []
+    block&.call self
   end
 
   def note(key, value, *tags)
-    leading_whitespace = value[/\A */]
-    value = value.gsub(/^#{leading_whitespace}/, '')
-    notes << [key, value, *tags]
+    notes << Note.new(key: key, value: value, tags: tags)
+    self
+  end
+
+  def for(filters)
+    notes.select do |note|
+      filters.all? { |filter| note.match? filter }
+    end
+  end
+
+  private
+
+  attr_writer :notes
+end
+
+class CommandLineNotes
+  Color1  = "\e[33m"
+  Color2  = "\e[34m"
+  NoColor = "\e[0m"
+
+  class Binary
+    def initialize(notes, argv)
+      @notes, @argv = notes, argv
+    end
+
+    def stdout
+      return notes.description if show_help?(argv)
+      filtered  = notes.for filters argv
+
+      key_width = filtered.map { |note| note.key.size }.max || 0
+      formats   = [Color1, Color2].map do |color|
+        "#{color}%-#{key_width}s %s#{NoColor}"
+      end
+
+      lines = filtered.zip(formats.cycle).flat_map do |note, format|
+        note.value.lines.zip([note.key]).map do |value_line, key|
+          sprintf format, key, value_line.chomp
+        end
+      end
+
+      lines.join("\n").freeze
+    end
+
+    private
+
+    attr_reader :notes, :argv
+
+    def show_help?(argv)
+      argv.include?("-h") || argv.include?("--help")
+    end
+
+    def filters(raw_filters)
+      raw_filters.map { |arg| Regexp.new arg, Regexp::IGNORECASE }
+    end
   end
 end
 
@@ -119,6 +116,11 @@ if $0 =~ /rspec/
       expect(bin(notes, []).stdout).to include 'key2'
     end
 
+    it 'prints nothing when it has no notes' do
+      notes = CommandLineNotes.new
+      expect(bin(notes, []).stdout).to eq ''
+    end
+
     it 'selects notes whose key matches when given an arg' do
       notes = CommandLineNotes.new do |cln|
         cln.note 'key1', 'value1'
@@ -144,6 +146,8 @@ if $0 =~ /rspec/
       end
       expect(bin(notes, ['tag1']).stdout).to include 'key1'
       expect(bin(notes, ['tag1']).stdout).to_not include 'key2'
+      expect(bin(notes, ['tag2']).stdout).to include 'key2'
+      expect(bin(notes, ['tag2']).stdout).to_not include 'key1'
     end
 
     it 'treats multiple arguments as successive filters' do
@@ -153,6 +157,14 @@ if $0 =~ /rspec/
       end
       expect(bin(notes, ['tag1', 'tag2']).stdout).to_not include 'key1'
       expect(bin(notes, ['tag1', 'tag2']).stdout).to include 'key2'
+    end
+
+    it 'ignores case when filtering' do
+      notes = CommandLineNotes.new do |cln|
+        cln.note 'key1', 'value1'
+        cln.note 'key2', 'value2'
+      end
+      expect(bin(notes, ['KEY1']).stdout).to eq bin(notes, ['key1']).stdout
     end
 
     it 'does not print the tags' do
@@ -178,17 +190,22 @@ if $0 =~ /rspec/
 
     it 'prints notes whose value has multiple lines on multiple lines (aligned)' do
       notes = CommandLineNotes.new do |cln|
-        cln.note 'k',   'value1'
-        cln.note 'key', <<-VALUE
-          value2.1  # should be at same indentation as value1
-           value2.2 # should be 1 space deeper than value 2.1
+        cln.note 'k', 'v1'
+        cln.note 'k2', <<-VALUE
+           v2.1
+            v2.2
+
+          v2.4
         VALUE
       end
-      line1, line2, line3, *other_lines = no_ansi(bin(notes, []).stdout).scan(/^.*?v/)
-      expect(other_lines).to eq []
-      expect(line1.size ).to eq line2.size
-      expect(line3.size ).to eq line2.size.next
+      l1, l2, l3, l4, l5, *rest = no_ansi(bin(notes, []).stdout).lines.map(&:chomp)
+      expect(rest).to be_empty
+      expect(l5.length).to eq l1.length+2 # v2.4 has same indentation as v1, but is 2 chars longer
+      expect(l2.length).to eq l5.length+1 # v2.1 is indented 1 space more than v2.4
+      expect(l3.length).to eq l5.length+2 # v2.2 is indented 2 spaces more than v2.4
+      expect(l4).to match /^\s*$/         # v2.3's indentation is an implementation detail, as long as its empty
     end
+
 
     it 'prints every other line coloured' do
       notes = CommandLineNotes.new do |cln|
